@@ -67,28 +67,28 @@ function App() {
   return (
     <div className="flex h-screen">
       {/* Left Wing */}
-      <div className="border-r-2 border-black">
+      <div className="border-r border-black">
         <ChooseYourPersona />
         <WidgetsMenu widgets={WidgetsAction} />
       </div>
 
       {/* Middle */}
-      <div className="p-10 flex-1 overflow-y-auto border-r-2 border-black">
+      <div className="p-10 flex-1 overflow-y-auto border-r border-black">
         <Outlet />
       </div>
 
       {/* Right Wing */}
       <div className="w-80 flex flex-col">
         {/* Global Widget - EN & Dark Mode buttons */}
-        <div className="border-b-2 border-black">
+        <div className="border-b border-black">
           <GlobalWidget />
         </div>
 
         {/* Empty space / Unknown Widget */}
-        <div className="border-b-2 border-black p-20"></div>
+        <div className="border-b border-black p-20"></div>
 
         {/* Filter Widget - most likes, favs, most claps */}
-        <div className="flex flex-col h-full justify-between border-b-2 border-black">
+        <div className="flex flex-col h-full justify-between border-b border-black">
           <FilterWidget tags={tags} />
           {/* Collab Widget - let's collab button */}
           <CollabWidget />

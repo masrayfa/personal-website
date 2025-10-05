@@ -17,7 +17,7 @@ const WidgetsActionMenu = ({ widgets }: IWidgetsActionMenu) => {
               <Button
                 type="button"
                 variant={'outline'}
-                className="p-16 cursor-pointer rounded-none border-2 border-black"
+                className="p-16 cursor-pointer rounded-none border border-black"
               ></Button>
               <p className="text-center">{widget.label}</p>
             </Link>

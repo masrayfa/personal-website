@@ -7,7 +7,7 @@ const CollabWidget = () => {
       <Button
         type="button"
         variant="outline"
-        className="w-full py-3 text-sm font-mono border-2 border-black rounded-none hover:bg-gray-50 cursor-pointer"
+        className="w-full py-3 text-sm font-mono border rounded-none hover:bg-gray-50 cursor-pointer"
       >
         <span className="mr-2">
           <PiCallBell />

@@ -7,14 +7,14 @@ const GlobalWidget = () => {
       <Button
         type="button"
         variant={'outline'}
-        className="px-4 py-2 cursor-pointer rounded-none border-2 border-black hover:bg-gray-50"
+        className="px-4 py-2 cursor-pointer rounded-none border  hover:bg-gray-50"
       >
         <p className="text-sm font-mono">EN</p>
       </Button>
       <Button
         type="button"
         variant={'outline'}
-        className="px-4 py-2 cursor-pointer rounded-none border-2 border-black hover:bg-gray-50"
+        className="px-4 py-2 cursor-pointer rounded-none border hover:bg-gray-50"
       >
         <MdOutlineDarkMode className="text-lg" />
       </Button>
