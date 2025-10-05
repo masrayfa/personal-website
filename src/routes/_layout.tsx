@@ -1,13 +1,13 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import ChooseYourPersona from '@/features/choose-your-persona/choose-your-persona.component';
-import WidgetsMenu from '@/features/widget-action-menu/widgets-action-menu.component';
-import GlobalWidget from '@/features/global-widget/global-widget.component';
-import CollabWidget from '@/features/collab-widget/collab-widget.component';
+import WidgetsActionMenu from '@/features/widgets/widget-action-menu/widgets-action-menu.component';
+import GlobalWidget from '@/features/widgets/global-widget/global-widget.component';
+import CollabWidget from '@/features/widgets/collab-widget/collab-widget.component';
 import Socials from '@/features/socials/socials.component';
-import FilterWidget from '@/features/filter-widget/filter-widget.component';
+import FilterWidget from '@/features/widgets/filter-widget/filter-widget.component';
 
 export const Route = createFileRoute('/_layout')({
-  component: App,
+  component: RouteComponent,
 });
 
 const WidgetsAction = [
@@ -63,32 +63,32 @@ const WidgetsAction = [
 
 const tags: string[] = ['most likes', 'favs', 'most claps'];
 
-function App() {
+function RouteComponent() {
   return (
     <div className="flex h-screen">
       {/* Left Wing */}
       <div className="border-r border-black">
         <ChooseYourPersona />
-        <WidgetsMenu widgets={WidgetsAction} />
+        <WidgetsActionMenu widgets={WidgetsAction} />
       </div>
 
       {/* Middle */}
-      <div className="p-10 flex-1 overflow-y-auto border-r border-black">
+      <div className="p-10 flex-1 overflow-y-auto scrollbar-hidden border-r border-black ">
         <Outlet />
       </div>
 
       {/* Right Wing */}
       <div className="w-80 flex flex-col">
         {/* Global Widget - EN & Dark Mode buttons */}
-        <div className="border-b border-black">
+        <div className="">
           <GlobalWidget />
         </div>
 
         {/* Empty space / Unknown Widget */}
-        <div className="border-b border-black p-20"></div>
+        <div className="border p-20"></div>
 
         {/* Filter Widget - most likes, favs, most claps */}
-        <div className="flex flex-col h-full justify-between border-b border-black">
+        <div className="flex flex-col h-full justify-between border-b ">
           <FilterWidget tags={tags} />
           {/* Collab Widget - let's collab button */}
           <CollabWidget />

@@ -13,7 +13,7 @@ const WidgetsActionMenu = ({ widgets }: IWidgetsActionMenu) => {
             key={widget.id}
             className="flex flex-col items-center justify-center"
           >
-            <Link to={widget.url}>
+            <Link to={'/$widgetId'} params={{ widgetId: widget.url }}>
               <Button
                 type="button"
                 variant={'outline'}

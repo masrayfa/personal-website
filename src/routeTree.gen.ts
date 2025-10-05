@@ -17,6 +17,7 @@ import { Route as ExamplesDemoStoreRouteImport } from './routes/examples/demo.st
 import { Route as ExamplesDemoNeonRouteImport } from './routes/examples/demo.neon'
 import { Route as ExamplesApiDemoTqTodosRouteImport } from './routes/examples/api.demo-tq-todos'
 import { Route as ExamplesApiDemoNamesRouteImport } from './routes/examples/api.demo-names'
+import { Route as LayoutWidgetIdContentIdRouteImport } from './routes/_layout.$widgetId.$contentId'
 import { Route as ExamplesDemoStartServerFuncsRouteImport } from './routes/examples/demo.start.server-funcs'
 import { Route as ExamplesDemoStartApiRequestRouteImport } from './routes/examples/demo.start.api-request'
 
@@ -60,6 +61,11 @@ const ExamplesApiDemoNamesRoute = ExamplesApiDemoNamesRouteImport.update({
   path: '/examples/api/demo-names',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LayoutWidgetIdContentIdRoute = LayoutWidgetIdContentIdRouteImport.update({
+  id: '/$contentId',
+  path: '/$contentId',
+  getParentRoute: () => LayoutWidgetIdRoute,
+} as any)
 const ExamplesDemoStartServerFuncsRoute =
   ExamplesDemoStartServerFuncsRouteImport.update({
     id: '/examples/demo/start/server-funcs',
@@ -74,8 +80,9 @@ const ExamplesDemoStartApiRequestRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/$widgetId': typeof LayoutWidgetIdRoute
+  '/$widgetId': typeof LayoutWidgetIdRouteWithChildren
   '/': typeof LayoutIndexRoute
+  '/$widgetId/$contentId': typeof LayoutWidgetIdContentIdRoute
   '/examples/api/demo-names': typeof ExamplesApiDemoNamesRoute
   '/examples/api/demo-tq-todos': typeof ExamplesApiDemoTqTodosRoute
   '/examples/demo/neon': typeof ExamplesDemoNeonRoute
@@ -85,8 +92,9 @@ export interface FileRoutesByFullPath {
   '/examples/demo/start/server-funcs': typeof ExamplesDemoStartServerFuncsRoute
 }
 export interface FileRoutesByTo {
-  '/$widgetId': typeof LayoutWidgetIdRoute
+  '/$widgetId': typeof LayoutWidgetIdRouteWithChildren
   '/': typeof LayoutIndexRoute
+  '/$widgetId/$contentId': typeof LayoutWidgetIdContentIdRoute
   '/examples/api/demo-names': typeof ExamplesApiDemoNamesRoute
   '/examples/api/demo-tq-todos': typeof ExamplesApiDemoTqTodosRoute
   '/examples/demo/neon': typeof ExamplesDemoNeonRoute
@@ -98,8 +106,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
-  '/_layout/$widgetId': typeof LayoutWidgetIdRoute
+  '/_layout/$widgetId': typeof LayoutWidgetIdRouteWithChildren
   '/_layout/': typeof LayoutIndexRoute
+  '/_layout/$widgetId/$contentId': typeof LayoutWidgetIdContentIdRoute
   '/examples/api/demo-names': typeof ExamplesApiDemoNamesRoute
   '/examples/api/demo-tq-todos': typeof ExamplesApiDemoTqTodosRoute
   '/examples/demo/neon': typeof ExamplesDemoNeonRoute
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/$widgetId'
     | '/'
+    | '/$widgetId/$contentId'
     | '/examples/api/demo-names'
     | '/examples/api/demo-tq-todos'
     | '/examples/demo/neon'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
   to:
     | '/$widgetId'
     | '/'
+    | '/$widgetId/$contentId'
     | '/examples/api/demo-names'
     | '/examples/api/demo-tq-todos'
     | '/examples/demo/neon'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/_layout'
     | '/_layout/$widgetId'
     | '/_layout/'
+    | '/_layout/$widgetId/$contentId'
     | '/examples/api/demo-names'
     | '/examples/api/demo-tq-todos'
     | '/examples/demo/neon'
@@ -214,6 +226,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExamplesApiDemoNamesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_layout/$widgetId/$contentId': {
+      id: '/_layout/$widgetId/$contentId'
+      path: '/$contentId'
+      fullPath: '/$widgetId/$contentId'
+      preLoaderRoute: typeof LayoutWidgetIdContentIdRouteImport
+      parentRoute: typeof LayoutWidgetIdRoute
+    }
     '/examples/demo/start/server-funcs': {
       id: '/examples/demo/start/server-funcs'
       path: '/examples/demo/start/server-funcs'
@@ -231,13 +250,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface LayoutWidgetIdRouteChildren {
+  LayoutWidgetIdContentIdRoute: typeof LayoutWidgetIdContentIdRoute
+}
+
+const LayoutWidgetIdRouteChildren: LayoutWidgetIdRouteChildren = {
+  LayoutWidgetIdContentIdRoute: LayoutWidgetIdContentIdRoute,
+}
+
+const LayoutWidgetIdRouteWithChildren = LayoutWidgetIdRoute._addFileChildren(
+  LayoutWidgetIdRouteChildren,
+)
+
 interface LayoutRouteChildren {
-  LayoutWidgetIdRoute: typeof LayoutWidgetIdRoute
+  LayoutWidgetIdRoute: typeof LayoutWidgetIdRouteWithChildren
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutWidgetIdRoute: LayoutWidgetIdRoute,
+  LayoutWidgetIdRoute: LayoutWidgetIdRouteWithChildren,
   LayoutIndexRoute: LayoutIndexRoute,
 }
 
