@@ -17,7 +17,7 @@ function MainContent() {
 
   switch (widgetId) {
     case 'blog':
-      return <BlogComponent widgetId={widgetId} />;
+      return <BlogComponent />;
     case 'short-stories':
       return <ShortStoriesComponent />;
     case 'work':

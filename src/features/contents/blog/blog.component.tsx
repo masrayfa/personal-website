@@ -7,105 +7,15 @@ import {
 } from '@/components/ui/card';
 import { Link, Outlet, useMatches } from '@tanstack/react-router';
 import { FaHeart } from 'react-icons/fa';
+import { listOfblogs } from '../constants';
 
-const listOfblogs = [
-  {
-    id: 1,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'sukses',
-    likes: 8,
-  },
-  {
-    id: 2,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'lancar',
-    likes: 19,
-  },
-  {
-    id: 3,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'rejeki',
-    likes: 27,
-  },
-  {
-    id: 4,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'rejeki 1',
-    likes: 14,
-  },
-  {
-    id: 5,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'rejeki 2',
-    likes: 11,
-  },
-  {
-    id: 6,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'rejeki 3',
-    likes: 11,
-  },
-  {
-    id: 7,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'rejeki 4',
-    likes: 11,
-  },
-  {
-    id: 8,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'rejeki 5',
-    likes: 11,
-  },
-  {
-    id: 9,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'rejeki 6',
-    likes: 11,
-  },
-  {
-    id: 10,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'rejeki 7',
-    likes: 11,
-  },
-  {
-    id: 11,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'rejeki 8',
-    likes: 11,
-  },
-  {
-    id: 12,
-    title: 'judul',
-    desc: 'deskripsi',
-    url: 'rejeki 9',
-    likes: 11,
-  },
-];
-
-const BlogComponent = (props: IContent) => {
-  const { widgetId } = props;
-
+const BlogComponent = () => {
   const matches = useMatches();
 
-  // Cek apakah ada child route (contentId) yang aktif
   const hasChildRoute = matches.some((match) =>
     match.id.includes('$contentId')
   );
 
-  // Jika ada child route, render Outlet (untuk detail page)
   if (hasChildRoute) {
     return <Outlet />;
   }
