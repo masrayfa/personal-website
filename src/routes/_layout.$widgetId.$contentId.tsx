@@ -1,12 +1,17 @@
-import BlogComponent from '@/features/contents/blog/blog.component';
-import { createFileRoute, NotFoundRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_layout/$widgetId/$contentId')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  // const { widgetId, contentId } = Route.useParams();
+  const { widgetId, contentId } = Route.useParams();
 
-  return <div>Hello "/_layout/$widgetId/$contentId"!</div>;
+  return (
+    <div>
+      <h1>DETAIL PAGE WORKS!</h1>
+      <p>Widget: {widgetId}</p>
+      <p>Content: {contentId}</p>
+    </div>
+  );
 }
