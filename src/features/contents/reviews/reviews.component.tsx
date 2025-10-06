@@ -1,5 +1,6 @@
 import React from 'react';
 import { reviews } from '../constants';
+import { Link } from '@tanstack/react-router';
 
 interface Props {
   title: string;
@@ -8,7 +9,7 @@ interface Props {
   mediaType?: 'image' | 'video' | 'gif';
 }
 
-const ReviewsComponent = (props: Props) => {
+const ReviewsComponent = () => {
   const [hovered, setHovered] = React.useState(false);
   const [mediaLoaded, setMediaLoaded] = React.useState(false);
   const [mediaError, setMediaError] = React.useState(false);
@@ -29,26 +30,31 @@ const ReviewsComponent = (props: Props) => {
       <ul className="flex flex-col space-y-20">
         {reviews.map((review) => (
           <li>
-            <div className="w-full">
-              <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group">
-                {review.mediaUrl && !mediaError ? (
-                  <div>{review.mediaUrl}</div>
-                ) : (
-                  <>
-                    <div>Reviews Placeholder</div>
-                  </>
+            <Link
+              to={'/$widgetId/$contentId'}
+              params={{ widgetId: 'reviews', contentId: String(review.id) }}
+            >
+              <div className="w-full">
+                <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group">
+                  {review.mediaUrl && !mediaError ? (
+                    <div>{review.mediaUrl}</div>
+                  ) : (
+                    <>
+                      <div>Reviews Placeholder</div>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Project Info */}
+              <div className="mt-4 space-y-2">
+                <h3 className="text-xl font-bold">{review.title}</h3>
+
+                {review.desc && (
+                  <p className="text-sm text-gray-600">{review.desc}</p>
                 )}
               </div>
-            </div>
-
-            {/* Project Info */}
-            <div className="mt-4 space-y-2">
-              <h3 className="text-xl font-bold">{review.title}</h3>
-
-              {review.desc && (
-                <p className="text-sm text-gray-600">{review.desc}</p>
-              )}
-            </div>
+            </Link>
           </li>
         ))}
       </ul>

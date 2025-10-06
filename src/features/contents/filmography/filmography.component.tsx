@@ -1,5 +1,6 @@
 import React from 'react';
 import { filmographys } from '../constants';
+import { Link } from '@tanstack/react-router';
 
 interface Props {
   title: string;
@@ -8,7 +9,7 @@ interface Props {
   mediaType?: 'image' | 'video' | 'gif';
 }
 
-const FilmographyComponent = (props: Props) => {
+const FilmographyComponent = () => {
   const [hovered, setHovered] = React.useState(false);
   const [mediaLoaded, setMediaLoaded] = React.useState(false);
   const [mediaError, setMediaError] = React.useState(false);
@@ -29,26 +30,31 @@ const FilmographyComponent = (props: Props) => {
       <ul className="flex flex-col space-y-20">
         {filmographys.map((film) => (
           <li>
-            <div className="w-full">
-              <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group">
-                {film.mediaUrl && !mediaError ? (
-                  <div>{film.mediaUrl}</div>
-                ) : (
-                  <>
-                    <div>Reviews Placeholder</div>
-                  </>
+            <Link
+              to={'/$widgetId/$contentId'}
+              params={{ widgetId: 'filmography', contentId: String(film.id) }}
+            >
+              <div className="w-full">
+                <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group">
+                  {film.mediaUrl && !mediaError ? (
+                    <div>{film.mediaUrl}</div>
+                  ) : (
+                    <>
+                      <div>Reviews Placeholder</div>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Project Info */}
+              <div className="mt-4 space-y-2">
+                <h3 className="text-xl font-bold">{film.title}</h3>
+
+                {film.desc && (
+                  <p className="text-sm text-gray-600">{film.desc}</p>
                 )}
               </div>
-            </div>
-
-            {/* Project Info */}
-            <div className="mt-4 space-y-2">
-              <h3 className="text-xl font-bold">{film.title}</h3>
-
-              {film.desc && (
-                <p className="text-sm text-gray-600">{film.desc}</p>
-              )}
-            </div>
+            </Link>
           </li>
         ))}
       </ul>

@@ -35,7 +35,7 @@ const WorkComponent = () => {
             <Link
               id={String(project.id)}
               to={'/$widgetId/$contentId'}
-              params={{ widgetId: 'blog', contentId: String(project.id) }}
+              params={{ widgetId: 'work', contentId: String(project.id) }}
             >
               <WorkProjectCard
                 key={project.id}

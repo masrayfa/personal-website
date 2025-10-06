@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/card';
 import { Link, Outlet, useMatches } from '@tanstack/react-router';
 import { FaHeart } from 'react-icons/fa';
-import { listOfblogs, shortStories } from '../constants';
+import { shortStories } from '../constants';
 
 const ShortStoriesComponent = () => {
   const matches = useMatches();
@@ -39,7 +39,10 @@ const ShortStoriesComponent = () => {
             <Link
               id={String(story.id)}
               to={'/$widgetId/$contentId'}
-              params={{ widgetId: 'blog', contentId: String(story.id) }}
+              params={{
+                widgetId: 'short-stories',
+                contentId: String(story.id),
+              }}
             >
               <Card className="rounded-none cursor-pointer border-black">
                 <CardHeader>
