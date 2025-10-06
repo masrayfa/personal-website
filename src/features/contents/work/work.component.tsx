@@ -1,5 +1,5 @@
 import { Link, Outlet, useMatches } from '@tanstack/react-router';
-import { listOfblogs, workProjects } from '../constants';
+import { workProjects } from '../constants';
 import { WorkProjectCard } from '@/components/WorkCanvasRealEffect';
 import { VscLinkExternal } from 'react-icons/vsc';
 
