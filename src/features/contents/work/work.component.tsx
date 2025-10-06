@@ -1,6 +1,7 @@
 import { Link, Outlet, useMatches } from '@tanstack/react-router';
 import { listOfblogs, workProjects } from '../constants';
 import { WorkProjectCard } from '@/components/WorkCanvasRealEffect';
+import { VscLinkExternal } from 'react-icons/vsc';
 
 const WorkComponent = () => {
   const matches = useMatches();
@@ -46,6 +47,31 @@ const WorkComponent = () => {
                 canvasColors={project.mediaUrl ? project.canvasColors : null}
               />
             </Link>
+            {/* Project Info */}
+            <div className="mt-4 space-y-2">
+              <div className="flex items-start justify-between">
+                <h3 className="text-xl font-bold">{project.title}</h3>
+                <button className="text-sm hover:underline flex items-center gap-1">
+                  View
+                  <VscLinkExternal />
+                </button>
+              </div>
+
+              {project.description && (
+                <p className="text-sm text-gray-600">{project.description}</p>
+              )}
+
+              <div className="flex flex-wrap gap-2">
+                {project.techStack.map((tech, index) => (
+                  <span
+                    key={index}
+                    className="text-xs px-2 py-1 bg-gray-100 border border-gray-300"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
           </li>
         ))}
       </ul>

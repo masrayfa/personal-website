@@ -1,21 +1,18 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { CanvasRevealEffect } from '@/components/ui/canvas-reveal-effect';
-import { VscLinkExternal } from 'react-icons/vsc';
 
 interface WorkProjectCardProps {
   title: string;
   description?: string;
   techStack: string[];
-  mediaUrl?: string; // URL untuk gambar, video, atau gif
-  mediaType?: 'image' | 'video' | 'gif'; // Type media
+  mediaUrl?: string;
+  mediaType?: 'image' | 'video' | 'gif';
   canvasColors?: [number, number, number][] | undefined | null; // Custom canvas colors
 }
 
 export function WorkProjectCard({
   title,
-  description,
-  techStack,
   mediaUrl,
   mediaType = 'image',
   canvasColors = [
@@ -41,7 +38,7 @@ export function WorkProjectCard({
         <Icon className="absolute h-6 w-6 -top-3 -right-3 text-black z-30" />
         <Icon className="absolute h-6 w-6 -bottom-3 -right-3 text-black z-30" />
 
-        {/* Media Content (Gambar/Video/GIF) */}
+        {/* Media Content (Picture/Video/GIF) */}
         {mediaUrl && !mediaError ? (
           <>
             {mediaType === 'video' ? (
@@ -69,7 +66,6 @@ export function WorkProjectCard({
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 z-10" />
           </>
         ) : (
-          // Fallback ke Canvas Effect jika tidak ada media atau error
           <>
             <AnimatePresence>
               {hovered && (
@@ -101,35 +97,10 @@ export function WorkProjectCard({
           </>
         )}
       </div>
-
-      {/* Project Info */}
-      <div className="mt-4 space-y-2">
-        <div className="flex items-start justify-between">
-          <h3 className="text-xl font-bold">{title}</h3>
-          <button className="text-sm hover:underline flex items-center gap-1">
-            View
-            <VscLinkExternal />
-          </button>
-        </div>
-
-        {description && <p className="text-sm text-gray-600">{description}</p>}
-
-        <div className="flex flex-wrap gap-2">
-          {techStack.map((tech, index) => (
-            <span
-              key={index}
-              className="text-xs px-2 py-1 bg-gray-100 border border-gray-300"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
 
-// Icon untuk corner decorations
 const Icon = ({ className, ...rest }: any) => {
   return (
     <svg
@@ -146,7 +117,6 @@ const Icon = ({ className, ...rest }: any) => {
   );
 };
 
-// Icon untuk placeholder project
 const ProjectIcon = () => {
   return (
     <svg
