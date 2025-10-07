@@ -30,7 +30,7 @@ export function WorkProjectCard({
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative w-full aspect-video bg-gray-100 border-2 border-black overflow-hidden group"
+        className="relative w-full aspect-video bg-gray-100 border overflow-hidden group"
       >
         {/* Corner Icons */}
         <Icon className="absolute h-6 w-6 -top-3 -left-3 text-black z-30" />
