@@ -35,7 +35,7 @@ const ReviewsComponent = () => {
               params={{ widgetId: 'reviews', contentId: String(review.id) }}
             >
               <div className="w-full">
-                <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group">
+                <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group flex justify-center items-center">
                   {review.mediaUrl && !mediaError ? (
                     <div>{review.mediaUrl}</div>
                   ) : (

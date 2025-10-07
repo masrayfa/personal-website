@@ -35,7 +35,7 @@ const FilmographyComponent = () => {
               params={{ widgetId: 'filmography', contentId: String(film.id) }}
             >
               <div className="w-full">
-                <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group">
+                <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group flex justify-center items-center">
                   {film.mediaUrl && !mediaError ? (
                     <div>{film.mediaUrl}</div>
                   ) : (
