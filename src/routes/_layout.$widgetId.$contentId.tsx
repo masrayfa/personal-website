@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { ContentsCollections } from '@/lib/posts-collections';
 
 export const Route = createFileRoute('/_layout/$widgetId/$contentId')({
   component: RouteComponent,
@@ -7,11 +8,13 @@ export const Route = createFileRoute('/_layout/$widgetId/$contentId')({
 function RouteComponent() {
   const { widgetId, contentId } = Route.useParams();
 
-  return (
-    <div>
-      <h1>DETAIL PAGE WORKS!</h1>
-      <p>Widget: {widgetId}</p>
-      <p>Content: {contentId}</p>
-    </div>
-  );
+  const collectionKey = `${widgetId}_${contentId}`;
+
+  const PostComponent = ContentsCollections(collectionKey);
+
+  if (!PostComponent) {
+    return <div>Post not found</div>;
+  }
+
+  return <PostComponent />;
 }

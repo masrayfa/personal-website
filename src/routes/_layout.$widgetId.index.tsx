@@ -15,7 +15,7 @@ export const Route = createFileRoute('/_layout/$widgetId/')({
 function MainContent() {
   const { widgetId } = Route.useParams();
 
-  switch (widgetId) {
+  switch (widgetId as WidgetType) {
     case 'blog':
       return <BlogComponent />;
     case 'short-stories':

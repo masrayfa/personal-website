@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/card';
 import { Link, Outlet, useMatches } from '@tanstack/react-router';
 import { FaHeart } from 'react-icons/fa';
-import { listOfblogs } from '../constants';
+import BlogMDsCollections from './md';
 
 const BlogComponent = () => {
   const matches = useMatches();
@@ -34,23 +34,23 @@ const BlogComponent = () => {
 
       {/* List of contents */}
       <ul className="flex flex-col gap-5">
-        {listOfblogs.map((blog) => (
+        {BlogMDsCollections.map((md) => (
           <li className="">
             <Link
-              id={String(blog.id)}
+              id={String(md.id)}
               to={'/$widgetId/$contentId'}
-              params={{ widgetId: 'blog', contentId: String(blog.id) }}
+              params={{ widgetId: 'blog', contentId: String(md.id) }}
             >
               <Card className="rounded-none cursor-pointer border-black">
                 <CardHeader>
-                  <CardTitle>{blog.title}</CardTitle>
-                  <CardDescription>{blog.desc}</CardDescription>
+                  <CardTitle>{md.metadata.title}</CardTitle>
+                  <CardDescription>{md.metadata.desc}</CardDescription>
                 </CardHeader>
                 <CardFooter className="justify-end gap-2">
                   <span>
                     <FaHeart />
                   </span>
-                  <span>{blog.likes}</span>
+                  <span>{md.metadata.likes ?? 30}</span>
                 </CardFooter>
               </Card>
             </Link>
