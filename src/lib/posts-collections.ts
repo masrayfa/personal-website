@@ -5,7 +5,7 @@ import LoveMDsCollections from '@/features/contents/love/md';
 import PeripheralsMDsCollections from '@/features/contents/peripherals/md';
 import ReviewsMDsCollections from '@/features/contents/reviews/md';
 import ShortStoriesMDsCollections from '@/features/contents/short-stories/md';
-import WorkMDsCollections from '@/features/contents/work/md';
+import WorkContentsCollections from '@/features/contents/work/md';
 
 export function ContentsCollections(collectionKey: string) {
   const widgetId = collectionKey.split('_')[0] as WidgetType;
@@ -57,7 +57,7 @@ export function ContentsCollections(collectionKey: string) {
       return selectedContent?.component;
     }
     case 'work': {
-      const selectedContent = WorkMDsCollections.find(
+      const selectedContent = WorkContentsCollections.find(
         (content) => content.id === Number(contentId)
       );
       return selectedContent?.component;

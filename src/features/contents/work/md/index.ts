@@ -1,5 +1,5 @@
 import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
-const WorkMDsCollections: ContentsCollectionsType[] = [];
+const WorkContentsCollections: ContentsCollectionsType[] = [];
 
-export default WorkMDsCollections;
+export default WorkContentsCollections;

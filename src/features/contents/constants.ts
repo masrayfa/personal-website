@@ -92,6 +92,7 @@ export const workProjects = [
     description: 'A beautiful Linear portal for clients',
     techStack: ['React', 'TypeScript', 'Tailwind'],
     mediaUrl: '/images/beacon-preview.png',
+    url: 'https://www.youtube.com/watch?v=fmHP7pSNhk0',
     mediaType: 'image' as const,
     category: 'Brand / Product / Growth',
   },
@@ -101,6 +102,7 @@ export const workProjects = [
     description: 'Next-gen drone technology',
     techStack: ['Three.js', 'WebGL', 'Node.js'],
     mediaUrl: '/images/antigravity-preview.jpg',
+    url: 'https://www.youtube.com/watch?v=fmHP7pSNhk0',
     mediaType: 'image' as const,
     category: 'Product / Growth',
   },
@@ -109,6 +111,7 @@ export const workProjects = [
     title: 'Rayzen',
     description: 'Modern design system',
     techStack: ['TypeScript', 'Tauri', 'SolidJS', 'Rust'],
+    url: 'https://www.youtube.com/watch?v=fmHP7pSNhk0',
     canvasColors: [
       [255, 99, 71],
       [255, 140, 0],

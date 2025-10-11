@@ -5,7 +5,6 @@ import viteTsConfigPaths from 'vite-tsconfig-paths';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from './vite-plugins/cloudflare.ts';
 import neon from './vite-plugins/neon.ts';
-import contentCollections from '@content-collections/vite';
 import mdx from '@mdx-js/rollup';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
@@ -21,7 +20,6 @@ const config = defineConfig({
     tailwindcss(),
     tanstackStart(),
     viteReact(),
-    contentCollections(),
     mdx({
       remarkPlugins: [remarkGfm],
       rehypePlugins: [rehypeHighlight],
