@@ -10,11 +10,11 @@ function RouteComponent() {
 
   const collectionKey = `${widgetId}_${contentId}`;
 
-  const PostComponent = ContentsCollections(collectionKey);
+  const SelectedContent = ContentsCollections(collectionKey);
 
-  if (!PostComponent) {
+  if (!SelectedContent) {
     return <div>Post not found</div>;
   }
 
-  return <PostComponent />;
+  return <SelectedContent />;
 }

@@ -9,10 +9,10 @@ import WorkComponent from '@/features/contents/work/work.component';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_layout/$widgetId/')({
-  component: MainContent,
+  component: MainWidget,
 });
 
-function MainContent() {
+function MainWidget() {
   const { widgetId } = Route.useParams();
 
   switch (widgetId as WidgetType) {

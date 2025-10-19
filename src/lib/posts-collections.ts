@@ -14,7 +14,7 @@ export function ContentsCollections(collectionKey: string) {
   switch (widgetId) {
     case 'all-time-fav': {
       const selectedContent = AllTimeFavMDsCollections.find(
-        (content) => content.id
+        (content) => content.id === Number(contentId)
       );
 
       return selectedContent?.component;
