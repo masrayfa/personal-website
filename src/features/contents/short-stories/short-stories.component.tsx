@@ -7,7 +7,6 @@ import {
 } from '@/components/ui/card';
 import { Link, Outlet, useMatches } from '@tanstack/react-router';
 import { FaHeart } from 'react-icons/fa';
-import { shortStories } from '../constants';
 import ShortStoriesMDsCollections from './md';
 
 const ShortStoriesComponent = () => {
