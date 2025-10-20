@@ -8,6 +8,7 @@ import {
 import { Link, Outlet, useMatches } from '@tanstack/react-router';
 import { FaHeart } from 'react-icons/fa';
 import { shortStories } from '../constants';
+import ShortStoriesMDsCollections from './md';
 
 const ShortStoriesComponent = () => {
   const matches = useMatches();
@@ -34,7 +35,7 @@ const ShortStoriesComponent = () => {
 
       {/* List of contents */}
       <ul className="flex flex-col gap-5">
-        {shortStories.map((story) => (
+        {ShortStoriesMDsCollections.map((story) => (
           <li className="">
             <Link
               id={String(story.id)}
@@ -46,14 +47,14 @@ const ShortStoriesComponent = () => {
             >
               <Card className="rounded-none cursor-pointer border-black">
                 <CardHeader>
-                  <CardTitle>{story.title}</CardTitle>
-                  <CardDescription>{story.desc}</CardDescription>
+                  <CardTitle>{story.metadata.title}</CardTitle>
+                  <CardDescription>{story.metadata.desc}</CardDescription>
                 </CardHeader>
                 <CardFooter className="justify-end gap-2">
                   <span>
                     <FaHeart />
                   </span>
-                  <span>{story.likes}</span>
+                  <span>{story.metadata.likes}</span>
                 </CardFooter>
               </Card>
             </Link>
