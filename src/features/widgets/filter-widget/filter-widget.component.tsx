@@ -20,20 +20,23 @@ const FILTER_COMPONENTS: Record<string, React.ComponentType> = {
   work: WorkFilter,
 };
 
-const FilterWidget = ({ tags }: IFilterWidget) => {
+const tags: string[] = ['most likes', 'favs', 'most claps'];
+
+const FilterWidget = () => {
   const params = useParams({ from: '/_layout/$widgetId' });
   const widgetId = params.widgetId;
 
   const FilterComponent = widgetId ? FILTER_COMPONENTS[widgetId] : null;
 
-  if (FilterComponent) {
-    return <FilterComponent />;
-  }
+  // if (FilterComponent) {
+  //   return <FilterComponent />;
+  // }
 
   return (
     <div className="p-5">
       <div className="flex flex-wrap gap-2">
-        {tags?.map((tag, i) => (
+        {FilterComponent && <FilterComponent />}
+        {/* {tags?.map((tag, i) => (
           <Button
             key={i}
             type="button"
@@ -47,7 +50,7 @@ const FilterWidget = ({ tags }: IFilterWidget) => {
           >
             {tag}
           </Button>
-        ))}
+        ))} */}
       </div>
     </div>
   );
