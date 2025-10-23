@@ -61,8 +61,6 @@ const WidgetsAction = [
   },
 ];
 
-const tags: string[] = ['most likes', 'favs', 'most claps'];
-
 function RouteComponent() {
   return (
     <div className="flex h-screen">
@@ -89,7 +87,7 @@ function RouteComponent() {
 
         {/* Filter Widget - most likes, favs, most claps */}
         <div className="flex flex-col h-full justify-between border-b ">
-          <FilterWidget tags={tags} />
+          <FilterWidget />
           {/* Collab Widget - let's collab button */}
           <CollabWidget />
         </div>

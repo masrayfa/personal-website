@@ -6,7 +6,6 @@ export const successResponse = <T>(
   c: Context,
   data: T,
   message?: string,
-  statusCode: StatusCode = 200,
   meta?: Record<string, unknown>
 ) => {
   const response: ApiResponse<T> = {

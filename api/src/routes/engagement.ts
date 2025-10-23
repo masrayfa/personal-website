@@ -52,18 +52,12 @@ engagement.get(
       }
 
       if (err instanceof DatabaseError) {
-        return errorResponse(
-          c,
-          500,
-          'DATABASE_ERROR',
-          err.message,
-          err.details
-        );
+        return errorResponse(c, 'DATABASE_ERROR', err.message, err.details);
       }
 
       return errorResponse(
         c,
-        500,
+        '500',
         'INTERNAL_SERVER_ERROR',
         err instanceof Error ? err.message : 'Unexpected error'
       );

@@ -11,7 +11,7 @@ app.use('*', logger());
 app.use('*', cors());
 app.use('*', errorHandler);
 
-// Routes
+// Health Checks
 app.get('/', (c) => {
   return c.json({
     success: true,
@@ -20,8 +20,10 @@ app.get('/', (c) => {
   });
 });
 
+// Routes
 app.route('/engagement', engagement);
 
+// Error Handler
 app.onError((err, c) => {
   console.error(`Error Occurred: ${err}`);
   return c.json(err);

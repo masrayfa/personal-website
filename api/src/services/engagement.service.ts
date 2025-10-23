@@ -39,9 +39,7 @@ export class EngagementService {
     }
   }
 
-  async getByContentId(
-    contentId: number
-  ): Promise<IEngagement | NotFoundError> {
+  async getByContentId(contentId: number): Promise<IEngagement> {
     try {
       const [engagement] = await db
         .select()
