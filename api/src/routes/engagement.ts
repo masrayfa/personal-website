@@ -71,8 +71,7 @@ engagement.post('/', sValidator('json', createEngagementSchema), async (c) => {
   return successResponse<IEngagement>(
     c,
     data,
-    'Engagement created successfully',
-    201
+    'Engagement created successfully'
   );
 });
 
@@ -95,7 +94,7 @@ engagement.patch(
 engagement.delete('/:id', sValidator('param', idParamSchema), async (c) => {
   const { id } = c.req.valid('param');
   await service.delete(id);
-  return successResponse(c, null, 'Engagement deleted successfully', 204);
+  return successResponse(c, null, 'Engagement deleted successfully');
 });
 
 engagement.post('/:id/like', sValidator('param', idParamSchema), async (c) => {

@@ -45,6 +45,8 @@ app.notFound((c) => {
   );
 });
 
+export type AppType = typeof app;
+
 export default {
   port: 8080,
   fetch: app.fetch,
