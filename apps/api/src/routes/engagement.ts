@@ -7,6 +7,7 @@ import {
   updateEngagementSchema,
   idParamSchema,
   contentIdParamSchema,
+  updateIfExistsSchema,
 } from '../validators/engagement.validator';
 import type { IEngagement } from '../interfaces/engagement.interface';
 import { DatabaseError, NotFoundError } from '../utils/error-util';
@@ -40,6 +41,40 @@ engagement.get(
     try {
       const { contentId } = c.req.valid('param');
       const data = await service.getByContentId(contentId);
+
+      return successResponse<IEngagement>(
+        c,
+        data,
+        'Engagement retrieved successfully'
+      );
+    } catch (err) {
+      if (err instanceof NotFoundError) {
+        return errorResponse(c, '404', 'NOT_FOUND', err.message);
+      }
+
+      if (err instanceof DatabaseError) {
+        return errorResponse(c, 'DATABASE_ERROR', err.message, err.details);
+      }
+
+      return errorResponse(
+        c,
+        '500',
+        'INTERNAL_SERVER_ERROR',
+        err instanceof Error ? err.message : 'Unexpected error'
+      );
+    }
+  }
+);
+
+engagement.patch(
+  '/content/:contentId',
+  sValidator('param', contentIdParamSchema),
+  sValidator('json', updateIfExistsSchema),
+  async (c) => {
+    try {
+      const { contentId } = c.req.valid('param');
+      const body = c.req.valid('json');
+      const data = await service.updateIfExists(contentId, body);
 
       return successResponse<IEngagement>(
         c,

@@ -5,6 +5,7 @@ import type {
   IEngagement,
   IEngagementCreate,
   IEngagementUpdate,
+  IEngagementUpdateIfExists,
 } from '../interfaces/engagement.interface';
 import { DatabaseError, NotFoundError } from '../utils/error-util';
 
@@ -91,6 +92,36 @@ export class EngagementService {
     } catch (error) {
       if (error instanceof NotFoundError) throw error;
       throw new DatabaseError('Failed to update engagement', error);
+    }
+  }
+
+  async updateIfExists(
+    contentId: number,
+    data: IEngagementUpdateIfExists
+  ): Promise<IEngagement> {
+    let result: IEngagement;
+
+    try {
+      const [updated] = await db
+        .update(engagementTable)
+        .set(data)
+        .where(eq(engagementTable.contentId, contentId))
+        .returning();
+
+      result = { ...updated };
+
+      if (!updated) {
+        const [created] = await db
+          .insert(engagementTable)
+          .values(data)
+          .returning();
+
+        result = { ...created };
+      }
+
+      return result;
+    } catch (error) {
+      throw new DatabaseError('Failed to update or creatre engagement', error);
     }
   }
 

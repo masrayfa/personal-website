@@ -44,3 +44,25 @@ export const contentIdParamSchema = v.object({
     v.minValue(1, 'Content ID must be greater than 0')
   ),
 });
+
+export const updateIfExistsSchema = v.object({
+  contentId: v.pipe(
+    v.number('Content ID must be a number'),
+    v.integer('Content ID must be an integer'),
+    v.minValue(1, 'Content ID must be greater than 0')
+  ),
+  likes: v.optional(
+    v.pipe(
+      v.number('Likes must be a number'),
+      v.integer('Likes must be an integer'),
+      v.minValue(0, 'Likes must be greater than or equal to 0')
+    )
+  ),
+  claps: v.optional(
+    v.pipe(
+      v.number('Claps must be a number'),
+      v.integer('Claps must be an integer'),
+      v.minValue(0, 'Claps must be greater than or equal to 0')
+    )
+  ),
+});

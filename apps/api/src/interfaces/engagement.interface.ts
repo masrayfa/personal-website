@@ -13,3 +13,9 @@ export interface IEngagementUpdate {
   likes?: number;
   claps?: number;
 }
+
+export interface IEngagementUpdateIfExists {
+  contentId: number;
+  likes?: number;
+  claps?: number;
+}
