@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1761659525218,
+      "tag": "0000_mushy_captain_britain",
+      "breakpoints": true
+    }
+  ]
+}
