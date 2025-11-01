@@ -25,6 +25,9 @@ const config = defineConfig({
       rehypePlugins: [rehypeHighlight],
     }),
   ],
+  server: {
+    port: 3000,
+  },
 });
 
 export default config;

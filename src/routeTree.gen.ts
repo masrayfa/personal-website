@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout.index'
+import { Route as ApiSplatRouteImport } from './routes/api.$'
 import { Route as LayoutWidgetIdRouteImport } from './routes/_layout.$widgetId'
 import { Route as LayoutWidgetIdIndexRouteImport } from './routes/_layout.$widgetId.index'
 import { Route as ExamplesDemoTanstackQueryRouteImport } from './routes/examples/demo.tanstack-query'
@@ -30,6 +31,11 @@ const LayoutIndexRoute = LayoutIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LayoutRoute,
+} as any)
+const ApiSplatRoute = ApiSplatRouteImport.update({
+  id: '/api/$',
+  path: '/api/$',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const LayoutWidgetIdRoute = LayoutWidgetIdRouteImport.update({
   id: '/$widgetId',
@@ -87,6 +93,7 @@ const ExamplesDemoStartApiRequestRoute =
 
 export interface FileRoutesByFullPath {
   '/$widgetId': typeof LayoutWidgetIdRouteWithChildren
+  '/api/$': typeof ApiSplatRoute
   '/': typeof LayoutIndexRoute
   '/$widgetId/$contentId': typeof LayoutWidgetIdContentIdRoute
   '/examples/api/demo-names': typeof ExamplesApiDemoNamesRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/examples/demo/start/server-funcs': typeof ExamplesDemoStartServerFuncsRoute
 }
 export interface FileRoutesByTo {
+  '/api/$': typeof ApiSplatRoute
   '/': typeof LayoutIndexRoute
   '/$widgetId/$contentId': typeof LayoutWidgetIdContentIdRoute
   '/examples/api/demo-names': typeof ExamplesApiDemoNamesRoute
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/$widgetId': typeof LayoutWidgetIdRouteWithChildren
+  '/api/$': typeof ApiSplatRoute
   '/_layout/': typeof LayoutIndexRoute
   '/_layout/$widgetId/$contentId': typeof LayoutWidgetIdContentIdRoute
   '/examples/api/demo-names': typeof ExamplesApiDemoNamesRoute
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/$widgetId'
+    | '/api/$'
     | '/'
     | '/$widgetId/$contentId'
     | '/examples/api/demo-names'
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/examples/demo/start/server-funcs'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/api/$'
     | '/'
     | '/$widgetId/$contentId'
     | '/examples/api/demo-names'
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_layout'
     | '/_layout/$widgetId'
+    | '/api/$'
     | '/_layout/'
     | '/_layout/$widgetId/$contentId'
     | '/examples/api/demo-names'
@@ -169,6 +181,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   LayoutRoute: typeof LayoutRouteWithChildren
+  ApiSplatRoute: typeof ApiSplatRoute
   ExamplesApiDemoNamesRoute: typeof ExamplesApiDemoNamesRoute
   ExamplesApiDemoTqTodosRoute: typeof ExamplesApiDemoTqTodosRoute
   ExamplesDemoNeonRoute: typeof ExamplesDemoNeonRoute
@@ -193,6 +206,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof LayoutIndexRouteImport
       parentRoute: typeof LayoutRoute
+    }
+    '/api/$': {
+      id: '/api/$'
+      path: '/api/$'
+      fullPath: '/api/$'
+      preLoaderRoute: typeof ApiSplatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_layout/$widgetId': {
       id: '/_layout/$widgetId'
@@ -296,6 +316,7 @@ const LayoutRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   LayoutRoute: LayoutRouteWithChildren,
+  ApiSplatRoute: ApiSplatRoute,
   ExamplesApiDemoNamesRoute: ExamplesApiDemoNamesRoute,
   ExamplesApiDemoTqTodosRoute: ExamplesApiDemoTqTodosRoute,
   ExamplesDemoNeonRoute: ExamplesDemoNeonRoute,
