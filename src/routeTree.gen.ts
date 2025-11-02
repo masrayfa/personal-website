@@ -14,14 +14,7 @@ import { Route as LayoutIndexRouteImport } from './routes/_layout.index'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
 import { Route as LayoutWidgetIdRouteImport } from './routes/_layout.$widgetId'
 import { Route as LayoutWidgetIdIndexRouteImport } from './routes/_layout.$widgetId.index'
-import { Route as ExamplesDemoTanstackQueryRouteImport } from './routes/examples/demo.tanstack-query'
-import { Route as ExamplesDemoStoreRouteImport } from './routes/examples/demo.store'
-import { Route as ExamplesDemoNeonRouteImport } from './routes/examples/demo.neon'
-import { Route as ExamplesApiDemoTqTodosRouteImport } from './routes/examples/api.demo-tq-todos'
-import { Route as ExamplesApiDemoNamesRouteImport } from './routes/examples/api.demo-names'
 import { Route as LayoutWidgetIdContentIdRouteImport } from './routes/_layout.$widgetId.$contentId'
-import { Route as ExamplesDemoStartServerFuncsRouteImport } from './routes/examples/demo.start.server-funcs'
-import { Route as ExamplesDemoStartApiRequestRouteImport } from './routes/examples/demo.start.api-request'
 
 const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
@@ -47,76 +40,24 @@ const LayoutWidgetIdIndexRoute = LayoutWidgetIdIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LayoutWidgetIdRoute,
 } as any)
-const ExamplesDemoTanstackQueryRoute =
-  ExamplesDemoTanstackQueryRouteImport.update({
-    id: '/examples/demo/tanstack-query',
-    path: '/examples/demo/tanstack-query',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ExamplesDemoStoreRoute = ExamplesDemoStoreRouteImport.update({
-  id: '/examples/demo/store',
-  path: '/examples/demo/store',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExamplesDemoNeonRoute = ExamplesDemoNeonRouteImport.update({
-  id: '/examples/demo/neon',
-  path: '/examples/demo/neon',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExamplesApiDemoTqTodosRoute = ExamplesApiDemoTqTodosRouteImport.update({
-  id: '/examples/api/demo-tq-todos',
-  path: '/examples/api/demo-tq-todos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExamplesApiDemoNamesRoute = ExamplesApiDemoNamesRouteImport.update({
-  id: '/examples/api/demo-names',
-  path: '/examples/api/demo-names',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LayoutWidgetIdContentIdRoute = LayoutWidgetIdContentIdRouteImport.update({
   id: '/$contentId',
   path: '/$contentId',
   getParentRoute: () => LayoutWidgetIdRoute,
 } as any)
-const ExamplesDemoStartServerFuncsRoute =
-  ExamplesDemoStartServerFuncsRouteImport.update({
-    id: '/examples/demo/start/server-funcs',
-    path: '/examples/demo/start/server-funcs',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ExamplesDemoStartApiRequestRoute =
-  ExamplesDemoStartApiRequestRouteImport.update({
-    id: '/examples/demo/start/api-request',
-    path: '/examples/demo/start/api-request',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/$widgetId': typeof LayoutWidgetIdRouteWithChildren
   '/api/$': typeof ApiSplatRoute
   '/': typeof LayoutIndexRoute
   '/$widgetId/$contentId': typeof LayoutWidgetIdContentIdRoute
-  '/examples/api/demo-names': typeof ExamplesApiDemoNamesRoute
-  '/examples/api/demo-tq-todos': typeof ExamplesApiDemoTqTodosRoute
-  '/examples/demo/neon': typeof ExamplesDemoNeonRoute
-  '/examples/demo/store': typeof ExamplesDemoStoreRoute
-  '/examples/demo/tanstack-query': typeof ExamplesDemoTanstackQueryRoute
   '/$widgetId/': typeof LayoutWidgetIdIndexRoute
-  '/examples/demo/start/api-request': typeof ExamplesDemoStartApiRequestRoute
-  '/examples/demo/start/server-funcs': typeof ExamplesDemoStartServerFuncsRoute
 }
 export interface FileRoutesByTo {
   '/api/$': typeof ApiSplatRoute
   '/': typeof LayoutIndexRoute
   '/$widgetId/$contentId': typeof LayoutWidgetIdContentIdRoute
-  '/examples/api/demo-names': typeof ExamplesApiDemoNamesRoute
-  '/examples/api/demo-tq-todos': typeof ExamplesApiDemoTqTodosRoute
-  '/examples/demo/neon': typeof ExamplesDemoNeonRoute
-  '/examples/demo/store': typeof ExamplesDemoStoreRoute
-  '/examples/demo/tanstack-query': typeof ExamplesDemoTanstackQueryRoute
   '/$widgetId': typeof LayoutWidgetIdIndexRoute
-  '/examples/demo/start/api-request': typeof ExamplesDemoStartApiRequestRoute
-  '/examples/demo/start/server-funcs': typeof ExamplesDemoStartServerFuncsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,14 +66,7 @@ export interface FileRoutesById {
   '/api/$': typeof ApiSplatRoute
   '/_layout/': typeof LayoutIndexRoute
   '/_layout/$widgetId/$contentId': typeof LayoutWidgetIdContentIdRoute
-  '/examples/api/demo-names': typeof ExamplesApiDemoNamesRoute
-  '/examples/api/demo-tq-todos': typeof ExamplesApiDemoTqTodosRoute
-  '/examples/demo/neon': typeof ExamplesDemoNeonRoute
-  '/examples/demo/store': typeof ExamplesDemoStoreRoute
-  '/examples/demo/tanstack-query': typeof ExamplesDemoTanstackQueryRoute
   '/_layout/$widgetId/': typeof LayoutWidgetIdIndexRoute
-  '/examples/demo/start/api-request': typeof ExamplesDemoStartApiRequestRoute
-  '/examples/demo/start/server-funcs': typeof ExamplesDemoStartServerFuncsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,27 +75,9 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/'
     | '/$widgetId/$contentId'
-    | '/examples/api/demo-names'
-    | '/examples/api/demo-tq-todos'
-    | '/examples/demo/neon'
-    | '/examples/demo/store'
-    | '/examples/demo/tanstack-query'
     | '/$widgetId/'
-    | '/examples/demo/start/api-request'
-    | '/examples/demo/start/server-funcs'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/api/$'
-    | '/'
-    | '/$widgetId/$contentId'
-    | '/examples/api/demo-names'
-    | '/examples/api/demo-tq-todos'
-    | '/examples/demo/neon'
-    | '/examples/demo/store'
-    | '/examples/demo/tanstack-query'
-    | '/$widgetId'
-    | '/examples/demo/start/api-request'
-    | '/examples/demo/start/server-funcs'
+  to: '/api/$' | '/' | '/$widgetId/$contentId' | '/$widgetId'
   id:
     | '__root__'
     | '/_layout'
@@ -169,26 +85,12 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/_layout/'
     | '/_layout/$widgetId/$contentId'
-    | '/examples/api/demo-names'
-    | '/examples/api/demo-tq-todos'
-    | '/examples/demo/neon'
-    | '/examples/demo/store'
-    | '/examples/demo/tanstack-query'
     | '/_layout/$widgetId/'
-    | '/examples/demo/start/api-request'
-    | '/examples/demo/start/server-funcs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   LayoutRoute: typeof LayoutRouteWithChildren
   ApiSplatRoute: typeof ApiSplatRoute
-  ExamplesApiDemoNamesRoute: typeof ExamplesApiDemoNamesRoute
-  ExamplesApiDemoTqTodosRoute: typeof ExamplesApiDemoTqTodosRoute
-  ExamplesDemoNeonRoute: typeof ExamplesDemoNeonRoute
-  ExamplesDemoStoreRoute: typeof ExamplesDemoStoreRoute
-  ExamplesDemoTanstackQueryRoute: typeof ExamplesDemoTanstackQueryRoute
-  ExamplesDemoStartApiRequestRoute: typeof ExamplesDemoStartApiRequestRoute
-  ExamplesDemoStartServerFuncsRoute: typeof ExamplesDemoStartServerFuncsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -228,61 +130,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutWidgetIdIndexRouteImport
       parentRoute: typeof LayoutWidgetIdRoute
     }
-    '/examples/demo/tanstack-query': {
-      id: '/examples/demo/tanstack-query'
-      path: '/examples/demo/tanstack-query'
-      fullPath: '/examples/demo/tanstack-query'
-      preLoaderRoute: typeof ExamplesDemoTanstackQueryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/examples/demo/store': {
-      id: '/examples/demo/store'
-      path: '/examples/demo/store'
-      fullPath: '/examples/demo/store'
-      preLoaderRoute: typeof ExamplesDemoStoreRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/examples/demo/neon': {
-      id: '/examples/demo/neon'
-      path: '/examples/demo/neon'
-      fullPath: '/examples/demo/neon'
-      preLoaderRoute: typeof ExamplesDemoNeonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/examples/api/demo-tq-todos': {
-      id: '/examples/api/demo-tq-todos'
-      path: '/examples/api/demo-tq-todos'
-      fullPath: '/examples/api/demo-tq-todos'
-      preLoaderRoute: typeof ExamplesApiDemoTqTodosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/examples/api/demo-names': {
-      id: '/examples/api/demo-names'
-      path: '/examples/api/demo-names'
-      fullPath: '/examples/api/demo-names'
-      preLoaderRoute: typeof ExamplesApiDemoNamesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_layout/$widgetId/$contentId': {
       id: '/_layout/$widgetId/$contentId'
       path: '/$contentId'
       fullPath: '/$widgetId/$contentId'
       preLoaderRoute: typeof LayoutWidgetIdContentIdRouteImport
       parentRoute: typeof LayoutWidgetIdRoute
-    }
-    '/examples/demo/start/server-funcs': {
-      id: '/examples/demo/start/server-funcs'
-      path: '/examples/demo/start/server-funcs'
-      fullPath: '/examples/demo/start/server-funcs'
-      preLoaderRoute: typeof ExamplesDemoStartServerFuncsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/examples/demo/start/api-request': {
-      id: '/examples/demo/start/api-request'
-      path: '/examples/demo/start/api-request'
-      fullPath: '/examples/demo/start/api-request'
-      preLoaderRoute: typeof ExamplesDemoStartApiRequestRouteImport
-      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -317,13 +170,6 @@ const LayoutRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   LayoutRoute: LayoutRouteWithChildren,
   ApiSplatRoute: ApiSplatRoute,
-  ExamplesApiDemoNamesRoute: ExamplesApiDemoNamesRoute,
-  ExamplesApiDemoTqTodosRoute: ExamplesApiDemoTqTodosRoute,
-  ExamplesDemoNeonRoute: ExamplesDemoNeonRoute,
-  ExamplesDemoStoreRoute: ExamplesDemoStoreRoute,
-  ExamplesDemoTanstackQueryRoute: ExamplesDemoTanstackQueryRoute,
-  ExamplesDemoStartApiRequestRoute: ExamplesDemoStartApiRequestRoute,
-  ExamplesDemoStartServerFuncsRoute: ExamplesDemoStartServerFuncsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

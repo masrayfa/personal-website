@@ -4,7 +4,8 @@ import { fromTypes, openapi } from "@elysiajs/openapi";
 
 import { createFileRoute } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
-import { engagements } from "@/api/routes";
+import { engagements } from "@/api/modules";
+import { responseHelpersPlugin } from "@/api/plugins/response";
 
 const app = new Elysia({
   name: "personal-website-api",
@@ -16,6 +17,7 @@ const app = new Elysia({
       references: fromTypes(),
     }),
   )
+  .use(responseHelpersPlugin)
   .use(engagements);
 
 const handle = async ({ request }: { request: Request }) => {
