@@ -1,64 +1,65 @@
-import AllTimeFavMDsCollections from '@/features/contents/all-time-fav/md';
-import BlogMDsCollections from '@/features/contents/blog/md';
-import FilmographyMDsCollections from '@/features/contents/filmography/md';
-import LoveMDsCollections from '@/features/contents/love/md';
-import PeripheralsMDsCollections from '@/features/contents/peripherals/md';
-import ReviewsMDsCollections from '@/features/contents/reviews/md';
-import ShortStoriesMDsCollections from '@/features/contents/short-stories/md';
-import WorkContentsCollections from '@/features/contents/work/md';
+import AllTimeFavMDsCollections from "@/features/contents/all-time-fav/md";
+import blogMDsCollections from "@/features/contents/blog/md";
+import FilmographyMDsCollections from "@/features/contents/filmography/md";
+import LoveMDsCollections from "@/features/contents/love/md";
+import PeripheralsMDsCollections from "@/features/contents/peripherals/md";
+import ReviewsMDsCollections from "@/features/contents/reviews/md";
+import ShortStoriesMDsCollections from "@/features/contents/short-stories/md";
+import WorkContentsCollections from "@/features/contents/work/md";
 
 export function ContentsCollections(collectionKey: string) {
-  const widgetId = collectionKey.split('_')[0] as WidgetType;
-  const contentId = collectionKey.split('_')[1];
+  const widgetId = collectionKey.split("_")[0] as WidgetType;
+  const contentId = collectionKey.split("_")[1];
 
   switch (widgetId) {
-    case 'all-time-fav': {
+    case "all-time-fav": {
       const selectedContent = AllTimeFavMDsCollections.find(
-        (content) => content.id === Number(contentId)
+        (content) => content.id === Number(contentId),
       );
 
       return selectedContent?.component;
     }
-    case 'blog': {
-      const selectedContent = BlogMDsCollections.find(
-        (content) => content.id === Number(contentId)
+    case "blog": {
+      const collections = blogMDsCollections();
+      const selectedContent = collections.find(
+        (content) => content.id === Number(contentId),
       );
 
       return selectedContent?.component;
     }
-    case 'filmography': {
+    case "filmography": {
       const selectedContent = FilmographyMDsCollections.find(
-        (content) => content.id === Number(contentId)
+        (content) => content.id === Number(contentId),
       );
       return selectedContent?.component;
     }
-    case 'love': {
+    case "love": {
       const selectedContent = LoveMDsCollections.find(
-        (content) => content.id === Number(contentId)
+        (content) => content.id === Number(contentId),
       );
       return selectedContent?.component;
     }
-    case 'peripherals': {
+    case "peripherals": {
       const selectedContent = PeripheralsMDsCollections.find(
-        (content) => content.id === Number(contentId)
+        (content) => content.id === Number(contentId),
       );
       return selectedContent?.component;
     }
-    case 'reviews': {
+    case "reviews": {
       const selectedContent = ReviewsMDsCollections.find(
-        (content) => content.id === Number(contentId)
+        (content) => content.id === Number(contentId),
       );
       return selectedContent?.component;
     }
-    case 'short-stories': {
+    case "short-stories": {
       const selectedContent = ShortStoriesMDsCollections.find(
-        (content) => content.id === Number(contentId)
+        (content) => content.id === Number(contentId),
       );
       return selectedContent?.component;
     }
-    case 'work': {
+    case "work": {
       const selectedContent = WorkContentsCollections.find(
-        (content) => content.id === Number(contentId)
+        (content) => content.id === Number(contentId),
       );
       return selectedContent?.component;
     }

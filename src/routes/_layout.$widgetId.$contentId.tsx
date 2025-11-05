@@ -1,11 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { ContentsCollections } from '@/lib/posts-collections';
+import { createFileRoute } from "@tanstack/react-router";
+import { ContentsCollections } from "@/lib/posts-collections";
 
-export const Route = createFileRoute('/_layout/$widgetId/$contentId')({
+export const Route = createFileRoute("/_layout/$widgetId/$contentId")({
   component: RouteComponent,
 });
 
-function RouteComponent() {
+async function RouteComponent() {
   const { widgetId, contentId } = Route.useParams();
 
   const collectionKey = `${widgetId}_${contentId}`;
