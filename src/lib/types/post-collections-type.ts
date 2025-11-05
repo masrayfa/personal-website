@@ -1,11 +1,12 @@
-import { MDXProps } from 'mdx/types';
-import { JSX } from 'react';
+import { MDXProps } from "mdx/types";
+import { JSX } from "react";
 
 type ContentCollectionsMetadata = {
   title: string;
   desc: string;
   date: string;
   likes: number;
+  genre?: string[];
 };
 
 export type ContentsCollectionsType = {

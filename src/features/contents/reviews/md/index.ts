@@ -1,24 +1,28 @@
 import { ContentsCollectionsType } from "@/lib/types/post-collections-type";
+import F1Movie from "./movies/f1-movie.mdx";
+import NoCountryForOldMen from "./movies/no-country-for-old-men.mdx";
 
 const ReviewsMDsCollections: ContentsCollectionsType[] = [
   {
     id: 1,
-    component: null,
+    component: F1Movie,
     metadata: {
-      title: "Why People",
-      desc: "unravel why people misunderstood us",
+      title: "F1 Movie",
+      desc: "my most comfort movie 2025",
       date: "2025-10-20",
       likes: 30,
+      genre: ["drama"],
     },
   },
   {
     id: 2,
-    component: null,
+    component: NoCountryForOldMen,
     metadata: {
-      title: "Why People",
-      desc: "unravel why people being shyt to us",
+      title: "No Country For Old Men",
+      desc: "the best action thriller movie",
       date: "2025-10-21",
       likes: 18,
+      genre: ["action"],
     },
   },
 ];
