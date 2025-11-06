@@ -5,7 +5,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Link, Outlet, useMatches } from "@tanstack/react-router";
-import { BlogMDsCollectionsData } from "./md";
+import { BlogMDsCollections } from "./md";
+import { filterCollections } from "@/lib/utils/filter-collections";
+import { useFilterStore } from "@/stores/filter-store";
 
 const BlogComponent = () => {
   const matches = useMatches();
@@ -17,6 +19,17 @@ const BlogComponent = () => {
   if (hasChildRoute) {
     return <Outlet />;
   }
+
+  const { getActiveFilters } = useFilterStore();
+  const activefilters = getActiveFilters("blog");
+
+  const filteredCollections = filterCollections(
+    BlogMDsCollections,
+    activefilters,
+  );
+
+  const blogs =
+    filteredCollections.length > 0 ? filteredCollections : BlogMDsCollections;
 
   return (
     <div className="flex flex-col space-y-16">
@@ -32,17 +45,17 @@ const BlogComponent = () => {
 
       {/* List of contents */}
       <ul className="flex flex-col gap-5">
-        {BlogMDsCollectionsData.map((md) => (
+        {blogs.map((blog) => (
           <li className="">
             <Link
-              id={String(md.id)}
+              id={String(blog.id)}
               to={"/$widgetId/$contentId"}
-              params={{ widgetId: "blog", contentId: String(md.id) }}
+              params={{ widgetId: "blog", contentId: String(blog.id) }}
             >
               <Card className="rounded-none cursor-pointer border-black">
                 <CardHeader>
-                  <CardTitle>{md.metadata.title}</CardTitle>
-                  <CardDescription>{md.metadata.desc}</CardDescription>
+                  <CardTitle>{blog.metadata.title}</CardTitle>
+                  <CardDescription>{blog.metadata.desc}</CardDescription>
                 </CardHeader>
                 {/* <CardFooter className="justify-end gap-2">
                   <span>

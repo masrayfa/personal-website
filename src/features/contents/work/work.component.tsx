@@ -1,14 +1,14 @@
-import { Link, Outlet, useMatches } from '@tanstack/react-router';
-import { workProjects } from '../constants';
-import { WorkProjectCard } from '@/components/WorkCanvasRealEffect';
-import { VscLinkExternal } from 'react-icons/vsc';
+import { Link, Outlet, useMatches } from "@tanstack/react-router";
+import { workProjects } from "../constants";
+import { WorkProjectCard } from "@/components/WorkCanvasRealEffect";
+import { VscLinkExternal } from "react-icons/vsc";
 
 const WorkComponent = () => {
   const matches = useMatches();
 
   // Checking if child route (contentId) is activated
   const hasChildRoute = matches.some((match) =>
-    match.id.includes('$contentId')
+    match.id.includes("$contentId"),
   );
 
   // If child route exists, render Outlet (for detail page)
@@ -35,7 +35,7 @@ const WorkComponent = () => {
             <Link
               id={String(project.id)}
               to={project.url}
-              params={{ widgetId: 'work', contentId: String(project.id) }}
+              params={{ widgetId: "work", contentId: String(project.id) }}
             >
               <WorkProjectCard
                 key={project.id}

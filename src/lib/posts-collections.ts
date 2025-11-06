@@ -1,5 +1,5 @@
 import AllTimeFavMDsCollections from "@/features/contents/all-time-fav/md";
-import blogMDsCollections from "@/features/contents/blog/md";
+import { BlogMDsCollections } from "@/features/contents/blog/md";
 import FilmographyMDsCollections from "@/features/contents/filmography/md";
 import LoveMDsCollections from "@/features/contents/love/md";
 import PeripheralsMDsCollections from "@/features/contents/peripherals/md";
@@ -20,8 +20,7 @@ export function ContentsCollections(collectionKey: string) {
       return selectedContent?.component;
     }
     case "blog": {
-      const collections = blogMDsCollections();
-      const selectedContent = collections.find(
+      const selectedContent = BlogMDsCollections.find(
         (content) => content.id === Number(contentId),
       );
 

@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { useParams } from "@tanstack/react-router";
 import AllTimeFavFilter from "./filters/all-time-filter";
 import BlogFilter from "./filters/blog-filter";
@@ -8,7 +7,6 @@ import PeripheralsFilter from "./filters/peripherals-filter";
 import ReviewsFilter from "./filters/reviews-filter";
 import ShortStoriesFilter from "./filters/short-stories-filter";
 import WorkFilter from "./filters/work-filter";
-import { useEffect } from "react";
 
 const FILTER_COMPONENTS: Record<string, React.ComponentType> = {
   "all-time-fav": AllTimeFavFilter,
@@ -21,8 +19,6 @@ const FILTER_COMPONENTS: Record<string, React.ComponentType> = {
   work: WorkFilter,
 };
 
-const tags: string[] = ["most likes", "favs", "most claps"];
-
 const FilterWidget = () => {
   let widgetId: string | undefined;
 
@@ -32,10 +28,6 @@ const FilterWidget = () => {
   } catch (error) {
     widgetId = undefined;
   }
-
-  useEffect(() => {
-    console.log("FilterWidget widgetId:", widgetId);
-  }, [widgetId]);
 
   const FilterComponent = widgetId ? FILTER_COMPONENTS[widgetId] : null;
 
