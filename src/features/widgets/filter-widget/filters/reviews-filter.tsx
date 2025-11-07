@@ -24,11 +24,11 @@ const MOOD_OPTIONS = [
 
 const ReviewsFilter = () => {
   const {
-    setFilter,
-    clearFilter,
     getActiveFilters,
     setFilteredCollections,
     clearAllFilters,
+    toggleGenreFilter,
+    toggleMoodFilter,
   } = useFilterStore();
 
   const activeFilters = getActiveFilters("reviews");
@@ -40,20 +40,11 @@ const ReviewsFilter = () => {
   }, [activeFilters, setFilteredCollections]);
 
   const handleGenreClick = (genre: string) => {
-    if (activeFilters.genre === genre) {
-      // If clicking the same genre, clear the filter
-      clearFilter("reviews", "genre");
-    } else {
-      setFilter("reviews", "genre", genre);
-    }
+    toggleGenreFilter("reviews", genre);
   };
 
   const handleMoodClick = (mood: string) => {
-    if (activeFilters.mood === mood) {
-      clearFilter("reviews", "mood");
-    } else {
-      setFilter("reviews", "mood", mood);
-    }
+    toggleMoodFilter("reviews", mood);
   };
 
   const handleClearAll = () => {
@@ -88,7 +79,7 @@ const ReviewsFilter = () => {
             key={option.value}
             label={option.label}
             value={option.value}
-            isActive={activeFilters.genre === option.value}
+            isActive={activeFilters.genre?.includes(option.value) || false}
             onClick={() => handleGenreClick(option.value)}
           />
         ))}
@@ -101,7 +92,7 @@ const ReviewsFilter = () => {
             key={option.value}
             label={option.label}
             value={option.value}
-            isActive={activeFilters.mood === option.value}
+            isActive={activeFilters.mood?.includes(option.value) || false}
             onClick={() => handleMoodClick(option.value)}
           />
         ))}

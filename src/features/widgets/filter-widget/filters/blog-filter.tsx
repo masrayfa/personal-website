@@ -12,8 +12,7 @@ const GENRE_OPTIONS = [
 
 const BlogFilter = () => {
   const {
-    setFilter,
-    clearFilter,
+    toggleGenreFilter,
     getActiveFilters,
     setFilteredCollections,
     clearAllFilters,
@@ -25,19 +24,12 @@ const BlogFilter = () => {
   useEffect(() => {
     const filtered = filterCollections(BlogMDsCollections, activeFilters);
     setFilteredCollections("blog", filtered);
+
+    console.log("@Blog-Filter::activeFilters: ", activeFilters);
   }, [activeFilters, setFilteredCollections]);
 
   const handleGenreClick = (genre: string) => {
-    console.log("Genre and Active Filters genre: ", {
-      genre,
-      active_filters_genr: activeFilters.genre,
-    });
-    if (genre === activeFilters.genre) {
-      // If clicking the same genre, clear the filter
-      clearFilter("blog", "genre");
-    } else {
-      setFilter("blog", "genre", genre);
-    }
+    toggleGenreFilter("blog", genre);
   };
 
   const handleClearAll = () => {
@@ -72,7 +64,7 @@ const BlogFilter = () => {
             key={option.value}
             label={option.label}
             value={option.value}
-            isActive={activeFilters.genre === option.value}
+            isActive={activeFilters.genre?.includes(option.value) || false}
             onClick={() => handleGenreClick(option.value)}
           />
         ))}

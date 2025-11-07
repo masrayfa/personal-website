@@ -17,8 +17,8 @@ export type FilterConfig = {
  * Active filters state for a specific widget
  */
 export type ActiveFilters = {
-  genre?: string | null;
-  mood?: string | null;
+  genre?: string[] | null;
+  mood?: string[] | null;
   // Future filters:
   // likes?: number | null;
   // claps?: number | null;
@@ -43,8 +43,12 @@ type FilterStore = {
   setFilter: (
     widgetId: WidgetType,
     filterKey: keyof ActiveFilters,
-    value: string | number | null,
+    value: string | number | string[] | null,
   ) => void;
+
+  toggleGenreFilter: (widgetId: WidgetType, genre: string) => void;
+
+  toggleMoodFilter: (widgetId: WidgetType, mood: string) => void;
 
   clearFilter: (widgetId: WidgetType, filterKey: keyof ActiveFilters) => void;
 
@@ -76,6 +80,52 @@ export const useFilterStore = create<FilterStore>((set, get) => ({
         },
       },
     }));
+  },
+
+  toggleGenreFilter: (widgetId, genre) => {
+    set((state) => {
+      const currentGenres =
+        state.widgetFilters[widgetId]?.activeFilters?.genre || [];
+      const newGenres = currentGenres.includes(genre)
+        ? currentGenres.filter((g) => g !== genre) // Remove if exists
+        : [...currentGenres, genre]; // Add if doesn't exist
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              genre: newGenres.length > 0 ? newGenres : null,
+            },
+          },
+        },
+      };
+    });
+  },
+
+  toggleMoodFilter: (widgetId, mood) => {
+    set((state) => {
+      const currentMood =
+        state.widgetFilters[widgetId]?.activeFilters?.mood || [];
+      const newMoods = currentMood.includes(mood)
+        ? currentMood.filter((currMood) => currMood !== mood)
+        : [...currentMood, mood];
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              mood: newMoods.length > 0 ? newMoods : null,
+            },
+          },
+        },
+      };
+    });
   },
 
   clearFilter: (widgetId, filterKey) => {

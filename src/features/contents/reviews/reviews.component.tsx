@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import ReviewsMDsCollections from "./md";
 import { useFilterStore } from "@/stores/filter-store";
@@ -10,16 +10,20 @@ interface Props {
   mediaType?: "image" | "video" | "gif";
 }
 
+const widgetId = "reviews";
+
 const ReviewsComponent = () => {
-  const widgetId = "reviews";
-  const { getFilteredCollections } = useFilterStore();
+  const { getFilteredCollections, getActiveFilters } = useFilterStore();
+
+  const activeFilters = getActiveFilters(widgetId);
 
   // Get filtered collections if filters are active, otherwise use all collections
   const filteredCollections = getFilteredCollections(widgetId);
-  const reviews =
-    filteredCollections.length > 0
-      ? filteredCollections
-      : ReviewsMDsCollections;
+  const reviews = filteredCollections.length > 0 ? filteredCollections : null;
+
+  useEffect(() => {
+    console.log("@ReviewsComponent::filteredCollections", filteredCollections);
+  }, [filteredCollections]);
 
   const [hovered, setHovered] = React.useState(false);
   const [mediaLoaded, setMediaLoaded] = React.useState(false);
@@ -39,44 +43,50 @@ const ReviewsComponent = () => {
 
       {/* List of Contents */}
       <ul className="flex flex-col space-y-20">
-        {reviews.map((review) => (
-          <li>
-            <Link
-              to={"/$widgetId/$contentId"}
-              params={{ widgetId: "reviews", contentId: String(review.id) }}
-            >
-              <div className="w-full">
-                <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group flex justify-center items-center">
-                  <div>Reviews Placeholder</div>
-                </div>
-              </div>
-
-              {/* Project Info */}
-              <div className="mt-4 space-y-2">
-                <h3 className="text-xl font-bold">{review.metadata.title}</h3>
-
-                {review.metadata.desc && (
-                  <p className="text-sm text-gray-600">
-                    {review.metadata.desc}
-                  </p>
-                )}
-
-                {review.metadata.genre && (
-                  <div className="flex gap-2">
-                    {review.metadata.genre.map((g) => (
-                      <span
-                        key={g}
-                        className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
-                      >
-                        {g}
-                      </span>
-                    ))}
+        {activeFilters && reviews?.length! > 0 ? (
+          reviews?.map((review) => (
+            <li>
+              <Link
+                to={"/$widgetId/$contentId"}
+                params={{ widgetId: "reviews", contentId: String(review.id) }}
+              >
+                <div className="w-full">
+                  <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group flex justify-center items-center">
+                    <div>Reviews Placeholder</div>
                   </div>
-                )}
-              </div>
-            </Link>
-          </li>
-        ))}
+                </div>
+
+                {/* Project Info */}
+                <div className="mt-4 space-y-2">
+                  <h3 className="text-xl font-bold">{review.metadata.title}</h3>
+
+                  {review.metadata.desc && (
+                    <p className="text-sm text-gray-600">
+                      {review.metadata.desc}
+                    </p>
+                  )}
+
+                  {review.metadata.genre && (
+                    <div className="flex gap-2">
+                      {review.metadata.genre.map((g) => (
+                        <span
+                          key={g}
+                          className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                        >
+                          {g}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </Link>
+            </li>
+          ))
+        ) : (
+          <div>
+            <p>No Review content is found</p>
+          </div>
+        )}
       </ul>
     </div>
   );

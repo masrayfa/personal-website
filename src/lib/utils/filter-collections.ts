@@ -15,10 +15,21 @@ export function filterCollections(
       return true;
     }
 
-    // Apply genre filter
-    if (activeFilters.genre) {
-      const hasGenre = item.metadata.genre?.includes(activeFilters.genre);
-      if (!hasGenre) return false;
+    // Apply genre filter (OR logic - matches ANY selected genre)
+    if (activeFilters.genre && activeFilters.genre.length > 0) {
+      const itemGenres = item.metadata.genre || [];
+      const hasAnyGenre = activeFilters.genre.some((selectedGenre) =>
+        itemGenres.includes(selectedGenre),
+      );
+      if (!hasAnyGenre) return false;
+    }
+
+    if (activeFilters.mood && activeFilters.mood.length > 0) {
+      const itemMoods = item.metadata.mood || [];
+      const hasAnyMood = activeFilters.mood.some((selectedMood) =>
+        itemMoods.includes(selectedMood),
+      );
+      if (!hasAnyMood) return false;
     }
 
     // Apply mood filter (when implemented)
