@@ -32,7 +32,7 @@ const FilterWidget = () => {
   const FilterComponent = widgetId ? FILTER_COMPONENTS[widgetId] : null;
 
   return (
-    <div className="p-5">
+    <div className="flex-1 overflow-y-auto scrollbar-hidden p-5 min-h-0">
       <div className="flex flex-wrap gap-2">
         {FilterComponent && <FilterComponent />}
         {!FilterComponent && (

@@ -1,63 +1,63 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router';
-import ChooseYourPersona from '@/features/choose-your-persona/choose-your-persona.component';
-import WidgetsActionMenu from '@/features/widgets/widget-action-menu/widgets-action-menu.component';
-import GlobalWidget from '@/features/widgets/global-widget/global-widget.component';
-import CollabWidget from '@/features/widgets/collab-widget/collab-widget.component';
-import Socials from '@/features/socials/socials.component';
-import FilterWidget from '@/features/widgets/filter-widget/filter-widget.component';
+import { createFileRoute, Outlet } from "@tanstack/react-router";
+import ChooseYourPersona from "@/features/choose-your-persona/choose-your-persona.component";
+import WidgetsActionMenu from "@/features/widgets/widget-action-menu/widgets-action-menu.component";
+import GlobalWidget from "@/features/widgets/global-widget/global-widget.component";
+import CollabWidget from "@/features/widgets/collab-widget/collab-widget.component";
+import Socials from "@/features/socials/socials.component";
+import FilterWidget from "@/features/widgets/filter-widget/filter-widget.component";
 
-export const Route = createFileRoute('/_layout')({
+export const Route = createFileRoute("/_layout")({
   component: RouteComponent,
 });
 
 const WidgetsAction = [
   {
     id: 1,
-    url: 'blog',
-    label: 'blog',
-    src: '',
+    url: "blog",
+    label: "blog",
+    src: "",
   },
   {
     id: 2,
-    url: 'work',
-    label: 'work',
-    src: '',
+    url: "work",
+    label: "work",
+    src: "",
   },
   {
     id: 3,
-    url: 'peripherals',
-    label: 'peripherals',
-    src: '',
+    url: "peripherals",
+    label: "peripherals",
+    src: "",
   },
   {
     id: 4,
-    url: 'short-stories',
-    label: 'short stories',
-    src: '',
+    url: "short-stories",
+    label: "short stories",
+    src: "",
   },
   {
     id: 5,
-    url: 'filmography',
-    label: 'filmography',
-    src: '',
+    url: "filmography",
+    label: "filmography",
+    src: "",
   },
   {
     id: 6,
-    url: 'reviews',
-    label: 'reviews',
-    src: '',
+    url: "reviews",
+    label: "reviews",
+    src: "",
   },
   {
     id: 7,
-    url: 'all-time-fav',
-    label: 'all time fav',
-    src: '',
+    url: "all-time-fav",
+    label: "all time fav",
+    src: "",
   },
   {
     id: 8,
-    url: 'love',
-    label: '<3',
-    src: '',
+    url: "love",
+    label: "<3",
+    src: "",
   },
 ];
 
@@ -76,7 +76,7 @@ function RouteComponent() {
       </div>
 
       {/* Right Wing */}
-      <div className="w-80 flex flex-col">
+      <div className="w-80 flex flex-col h-screen">
         {/* Global Widget - EN & Dark Mode buttons */}
         <div className="">
           <GlobalWidget />
@@ -86,7 +86,7 @@ function RouteComponent() {
         <div className="border p-20"></div>
 
         {/* Filter Widget - most likes, favs, most claps */}
-        <div className="flex flex-col h-full justify-between border-b ">
+        <div className="flex flex-col flex-1 justify-between border-b overflow-hidden">
           <FilterWidget />
           {/* Collab Widget - let's collab button */}
           <CollabWidget />

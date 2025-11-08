@@ -8,6 +8,13 @@ import { ContentsCollectionsType } from "@/lib/types/post-collections-type";
 export type FilterConfig = {
   genre?: string[];
   mood?: string[];
+  // Filmography filters
+  status?: string[];
+  region?: string[];
+  subject?: string[];
+  visualStyle?: string[];
+  technical?: string[];
+  year?: number[];
   // Future filters (disabled for now):
   // likes?: number;
   // claps?: number;
@@ -19,6 +26,13 @@ export type FilterConfig = {
 export type ActiveFilters = {
   genre?: string[] | null;
   mood?: string[] | null;
+  // Filmography filters
+  status?: string[] | null;
+  region?: string[] | null;
+  subject?: string[] | null;
+  visualStyle?: string[] | null;
+  technical?: string[] | null;
+  year?: number[] | null;
   // Future filters:
   // likes?: number | null;
   // claps?: number | null;
@@ -49,6 +63,18 @@ type FilterStore = {
   toggleGenreFilter: (widgetId: WidgetType, genre: string) => void;
 
   toggleMoodFilter: (widgetId: WidgetType, mood: string) => void;
+
+  toggleStatusFilter: (widgetId: WidgetType, status: string) => void;
+
+  toggleRegionFilter: (widgetId: WidgetType, region: string) => void;
+
+  toggleSubjectFilter: (widgetId: WidgetType, subject: string) => void;
+
+  toggleVisualStyleFilter: (widgetId: WidgetType, visualStyle: string) => void;
+
+  toggleTechnicalFilter: (widgetId: WidgetType, technical: string) => void;
+
+  toggleYearFilter: (widgetId: WidgetType, year: number) => void;
 
   clearFilter: (widgetId: WidgetType, filterKey: keyof ActiveFilters) => void;
 
@@ -121,6 +147,144 @@ export const useFilterStore = create<FilterStore>((set, get) => ({
             activeFilters: {
               ...state.widgetFilters[widgetId]?.activeFilters,
               mood: newMoods.length > 0 ? newMoods : null,
+            },
+          },
+        },
+      };
+    });
+  },
+
+  toggleStatusFilter: (widgetId, status) => {
+    set((state) => {
+      const currentStatus =
+        state.widgetFilters[widgetId]?.activeFilters?.status || [];
+      const newStatus = currentStatus.includes(status)
+        ? currentStatus.filter((s) => s !== status)
+        : [...currentStatus, status];
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              status: newStatus.length > 0 ? newStatus : null,
+            },
+          },
+        },
+      };
+    });
+  },
+
+  toggleRegionFilter: (widgetId, region) => {
+    set((state) => {
+      const currentRegion =
+        state.widgetFilters[widgetId]?.activeFilters?.region || [];
+      const newRegion = currentRegion.includes(region)
+        ? currentRegion.filter((r) => r !== region)
+        : [...currentRegion, region];
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              region: newRegion.length > 0 ? newRegion : null,
+            },
+          },
+        },
+      };
+    });
+  },
+
+  toggleSubjectFilter: (widgetId, subject) => {
+    set((state) => {
+      const currentSubject =
+        state.widgetFilters[widgetId]?.activeFilters?.subject || [];
+      const newSubject = currentSubject.includes(subject)
+        ? currentSubject.filter((s) => s !== subject)
+        : [...currentSubject, subject];
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              subject: newSubject.length > 0 ? newSubject : null,
+            },
+          },
+        },
+      };
+    });
+  },
+
+  toggleVisualStyleFilter: (widgetId, visualStyle) => {
+    set((state) => {
+      const currentVisualStyle =
+        state.widgetFilters[widgetId]?.activeFilters?.visualStyle || [];
+      const newVisualStyle = currentVisualStyle.includes(visualStyle)
+        ? currentVisualStyle.filter((v) => v !== visualStyle)
+        : [...currentVisualStyle, visualStyle];
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              visualStyle: newVisualStyle.length > 0 ? newVisualStyle : null,
+            },
+          },
+        },
+      };
+    });
+  },
+
+  toggleTechnicalFilter: (widgetId, technical) => {
+    set((state) => {
+      const currentTechnical =
+        state.widgetFilters[widgetId]?.activeFilters?.technical || [];
+      const newTechnical = currentTechnical.includes(technical)
+        ? currentTechnical.filter((t) => t !== technical)
+        : [...currentTechnical, technical];
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              technical: newTechnical.length > 0 ? newTechnical : null,
+            },
+          },
+        },
+      };
+    });
+  },
+
+  toggleYearFilter: (widgetId, year) => {
+    set((state) => {
+      const currentYear =
+        state.widgetFilters[widgetId]?.activeFilters?.year || [];
+      const newYear = currentYear.includes(year)
+        ? currentYear.filter((y) => y !== year)
+        : [...currentYear, year];
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              year: newYear.length > 0 ? newYear : null,
             },
           },
         },

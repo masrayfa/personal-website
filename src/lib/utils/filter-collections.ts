@@ -24,6 +24,7 @@ export function filterCollections(
       if (!hasAnyGenre) return false;
     }
 
+    // Apply mood filter (OR logic - matches ANY selected mood)
     if (activeFilters.mood && activeFilters.mood.length > 0) {
       const itemMoods = item.metadata.mood || [];
       const hasAnyMood = activeFilters.mood.some((selectedMood) =>
@@ -32,11 +33,54 @@ export function filterCollections(
       if (!hasAnyMood) return false;
     }
 
-    // Apply mood filter (when implemented)
-    if (activeFilters.mood) {
-      // TODO: Implement mood filtering when metadata includes mood
-      // const hasMood = item.metadata.mood?.includes(activeFilters.mood);
-      // if (!hasMood) return false;
+    // Apply status filter (filmography)
+    if (activeFilters.status && activeFilters.status.length > 0) {
+      const itemStatus = item.metadata.status;
+      const hasStatus = activeFilters.status.includes(itemStatus || '');
+      if (!hasStatus) return false;
+    }
+
+    // Apply region filter (filmography - OR logic)
+    if (activeFilters.region && activeFilters.region.length > 0) {
+      const itemRegions = item.metadata.region || [];
+      const hasAnyRegion = activeFilters.region.some((selectedRegion) =>
+        itemRegions.includes(selectedRegion),
+      );
+      if (!hasAnyRegion) return false;
+    }
+
+    // Apply subject filter (filmography - OR logic)
+    if (activeFilters.subject && activeFilters.subject.length > 0) {
+      const itemSubjects = item.metadata.subject || [];
+      const hasAnySubject = activeFilters.subject.some((selectedSubject) =>
+        itemSubjects.includes(selectedSubject),
+      );
+      if (!hasAnySubject) return false;
+    }
+
+    // Apply visual style filter (filmography - OR logic)
+    if (activeFilters.visualStyle && activeFilters.visualStyle.length > 0) {
+      const itemVisualStyles = item.metadata.visualStyle || [];
+      const hasAnyVisualStyle = activeFilters.visualStyle.some((selectedStyle) =>
+        itemVisualStyles.includes(selectedStyle),
+      );
+      if (!hasAnyVisualStyle) return false;
+    }
+
+    // Apply technical filter (filmography - OR logic)
+    if (activeFilters.technical && activeFilters.technical.length > 0) {
+      const itemTechnicals = item.metadata.technical || [];
+      const hasAnyTechnical = activeFilters.technical.some((selectedTech) =>
+        itemTechnicals.includes(selectedTech),
+      );
+      if (!hasAnyTechnical) return false;
+    }
+
+    // Apply year filter (filmography - OR logic)
+    if (activeFilters.year && activeFilters.year.length > 0) {
+      const itemYear = item.metadata.year;
+      const hasYear = activeFilters.year.includes(itemYear || 0);
+      if (!hasYear) return false;
     }
 
     // Future filters (likes, claps) can be added here

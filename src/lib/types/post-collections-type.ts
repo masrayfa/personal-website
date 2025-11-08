@@ -5,8 +5,16 @@ type ContentCollectionsMetadata = {
   title: string;
   desc: string;
   date: string;
-  likes: number;
+  likes?: number;
   genre?: string[];
+  mood?: string[];
+  // Filmography specific fields
+  status?: "dream" | "captured";
+  region?: string[];
+  subject?: string[];
+  visualStyle?: string[];
+  technical?: string[];
+  year?: number;
 };
 
 export type ContentsCollectionsType = {

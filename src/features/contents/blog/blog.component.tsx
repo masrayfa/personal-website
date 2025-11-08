@@ -28,8 +28,7 @@ const BlogComponent = () => {
     activefilters,
   );
 
-  const blogs =
-    filteredCollections.length > 0 ? filteredCollections : BlogMDsCollections;
+  const blogs = filteredCollections.length > 0 ? filteredCollections : null;
 
   return (
     <div className="flex flex-col space-y-16">
@@ -45,28 +44,34 @@ const BlogComponent = () => {
 
       {/* List of contents */}
       <ul className="flex flex-col gap-5">
-        {blogs.map((blog) => (
-          <li className="">
-            <Link
-              id={String(blog.id)}
-              to={"/$widgetId/$contentId"}
-              params={{ widgetId: "blog", contentId: String(blog.id) }}
-            >
-              <Card className="rounded-none cursor-pointer border-black">
-                <CardHeader>
-                  <CardTitle>{blog.metadata.title}</CardTitle>
-                  <CardDescription>{blog.metadata.desc}</CardDescription>
-                </CardHeader>
-                {/* <CardFooter className="justify-end gap-2">
+        {(blogs ?? []).length > 0 ? (
+          blogs?.map((blog) => (
+            <li className="">
+              <Link
+                id={String(blog.id)}
+                to={"/$widgetId/$contentId"}
+                params={{ widgetId: "blog", contentId: String(blog.id) }}
+              >
+                <Card className="rounded-none cursor-pointer border-black">
+                  <CardHeader>
+                    <CardTitle>{blog.metadata.title}</CardTitle>
+                    <CardDescription>{blog.metadata.desc}</CardDescription>
+                  </CardHeader>
+                  {/* <CardFooter className="justify-end gap-2">
                   <span>
                     <FaHeart />
                   </span>
                   <span>{md.metadata.likes ?? 30}</span>
                 </CardFooter> */}
-              </Card>
-            </Link>
-          </li>
-        ))}
+                </Card>
+              </Link>
+            </li>
+          ))
+        ) : (
+          <div>
+            <p>No content found</p>
+          </div>
+        )}
       </ul>
     </div>
   );
