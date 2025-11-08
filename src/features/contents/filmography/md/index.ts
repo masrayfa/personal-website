@@ -72,6 +72,7 @@ const FilmographyCollections: ContentsCollectionsType[] = [
     metadata: {
       title: "Bandung - Home Base",
       desc: "My city through my lens - Art Deco architecture and creative energy",
+      image_url: "/w-harry.jpg",
       date: "2024-12-01",
       status: "captured",
       region: ["Asia", "Southeast Asia"],

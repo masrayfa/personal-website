@@ -53,12 +53,23 @@ const FilmographyComponent = () => {
 
             const CardContent = (
               <Card
-                className={`rounded-none border-black relative ${isDream ? "cursor-not-allowed opacity-75" : "cursor-pointer"}`}
+                className={`rounded-none border-black relative overflow-hidden ${isDream ? "cursor-not-allowed opacity-75" : "cursor-pointer"}`}
               >
+                {/* Image Section */}
+                {film.metadata.image_url && (
+                  <div className="relative w-full h-64 overflow-hidden bg-gray-100">
+                    <img
+                      src={film.metadata.image_url}
+                      alt={film.metadata.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+
                 {/* Dream Destination Badge */}
                 {film.metadata.status === "dream" && (
                   <div className="absolute top-4 right-4 z-10">
-                    <span className="flex items-center gap-1.5 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-purple-300">
+                    <span className="flex items-center gap-1.5 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-purple-300 shadow-sm">
                       <FaStar className="text-sm" />
                       Dream Destination
                     </span>
@@ -68,7 +79,7 @@ const FilmographyComponent = () => {
                 {/* Captured Badge */}
                 {film.metadata.status === "captured" && (
                   <div className="absolute top-4 right-4 z-10">
-                    <span className="flex items-center gap-1.5 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-300">
+                    <span className="flex items-center gap-1.5 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-300 shadow-sm">
                       <FaCamera className="text-sm" />
                       Captured
                     </span>

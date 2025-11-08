@@ -5,6 +5,7 @@ type ContentCollectionsMetadata = {
   title: string;
   desc: string;
   date: string;
+  image_url?: string;
   likes?: number;
   genre?: string[];
   mood?: string[];
