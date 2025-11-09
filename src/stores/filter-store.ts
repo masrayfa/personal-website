@@ -24,8 +24,12 @@ export type FilterConfig = {
  * Active filters state for a specific widget
  */
 export type ActiveFilters = {
+  // Blog filters
+  // // Short Stories
   genre?: string[] | null;
   mood?: string[] | null;
+  // Reviews filters
+  reviewType?: string[] | null;
   // Filmography filters
   status?: string[] | null;
   region?: string[] | null;
@@ -59,6 +63,8 @@ type FilterStore = {
     filterKey: keyof ActiveFilters,
     value: string | number | string[] | null,
   ) => void;
+
+  toggleReviewTypeFilter: (widgetId: WidgetType, reviewType: string) => void;
 
   toggleGenreFilter: (widgetId: WidgetType, genre: string) => void;
 
@@ -106,6 +112,29 @@ export const useFilterStore = create<FilterStore>((set, get) => ({
         },
       },
     }));
+  },
+
+  toggleReviewTypeFilter: (widgetId, reviewType) => {
+    set((state) => {
+      const currentReviewTypes =
+        state.widgetFilters[widgetId]?.activeFilters?.reviewType || [];
+      const newReviewTypes = currentReviewTypes.includes(reviewType)
+        ? currentReviewTypes.filter((g) => g !== reviewType) 
+        : [...currentReviewTypes, reviewType]; 
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              reviewType: newReviewTypes.length > 0 ? newReviewTypes : null,
+            },
+          },
+        },
+      };
+    });
   },
 
   toggleGenreFilter: (widgetId, genre) => {

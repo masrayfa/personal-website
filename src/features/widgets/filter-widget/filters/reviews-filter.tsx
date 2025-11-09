@@ -5,6 +5,15 @@ import { FilterSection } from "../components/filter-section";
 import ReviewsMDsCollections from "@/features/contents/reviews/md";
 import { filterCollections } from "@/lib/utils/filter-collections";
 
+const REVIEW_TYPE_OPTIONS = [
+  { label: "Movie", value: "movie" },
+  { label: "Book", value: "book" },
+  { label: "Music", value: "music" },
+  { label: "Game", value: "game" },
+  { label: "Tech", value: "tech" },
+  { label: "Product", value: "product" },
+]
+
 const GENRE_OPTIONS = [
   { label: "Action", value: "action" },
   { label: "Drama", value: "drama" },
@@ -29,6 +38,7 @@ const ReviewsFilter = () => {
     clearAllFilters,
     toggleGenreFilter,
     toggleMoodFilter,
+    toggleReviewTypeFilter,
   } = useFilterStore();
 
   const activeFilters = getActiveFilters("reviews");
@@ -38,6 +48,10 @@ const ReviewsFilter = () => {
     const filtered = filterCollections(ReviewsMDsCollections, activeFilters);
     setFilteredCollections("reviews", filtered);
   }, [activeFilters, setFilteredCollections]);
+
+  const handleReviewTypeClick = (reviewType: string) => {
+    toggleReviewTypeFilter("reviews", reviewType);
+  };
 
   const handleGenreClick = (genre: string) => {
     toggleGenreFilter("reviews", genre);
@@ -71,6 +85,19 @@ const ReviewsFilter = () => {
           </button>
         )}
       </div>
+
+      {/* Review Type Filter */}
+      <FilterSection title="By Review Type">
+        {REVIEW_TYPE_OPTIONS.map((option) => (
+          <FilterPill
+            key={option.value}
+            label={option.label}
+            value={option.value}
+            isActive={activeFilters.reviewType?.includes(option.value) || false}
+            onClick={() => handleReviewTypeClick(option.value)}
+          />
+        ))}
+      </FilterSection>
 
       {/* Genre Filter */}
       <FilterSection title="By Genre">

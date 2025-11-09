@@ -2,6 +2,8 @@ import { MDXProps } from "mdx/types";
 import { JSX } from "react";
 
 type ContentCollectionsMetadata = {
+  // Blog
+  // // Short stories
   title: string;
   desc: string;
   date: string;
@@ -9,6 +11,8 @@ type ContentCollectionsMetadata = {
   likes?: number;
   genre?: string[];
   mood?: string[];
+  // Reviews
+  reviewType?: string[];
   // Filmography specific fields
   status?: "dream" | "captured";
   region?: string[];

@@ -2,28 +2,17 @@ import React, { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import ReviewsMDsCollections from "./md";
 import { useFilterStore } from "@/stores/filter-store";
-
-interface Props {
-  title: string;
-  description?: string;
-  mediaUrl?: string;
-  mediaType?: "image" | "video" | "gif";
-}
-
-const widgetId = "reviews";
+import { filterCollections } from "@/lib/utils/filter-collections";
 
 const ReviewsComponent = () => {
-  const { getFilteredCollections, getActiveFilters } = useFilterStore();
+  const { getActiveFilters } = useFilterStore();
 
-  const activeFilters = getActiveFilters(widgetId);
+  const activeFilters = getActiveFilters("reviews");
 
   // Get filtered collections if filters are active, otherwise use all collections
-  const filteredCollections = getFilteredCollections(widgetId);
-  const reviews = filteredCollections.length > 0 ? filteredCollections : null;
+  const filteredCollections = filterCollections(ReviewsMDsCollections, activeFilters);
 
-  useEffect(() => {
-    console.log("@ReviewsComponent::filteredCollections", filteredCollections);
-  }, [filteredCollections]);
+  const reviews = filteredCollections.length > 0 ? filteredCollections : null;
 
   const [hovered, setHovered] = React.useState(false);
   const [mediaLoaded, setMediaLoaded] = React.useState(false);
@@ -52,7 +41,13 @@ const ReviewsComponent = () => {
               >
                 <div className="w-full">
                   <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group flex justify-center items-center">
-                    <div>Reviews Placeholder</div>
+                    {review.metadata.image_url && (
+                      <img
+                        src={review.metadata.image_url}
+                        alt={review.metadata.title}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -62,7 +57,7 @@ const ReviewsComponent = () => {
 
                   {review.metadata.desc && (
                     <p className="text-sm text-gray-600">
-                      {review.metadata.desc}
+                      {review.metadata.reviewType} • {review.metadata.desc}
                     </p>
                   )}
 

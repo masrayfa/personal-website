@@ -15,6 +15,14 @@ export function filterCollections(
       return true;
     }
 
+    if(activeFilters.reviewType && activeFilters.reviewType.length > 0) {
+      const itemReviewType = item.metadata.reviewType;
+      const hasReviewType = activeFilters.reviewType.some((selectedType) =>
+        itemReviewType?.includes(selectedType)
+      );
+      if(!hasReviewType) return false;
+    }
+
     // Apply genre filter (OR logic - matches ANY selected genre)
     if (activeFilters.genre && activeFilters.genre.length > 0) {
       const itemGenres = item.metadata.genre || [];
