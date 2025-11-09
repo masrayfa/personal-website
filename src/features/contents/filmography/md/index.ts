@@ -82,6 +82,21 @@ const FilmographyCollections: ContentsCollectionsType[] = [
       year: 2024,
     },
   },
+  {
+    id: 6,
+    component: BandungLocal,
+    metadata: {
+      title: "Bandung - Home Base",
+      desc: "My city through my lens - Art Deco architecture and creative energy",
+      date: "2024-12-01",
+      status: "captured",
+      region: ["Asia", "Southeast Asia"],
+      subject: ["architecture", "culture", "street", "nature"],
+      visualStyle: ["cinematic", "moody", "vibrant"],
+      technical: ["4K", "digital"],
+      year: 2024,
+    },
+  },
 ];
 
 export default FilmographyCollections;
