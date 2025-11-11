@@ -1,5 +1,85 @@
+import { useEffect, useMemo } from 'react';
+import { useFilterStore } from '@/stores/filter-store';
+import { FilterPill } from '../components/filter-pill';
+import { FilterSection } from '../components/filter-section';
+import { filterCollections } from '@/lib/utils/filter-collections';
+import { peripherals } from '@/features/contents/constants';
+
 const PeripheralsFilter = () => {
-  return <div>PeripheralsFilter</div>;
+  const { getActiveFilters, setFilter, setFilteredCollections, clearAllFilters } =
+    useFilterStore();
+
+  const activeFilters = getActiveFilters('peripherals');
+
+  // Apply filters whenever active filters change
+  useEffect(() => {
+    const filtered = filterCollections(peripherals, 'simplified', activeFilters);
+    setFilteredCollections('peripherals', filtered);
+  }, [activeFilters, setFilteredCollections]);
+
+  // Get unique categories from peripherals data
+  const categoryOptions = useMemo(() => {
+    const categories = new Set<string>();
+    peripherals.forEach((item) => {
+      if (item.metadata.category) {
+        categories.add(item.metadata.category);
+      }
+    });
+    return Array.from(categories)
+      .sort()
+      .map((category) => ({
+        label: category.charAt(0).toUpperCase() + category.slice(1),
+        value: category,
+      }));
+  }, []);
+
+  const handleCategoryClick = (category: string) => {
+    // Toggle: if already selected, clear it; otherwise set it
+    if (activeFilters.category === category) {
+      setFilter('peripherals', 'category', null);
+    } else {
+      setFilter('peripherals', 'category', category);
+    }
+  };
+
+  const handleClearAll = () => {
+    clearAllFilters('peripherals');
+  };
+
+  const hasActiveFilters = activeFilters.category !== null && activeFilters.category !== undefined;
+
+  return (
+    <div className="space-y-6 w-full">
+      {/* Header with clear all button */}
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200">
+          Filters
+        </h2>
+        {hasActiveFilters && (
+          <button
+            onClick={handleClearAll}
+            className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
+          >
+            Clear All
+          </button>
+        )}
+      </div>
+
+      {/* Category Filter */}
+      <FilterSection title="By Category" disabled={categoryOptions.length === 0}>
+        {categoryOptions.map((option) => (
+          <FilterPill
+            key={option.value}
+            label={option.label}
+            value={option.value}
+            isActive={activeFilters.category === option.value}
+            onClick={() => handleCategoryClick(option.value)}
+            disabled={false}
+          />
+        ))}
+      </FilterSection>
+    </div>
+  );
 };
 
 export default PeripheralsFilter;
