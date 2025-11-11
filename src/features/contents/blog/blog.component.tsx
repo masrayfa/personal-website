@@ -1,6 +1,7 @@
 import {
   Card,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -55,14 +56,27 @@ const BlogComponent = () => {
                 <Card className="rounded-none cursor-pointer border-black">
                   <CardHeader>
                     <CardTitle>{blog.metadata.title}</CardTitle>
-                    <CardDescription>{blog.metadata.desc}</CardDescription>
+                    <CardDescription>{blog.metadata.date} • {blog.metadata.desc}</CardDescription>
                   </CardHeader>
-                  {/* <CardFooter className="justify-end gap-2">
-                  <span>
-                    <FaHeart />
-                  </span>
-                  <span>{md.metadata.likes ?? 30}</span>
-                </CardFooter> */}
+                  <CardFooter>
+                    {/* Metadata Pills */}
+                    <div className="flex flex-wrap gap-2">
+                      {blog.metadata.year && (
+                        <span className="text-xs bg-gray-100 border border-gray-300 px-2 py-1">
+                          {blog.metadata.year}
+                        </span>
+                      )}
+                      {blog.metadata.genre &&
+                        blog.metadata.genre.map((b: string) => (
+                          <span
+                            key={b}
+                            className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                          >
+                            {b}
+                          </span>
+                        ))}
+                    </div>
+                  </CardFooter>
                 </Card>
               </Link>
             </li>
