@@ -10,7 +10,7 @@ const ReviewsComponent = () => {
   const activeFilters = getActiveFilters("reviews");
 
   // Get filtered collections if filters are active, otherwise use all collections
-  const filteredCollections = filterCollections(ReviewsMDsCollections, activeFilters);
+  const filteredCollections = filterCollections(ReviewsMDsCollections, 'full', activeFilters);
 
   const reviews = filteredCollections.length > 0 ? filteredCollections : null;
 

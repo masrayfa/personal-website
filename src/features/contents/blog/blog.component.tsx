@@ -26,6 +26,7 @@ const BlogComponent = () => {
 
   const filteredCollections = filterCollections(
     BlogMDsCollections,
+    'full',
     activefilters,
   );
 

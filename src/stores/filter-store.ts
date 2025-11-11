@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { ContentsCollectionsType } from "@/lib/types/post-collections-type";
+import { create } from 'zustand';
+import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 /**
  * Filter configuration for each widget type
@@ -28,8 +28,10 @@ export type ActiveFilters = {
   // // Short Stories
   genre?: string[] | null;
   mood?: string[] | null;
+
   // Reviews filters
   reviewType?: string[] | null;
+
   // Filmography filters
   status?: string[] | null;
   region?: string[] | null;
@@ -37,6 +39,19 @@ export type ActiveFilters = {
   visualStyle?: string[] | null;
   technical?: string[] | null;
   year?: number[] | null;
+
+  // All times fav
+  category?: string;
+  allTimeFavName?: string;
+
+  // Work Projects
+  techStack?: string[];
+  mediaUrl?: string;
+  url?: string;
+  mediaType?: 'image' | 'video';
+  // // Canvas colors for videos
+  canvasColors?: [number, number, number][];
+
   // Future filters:
   // likes?: number | null;
   // claps?: number | null;
@@ -61,7 +76,7 @@ type FilterStore = {
   setFilter: (
     widgetId: WidgetType,
     filterKey: keyof ActiveFilters,
-    value: string | number | string[] | null,
+    value: string | number | string[] | null
   ) => void;
 
   toggleReviewTypeFilter: (widgetId: WidgetType, reviewType: string) => void;
@@ -88,7 +103,7 @@ type FilterStore = {
 
   setFilteredCollections: (
     widgetId: WidgetType,
-    collections: ContentsCollectionsType[],
+    collections: ContentsCollectionsType[]
   ) => void;
 
   getActiveFilters: (widgetId: WidgetType) => ActiveFilters;
@@ -119,8 +134,8 @@ export const useFilterStore = create<FilterStore>((set, get) => ({
       const currentReviewTypes =
         state.widgetFilters[widgetId]?.activeFilters?.reviewType || [];
       const newReviewTypes = currentReviewTypes.includes(reviewType)
-        ? currentReviewTypes.filter((g) => g !== reviewType) 
-        : [...currentReviewTypes, reviewType]; 
+        ? currentReviewTypes.filter((g) => g !== reviewType)
+        : [...currentReviewTypes, reviewType];
 
       return {
         widgetFilters: {

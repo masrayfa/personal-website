@@ -31,46 +31,48 @@ const WorkComponent = () => {
       {/* List of contents */}
       <ul className="flex flex-col gap-12">
         {workProjects.map((project) => (
-          <li>
+          <li key={project.id}>
             <Link
               id={String(project.id)}
-              to={project.url}
+              to={project.metadata.url || '#'}
               params={{ widgetId: "work", contentId: String(project.id) }}
             >
               <WorkProjectCard
                 key={project.id}
-                title={project.title}
-                description={project.description}
-                techStack={project.techStack}
-                mediaUrl={project.mediaUrl}
-                mediaType={project.mediaType}
-                canvasColors={project.mediaUrl ? project.canvasColors : null}
+                title={project.metadata.title}
+                description={project.metadata.desc}
+                techStack={project.metadata.techStack || []}
+                mediaUrl={project.metadata.mediaUrl}
+                mediaType={project.metadata.mediaType}
+                canvasColors={project.metadata.mediaUrl ? project.metadata.canvasColors : null}
               />
             </Link>
             {/* Project Info */}
             <div className="mt-4 space-y-2">
               <div className="flex items-start justify-between">
-                <h3 className="text-xl font-bold">{project.title}</h3>
+                <h3 className="text-xl font-bold">{project.metadata.title}</h3>
                 <button className="text-sm hover:underline flex items-center gap-1">
                   View
                   <VscLinkExternal />
                 </button>
               </div>
 
-              {project.description && (
-                <p className="text-sm text-gray-600">{project.description}</p>
+              {project.metadata.desc && (
+                <p className="text-sm text-gray-600">{project.metadata.desc}</p>
               )}
 
-              <div className="flex flex-wrap gap-2">
-                {project.techStack.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="text-xs px-2 py-1 bg-gray-100 border border-gray-300"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              {project.metadata.techStack && (
+                <div className="flex flex-wrap gap-2">
+                  {project.metadata.techStack.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="text-xs px-2 py-1 bg-gray-100 border border-gray-300"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </li>
         ))}

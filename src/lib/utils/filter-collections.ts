@@ -1,33 +1,69 @@
-import { ContentsCollectionsType } from "@/lib/types/post-collections-type";
-import { ActiveFilters } from "@/stores/filter-store";
+import {
+  ContentsCollectionsType,
+  ContentsCollectionsTypeSimplified,
+} from '@/lib/types/post-collections-type';
+import { ActiveFilters } from '@/stores/filter-store';
 
-export function filterCollections(
-  collections: ContentsCollectionsType[],
-  activeFilters: ActiveFilters,
-): ContentsCollectionsType[] {
+function filterSimplifiedCollections(
+  collections: ContentsCollectionsTypeSimplified[],
+  activeFilters: ActiveFilters
+): ContentsCollectionsTypeSimplified[] {
   return collections.filter((item) => {
     // If no filters are active, return all items
+    if (!activeFilters || Object.keys(activeFilters).length === 0) {
+      return true;
+    }
+
     const hasActiveFilters = Object.values(activeFilters).some(
-      (value) => value !== null && value !== undefined,
+      (value) => value !== null && value !== undefined
     );
 
     if (!hasActiveFilters) {
       return true;
     }
 
-    if(activeFilters.reviewType && activeFilters.reviewType.length > 0) {
+    // Apply category filter (exact match for single category)
+    if (activeFilters.category) {
+      const itemCategory = item.metadata.category;
+      const hasCategory = itemCategory === activeFilters.category;
+      if (!hasCategory) return false;
+    }
+
+    return true;
+  });
+}
+
+function filterFullCollections(
+  collections: ContentsCollectionsType[],
+  activeFilters: ActiveFilters
+): ContentsCollectionsType[] {
+  return collections.filter((item) => {
+    // If no filters are active, return all items
+    if (!activeFilters || Object.keys(activeFilters).length === 0) {
+      return true;
+    }
+
+    const hasActiveFilters = Object.values(activeFilters).some(
+      (value) => value !== null && value !== undefined
+    );
+
+    if (!hasActiveFilters) {
+      return true;
+    }
+
+    if (activeFilters.reviewType && activeFilters.reviewType.length > 0) {
       const itemReviewType = item.metadata.reviewType;
       const hasReviewType = activeFilters.reviewType.some((selectedType) =>
         itemReviewType?.includes(selectedType)
       );
-      if(!hasReviewType) return false;
+      if (!hasReviewType) return false;
     }
 
     // Apply genre filter (OR logic - matches ANY selected genre)
     if (activeFilters.genre && activeFilters.genre.length > 0) {
       const itemGenres = item.metadata.genre || [];
       const hasAnyGenre = activeFilters.genre.some((selectedGenre) =>
-        itemGenres.includes(selectedGenre),
+        itemGenres.includes(selectedGenre)
       );
       if (!hasAnyGenre) return false;
     }
@@ -36,7 +72,7 @@ export function filterCollections(
     if (activeFilters.mood && activeFilters.mood.length > 0) {
       const itemMoods = item.metadata.mood || [];
       const hasAnyMood = activeFilters.mood.some((selectedMood) =>
-        itemMoods.includes(selectedMood),
+        itemMoods.includes(selectedMood)
       );
       if (!hasAnyMood) return false;
     }
@@ -52,7 +88,7 @@ export function filterCollections(
     if (activeFilters.region && activeFilters.region.length > 0) {
       const itemRegions = item.metadata.region || [];
       const hasAnyRegion = activeFilters.region.some((selectedRegion) =>
-        itemRegions.includes(selectedRegion),
+        itemRegions.includes(selectedRegion)
       );
       if (!hasAnyRegion) return false;
     }
@@ -61,7 +97,7 @@ export function filterCollections(
     if (activeFilters.subject && activeFilters.subject.length > 0) {
       const itemSubjects = item.metadata.subject || [];
       const hasAnySubject = activeFilters.subject.some((selectedSubject) =>
-        itemSubjects.includes(selectedSubject),
+        itemSubjects.includes(selectedSubject)
       );
       if (!hasAnySubject) return false;
     }
@@ -69,8 +105,8 @@ export function filterCollections(
     // Apply visual style filter (filmography - OR logic)
     if (activeFilters.visualStyle && activeFilters.visualStyle.length > 0) {
       const itemVisualStyles = item.metadata.visualStyle || [];
-      const hasAnyVisualStyle = activeFilters.visualStyle.some((selectedStyle) =>
-        itemVisualStyles.includes(selectedStyle),
+      const hasAnyVisualStyle = activeFilters.visualStyle.some(
+        (selectedStyle) => itemVisualStyles.includes(selectedStyle)
       );
       if (!hasAnyVisualStyle) return false;
     }
@@ -79,7 +115,7 @@ export function filterCollections(
     if (activeFilters.technical && activeFilters.technical.length > 0) {
       const itemTechnicals = item.metadata.technical || [];
       const hasAnyTechnical = activeFilters.technical.some((selectedTech) =>
-        itemTechnicals.includes(selectedTech),
+        itemTechnicals.includes(selectedTech)
       );
       if (!hasAnyTechnical) return false;
     }
@@ -100,6 +136,26 @@ export function filterCollections(
   });
 }
 
+export function filterCollections(
+  collections: ContentsCollectionsType[] | ContentsCollectionsTypeSimplified[],
+  type: 'full' | 'simplified',
+  activeFilters: ActiveFilters
+): ContentsCollectionsType[] | ContentsCollectionsTypeSimplified[] {
+  switch (type) {
+    case 'simplified':
+      return filterSimplifiedCollections(
+        collections as ContentsCollectionsTypeSimplified[],
+        activeFilters
+      );
+    case 'full':
+    default:
+      return filterFullCollections(
+        collections as ContentsCollectionsType[],
+        activeFilters
+      );
+  }
+}
+
 /**
  * Extracts unique values for a specific filter from collections
  *
@@ -113,7 +169,7 @@ export function filterCollections(
  */
 export function extractUniqueFilterValues(
   collections: ContentsCollectionsType[],
-  filterKey: keyof ContentsCollectionsType["metadata"],
+  filterKey: keyof ContentsCollectionsType['metadata']
 ): string[] {
   const values = collections.flatMap((item) => {
     const value = item.metadata[filterKey];

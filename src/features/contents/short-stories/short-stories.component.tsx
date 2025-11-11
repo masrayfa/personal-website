@@ -25,6 +25,7 @@ const ShortStoriesComponent = () => {
 
   const filteredCollections = filterCollections(
     ShortStoriesMDsCollections,
+    'full',
     activefilters,
   );
 

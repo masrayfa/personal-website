@@ -3,17 +3,17 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Link, Outlet, useMatches } from "@tanstack/react-router";
-import FilmographyCollections from "./md";
-import { useFilterStore } from "@/stores/filter-store";
-import { filterCollections } from "@/lib/utils/filter-collections";
+} from '@/components/ui/card';
+import { Link, Outlet, useMatches } from '@tanstack/react-router';
+import FilmographyCollections from './md';
+import { useFilterStore } from '@/stores/filter-store';
+import { filterCollections } from '@/lib/utils/filter-collections';
 
 const FilmographyComponent = () => {
   const matches = useMatches();
 
   const hasChildRoute = matches.some((match) =>
-    match.id.includes("$contentId"),
+    match.id.includes('$contentId')
   );
 
   if (hasChildRoute) {
@@ -21,16 +21,17 @@ const FilmographyComponent = () => {
   }
 
   const { getActiveFilters } = useFilterStore();
-  const activeFilters = getActiveFilters("filmography");
+  const activeFilters = getActiveFilters('filmography');
 
   const filteredCollections = filterCollections(
     FilmographyCollections,
-    activeFilters,
+    'full',
+    activeFilters
   );
 
   // Filter out dream status films
   const capturedFilms = filteredCollections.filter(
-    (film) => film.metadata.status !== "dream"
+    (film) => film.metadata.status !== 'dream'
   );
 
   const filmography = capturedFilms.length > 0 ? capturedFilms : null;
@@ -53,9 +54,9 @@ const FilmographyComponent = () => {
           filmography?.map((film) => (
             <li key={film.id}>
               <Link
-                to={"/$widgetId/$contentId"}
+                to={'/$widgetId/$contentId'}
                 params={{
-                  widgetId: "filmography",
+                  widgetId: 'filmography',
                   contentId: String(film.id),
                 }}
               >
@@ -74,10 +75,14 @@ const FilmographyComponent = () => {
 
                     {/* Film Info */}
                     <div className="mt-4 space-y-2">
-                      <h3 className="text-xl font-bold">{film.metadata.title}</h3>
+                      <h3 className="text-xl font-bold">
+                        {film.metadata.title}
+                      </h3>
 
                       {film.metadata.desc && (
-                        <p className="text-sm text-gray-600">{film.metadata.desc}</p>
+                        <p className="text-sm text-gray-600">
+                          {film.metadata.desc}
+                        </p>
                       )}
 
                       {/* Metadata Pills */}
@@ -87,22 +92,24 @@ const FilmographyComponent = () => {
                             {film.metadata.year}
                           </span>
                         )}
-                        {film.metadata.region && film.metadata.region.map((r) => (
-                          <span
-                            key={r}
-                            className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
-                          >
-                            {r}
-                          </span>
-                        ))}
-                        {film.metadata.subject && film.metadata.subject.map((s) => (
-                          <span
-                            key={s}
-                            className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
-                          >
-                            {s}
-                          </span>
-                        ))}
+                        {film.metadata.region &&
+                          film.metadata.region.map((r) => (
+                            <span
+                              key={r}
+                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                            >
+                              {r}
+                            </span>
+                          ))}
+                        {film.metadata.subject &&
+                          film.metadata.subject.map((s) => (
+                            <span
+                              key={s}
+                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                            >
+                              {s}
+                            </span>
+                          ))}
                       </div>
                     </div>
                   </>
@@ -120,22 +127,24 @@ const FilmographyComponent = () => {
                             {film.metadata.year}
                           </span>
                         )}
-                        {film.metadata.region && film.metadata.region.map((r) => (
-                          <span
-                            key={r}
-                            className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
-                          >
-                            {r}
-                          </span>
-                        ))}
-                        {film.metadata.subject && film.metadata.subject.map((s) => (
-                          <span
-                            key={s}
-                            className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
-                          >
-                            {s}
-                          </span>
-                        ))}
+                        {film.metadata.region &&
+                          film.metadata.region.map((r) => (
+                            <span
+                              key={r}
+                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                            >
+                              {r}
+                            </span>
+                          ))}
+                        {film.metadata.subject &&
+                          film.metadata.subject.map((s) => (
+                            <span
+                              key={s}
+                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                            >
+                              {s}
+                            </span>
+                          ))}
                       </div>
                     </CardHeader>
                   </Card>
