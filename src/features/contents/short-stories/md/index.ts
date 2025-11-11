@@ -10,7 +10,6 @@ const ShortStoriesMDsCollections: ContentsCollectionsType[] = [
       title: "Unfinshed Finished Puzzle",
       desc: "a son wanted to play puzzle with his father",
       date: "2028-09-14",
-      likes: 90,
       genre: ["drama", "family"],
     },
   },

@@ -1,12 +1,10 @@
 import {
   Card,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Link, Outlet, useMatches } from "@tanstack/react-router";
-import { FaHeart } from "react-icons/fa";
 import ShortStoriesMDsCollections from "./md";
 import { useFilterStore } from "@/stores/filter-store";
 import { filterCollections } from "@/lib/utils/filter-collections";
@@ -46,30 +44,87 @@ const ShortStoriesComponent = () => {
       </div>
 
       {/* List of contents */}
-      <ul className="flex flex-col gap-5">
-        {(shortStories ?? []).length > 0 ? (
-          shortStories?.map((story) => (
-            <li className="">
+      <ul className="flex flex-col space-y-20">
+        {shortStories && shortStories.length > 0 ? (
+          shortStories.map((story) => (
+            <li key={story.id}>
               <Link
-                id={String(story.id)}
                 to={"/$widgetId/$contentId"}
                 params={{
                   widgetId: "short-stories",
                   contentId: String(story.id),
                 }}
               >
-                <Card className="rounded-none cursor-pointer border-black">
-                  <CardHeader>
-                    <CardTitle>{story.metadata.title}</CardTitle>
-                    <CardDescription>{story.metadata.desc}</CardDescription>
-                  </CardHeader>
-                  <CardFooter className="justify-end gap-2">
-                    <span>
-                      <FaHeart />
-                    </span>
-                    <span>{story.metadata.likes}</span>
-                  </CardFooter>
-                </Card>
+                {story.metadata.image_url ? (
+                  // Film with image - Reviews style
+                  <>
+                    <div className="w-full">
+                      <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group flex justify-center items-center">
+                        <img
+                          src={story.metadata.image_url}
+                          alt={story.metadata.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Film Info */}
+                    <div className="mt-4 space-y-2">
+                      <h3 className="text-xl font-bold">{story.metadata.title}</h3>
+
+                      {story.metadata.desc && (
+                        <span>
+                          <p className="text-sm text-gray-600">{story.metadata.date}</p>
+                        <p className="text-sm text-gray-600">{story.metadata.desc}</p>
+                        </span>
+                      )}
+
+                      {/* Metadata Pills */}
+                      <div className="flex flex-wrap gap-2">
+                        {story.metadata.year && (
+                          <span className="text-xs bg-gray-100 border border-gray-300 px-2 py-1">
+                            {story.metadata.year}
+                          </span>
+                        )}
+                        {story.metadata.genre &&
+                          story.metadata.genre.map((g: string) => (
+                            <span
+                              key={g}
+                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                            >
+                              {g}
+                            </span>
+                          ))}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  // Film without image - Blog card style
+                  <Card className="rounded-none cursor-pointer border-black">
+                    <CardHeader>
+                      <CardTitle>{story.metadata.title}</CardTitle>
+                      <CardDescription>{story.metadata.date} • {story.metadata.desc}</CardDescription>
+
+                      {/* Metadata Pills */}
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        {story.metadata.year && (
+                          <span className="text-xs bg-gray-100 border border-gray-300 px-2 py-1">
+                            {story.metadata.year}
+                          </span>
+                        )}
+                        {story.metadata.genre &&
+                          story.metadata.genre.map((g: string) => (
+                            <span
+                              key={g}
+                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                            >
+                              {g}
+                            </span>
+                          ))}
+                      </div>
+                    </CardHeader>
+                  </Card>
+                )}
               </Link>
             </li>
           ))
