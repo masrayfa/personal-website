@@ -8,6 +8,7 @@ interface WorkProjectCardProps {
   techStack: string[];
   mediaUrl?: string;
   mediaType?: 'image' | 'video' | 'gif';
+  logoUrl?: string; // Logo to display in center
   canvasColors?: [number, number, number][] | undefined | null; // Custom canvas colors
 }
 
@@ -15,10 +16,7 @@ export function WorkProjectCard({
   title,
   mediaUrl,
   mediaType = 'image',
-  canvasColors = [
-    [236, 72, 153],
-    [232, 121, 249],
-  ],
+  logoUrl,
 }: WorkProjectCardProps) {
   const [hovered, setHovered] = React.useState(false);
   const [mediaLoaded, setMediaLoaded] = React.useState(false);
@@ -38,35 +36,58 @@ export function WorkProjectCard({
         <Icon className="absolute h-6 w-6 -top-3 -right-3 text-black z-30" />
         <Icon className="absolute h-6 w-6 -bottom-3 -right-3 text-black z-30" />
 
-        {/* Media Content (Picture/Video/GIF) */}
         {mediaUrl && !mediaError ? (
           <>
-            {mediaType === 'video' ? (
-              <video
-                src={mediaUrl}
-                className="w-full h-full object-cover"
-                autoPlay
-                loop
-                muted
-                playsInline
-                onLoadedData={() => setMediaLoaded(true)}
-                onError={() => setMediaError(true)}
-              />
-            ) : (
-              <img
-                src={mediaUrl}
-                alt={title}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                onLoad={() => setMediaLoaded(true)}
-                onError={() => setMediaError(true)}
-              />
-            )}
+            {/* Background Layer: Media (Image/Video) - Less visible */}
+            <div className="absolute inset-0 z-0">
+              {mediaType === 'video' ? (
+                <video
+                  src={mediaUrl}
+                  className="w-full h-full object-cover opacity-30 group-hover:opacity-100 transition-opacity duration-500"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  onLoadedData={() => setMediaLoaded(true)}
+                  onError={() => setMediaError(true)}
+                />
+              ) : (
+                <img
+                  src={mediaUrl}
+                  alt={title}
+                  className="w-full h-full object-cover opacity-30 group-hover:opacity-100 transition-opacity duration-500"
+                  onLoad={() => setMediaLoaded(true)}
+                  onError={() => setMediaError(true)}
+                />
+              )}
+            </div>
 
-            {/* Overlay on hover */}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 z-10" />
+            {/* Middle Layer: Static Pixelated Canvas Effect - Always visible */}
+            <div className="h-full w-full absolute inset-0 z-10">
+              <CanvasRevealEffect
+                animationSpeed={3}
+                containerClassName="bg-transparent"
+                colors={[
+                  [20, 20, 20],   // dark
+                ]}
+                dotSize={2}
+              />
+            </div>
+
+            {/* Foreground Layer: Logo (if provided) */}
+            {logoUrl && (
+              <div className="absolute inset-0 flex items-center justify-center z-20">
+                <img
+                  src={logoUrl}
+                  alt={`${title} logo`}
+                  className="h-16 w-auto object-contain"
+                />
+              </div>
+            )}
           </>
         ) : (
           <>
+            {/* Static Canvas for placeholder */}
             <AnimatePresence>
               {hovered && (
                 <motion.div
@@ -78,7 +99,9 @@ export function WorkProjectCard({
                   <CanvasRevealEffect
                     animationSpeed={3}
                     containerClassName="bg-black"
-                    colors={canvasColors}
+                    colors={[
+                      [20, 20, 20],
+                    ]}
                     dotSize={2}
                   />
                 </motion.div>
@@ -86,13 +109,10 @@ export function WorkProjectCard({
             </AnimatePresence>
 
             {/* Placeholder Icon */}
-            <div className="absolute inset-0 flex items-center justify-center z-20">
-              <div className="text-center transition-all duration-200 group-hover:-translate-y-4 group-hover:opacity-0">
+            <div className="relative z-20">
+              <div className="text-center transition duration-200 w-full mx-auto flex items-center justify-center h-full">
                 <ProjectIcon />
               </div>
-              <h3 className="absolute text-xl font-bold opacity-0 group-hover:opacity-100 text-white transition-all duration-200 group-hover:-translate-y-2">
-                {title}
-              </h3>
             </div>
           </>
         )}
