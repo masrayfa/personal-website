@@ -9,6 +9,7 @@ import { wallOfFavsCollections } from '../constants';
 import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
 import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-type';
+import { Dialog, DialogTrigger, DialogContent } from '@/components/ui/dialog';
 
 const AllTimeFavComponent = () => {
   const matches = useMatches();
@@ -69,12 +70,25 @@ const AllTimeFavComponent = () => {
               <ul className="grid grid-cols-4 gap-5">
                 {items.map((fav) => (
                   <li key={fav.id}>
-                    <Card className="rounded-none cursor-pointer border-black">
-                      <CardHeader>
-                        <CardTitle>{fav.metadata.allTimeFavName}</CardTitle>
-                        <CardDescription>{fav.metadata.category}</CardDescription>
-                      </CardHeader>
-                    </Card>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Card className="rounded-none cursor-pointer border-black">
+                          <CardHeader>
+                            <CardTitle>{fav.metadata.allTimeFavName}</CardTitle>
+                            <CardDescription>
+                              {fav.metadata.category}
+                            </CardDescription>
+                          </CardHeader>
+                        </Card>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <div className="flex flex-col space-y-4">
+                          <h2 className="text-2xl font-bold">
+                            {fav.metadata.allTimeFavName}
+                          </h2>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </li>
                 ))}
               </ul>
