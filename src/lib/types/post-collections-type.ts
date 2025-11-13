@@ -26,6 +26,8 @@ type ContentCollectionsMetadata = {
   // All times fav
   category?: string;
   allTimeFavName?: string;
+  allTimeReason?: string;
+  reviewLink?: string;
 
   // Work Projects
   techStack?: string[];

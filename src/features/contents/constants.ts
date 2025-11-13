@@ -83,6 +83,10 @@ export const wallOfFavsCollections: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'movies',
       allTimeFavName: 'Satu Kakak 7 Keponakan',
+      image_url: '/img/movies/sakatupo.png',
+      allTimeReason:
+        'i felt warm from the writings that talks about family bonds, love, and personal struggles as a son.',
+      reviewLink: '/reviews/2',
     },
   },
   {
@@ -97,6 +101,10 @@ export const wallOfFavsCollections: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'movies',
       allTimeFavName: 'The Batman',
+      allTimeReason:
+        'i feel the rawness of becoming a hero through his journey. love the detective side and grounded version of a batman. Cinematic at its finest 🤌',
+      image_url: '/img/movies/the-batman-2022.png',
+      reviewLink: '/reviews/3',
     },
   },
   {
@@ -110,14 +118,21 @@ export const wallOfFavsCollections: ContentsCollectionsTypeSimplified[] = [
     id: 5,
     metadata: {
       category: 'movies',
-      allTimeFavName: 'minari',
+      allTimeFavName: 'inglorious basterds',
+      image_url: '/img/movies/inglorious-basterds.png',
+      allTimeReason:
+        'the characters depth. the directing style. the script. the picture',
+      reviewLink: '/reviews/4',
     },
   },
   {
     id: 6,
     metadata: {
       category: 'movies',
-      allTimeFavName: 'oppenheimer',
+      allTimeFavName: 'moonrise kingdom',
+      image_url: '/img/movies/moonrise-kingdom.png',
+      allTimeReason:
+        'a wes anderson movie that inspires me to make film in junior high. it influenced my aesthetic film making style till now.',
     },
   },
   {
@@ -125,6 +140,10 @@ export const wallOfFavsCollections: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'movies',
       allTimeFavName: 'SORE',
+      image_url: '/img/movies/sore.png',
+      allTimeReason:
+        'i resonated with the characters struggle that as much as we want to change our partner, we cannot.',
+      reviewLink: '/reviews/1',
     },
   },
 ];

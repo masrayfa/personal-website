@@ -4,7 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Outlet, useMatches } from '@tanstack/react-router';
+import { Link, Outlet, useMatches } from '@tanstack/react-router';
 import { wallOfFavsCollections } from '../constants';
 import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
@@ -83,9 +83,21 @@ const AllTimeFavComponent = () => {
                       </DialogTrigger>
                       <DialogContent>
                         <div className="flex flex-col space-y-4">
-                          <h2 className="text-2xl font-bold">
+                          <h2 className="text-3xl font-bold">
                             {fav.metadata.allTimeFavName}
                           </h2>
+                          <img src={fav.metadata.image_url} />
+                          <span>
+                            <p className="text-xl font-bold">
+                              all time reason:{' '}
+                            </p>
+                            <p>{fav.metadata.allTimeReason}</p>
+                          </span>
+                          {fav.metadata.reviewLink && (
+                            <Link to={fav.metadata.reviewLink}>
+                              <p className="text-sm underline">review link</p>
+                            </Link>
+                          )}
                         </div>
                       </DialogContent>
                     </Dialog>
