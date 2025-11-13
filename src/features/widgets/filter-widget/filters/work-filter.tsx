@@ -7,19 +7,20 @@ import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-
 import { workProjects } from '@/features/contents/constants';
 
 const TECH_STACK_OPTIONS = [
-  { label: 'TypeScript', value: 'TypeScript' },
-  { label: 'Tauri', value: 'Tauri' },
-  { label: 'SolidJS', value: 'SolidJS' },
-  { label: 'Rust', value: 'Rust' },
-  { label: 'React', value: 'React' },
-  { label: 'Node.js', value: 'Node.js' },
+  { label: 'TypeScript', value: 'typeScript' },
+  { label: 'Tauri', value: 'tauri' },
+  { label: 'SolidJS', value: 'solidjs' },
+  { label: 'Rust', value: 'rust' },
+  { label: 'React', value: 'react' },
+  { label: 'Node.js', value: 'nodejs' },
 ];
 
 const CATEGORY_OPTIONS = [
-  { label: 'Brand', value: 'Brand' },
-  { label: 'Product', value: 'Product' },
-  { label: 'Website', value: 'Website' },
-  { label: 'App', value: 'App' },
+  { label: 'Web', value: 'web' },
+  { label: 'App', value: 'app' },
+  { label: 'Desktop', value: 'desktop' },
+  { label: 'Product', value: 'product' },
+  { label: 'Brand', value: 'brand' },
 ];
 
 const WorkFilter = () => {

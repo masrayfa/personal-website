@@ -3,16 +3,11 @@ import { workProjects } from '../constants';
 import { WorkProjectCard } from '@/components/WorkCanvasRealEffect';
 import { VscLinkExternal } from 'react-icons/vsc';
 import { useFilterStore } from '@/stores/filter-store';
+import { filterCollections } from '@/lib/utils/filter-collections';
+import { useEffect } from 'react';
 
 const WorkComponent = () => {
   const matches = useMatches();
-  const filteredCollections = useFilterStore((state) =>
-    state.getFilteredCollections('work')
-  );
-
-  // Use filtered collections if available, otherwise use all work projects
-  const displayProjects =
-    filteredCollections.length > 0 ? filteredCollections : workProjects;
 
   // Checking if child route (contentId) is activated
   const hasChildRoute = matches.some((match) =>
@@ -23,6 +18,24 @@ const WorkComponent = () => {
   if (hasChildRoute) {
     return <Outlet />;
   }
+
+  const { getActiveFilters } = useFilterStore();
+
+  const activeFilters = getActiveFilters('work');
+
+  const filteredCollections = filterCollections(
+    workProjects,
+    'simplified',
+    activeFilters
+  );
+
+  const worksCollections =
+    filteredCollections.length > 0 ? filteredCollections : null;
+
+  useEffect(() => {
+    console.log('@ReviesComponent - activeFilters:', activeFilters);
+    console.log('@ReviesComponent - reviews:', worksCollections);
+  }, [activeFilters, worksCollections]);
 
   return (
     <div className="flex flex-col space-y-16">
@@ -38,59 +51,63 @@ const WorkComponent = () => {
 
       {/* List of contents */}
       <ul className="flex flex-col gap-12">
-        {displayProjects.map((project) => (
-          <li key={project.id}>
-            <Link
-              id={String(project.id)}
-              to={project.metadata.url || '#'}
-              params={{ widgetId: 'work', contentId: String(project.id) }}
-            >
-              <WorkProjectCard
-                key={project.id}
-                title={project.metadata.title}
-                description={project.metadata.desc}
-                techStack={project.metadata.techStack || []}
-                mediaUrl={project.metadata.mediaUrl}
-                mediaType={project.metadata.mediaType}
-                canvasColors={
-                  project.metadata.mediaUrl
-                    ? project.metadata.canvasColors
-                    : null
-                }
-              />
-            </Link>
-            {/* Project Info */}
-            <div className="mt-4 space-y-2">
+        {activeFilters && worksCollections?.length! > 0 ? (
+          (worksCollections ?? []).map((work) => (
+            <li key={work.id}>
               <Link
-                to={project.metadata.url || '#'}
-                className="flex items-start justify-between cursor-pointer"
+                id={String(work.id)}
+                to={work.metadata.url || '#'}
+                params={{ widgetId: 'work', contentId: String(work.id) }}
               >
-                <h3 className="text-xl font-bold">{project.metadata.title}</h3>
-                <button className="text-sm hover:underline flex items-center gap-1">
-                  View
-                  <VscLinkExternal />
-                </button>
+                <WorkProjectCard
+                  key={work.id}
+                  title={work.metadata.title ?? ''}
+                  description={work.metadata.desc}
+                  techStack={work.metadata.techStack || []}
+                  mediaUrl={work.metadata.mediaUrl}
+                  mediaType={work.metadata.mediaType}
+                  canvasColors={
+                    work.metadata.mediaUrl ? work.metadata.canvasColors : null
+                  }
+                />
               </Link>
+              {/* Project Info */}
+              <div className="mt-4 space-y-2">
+                <Link
+                  to={work.metadata.url || '#'}
+                  className="flex items-start justify-between cursor-pointer"
+                >
+                  <h3 className="text-xl font-bold">{work.metadata.title}</h3>
+                  <button className="text-sm hover:underline flex items-center gap-1">
+                    View
+                    <VscLinkExternal />
+                  </button>
+                </Link>
 
-              {project.metadata.desc && (
-                <p className="text-sm text-gray-600">{project.metadata.desc}</p>
-              )}
+                {work.metadata.desc && (
+                  <p className="text-sm text-gray-600">{work.metadata.desc}</p>
+                )}
 
-              {project.metadata.techStack && (
-                <div className="flex flex-wrap gap-2">
-                  {project.metadata.techStack.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="text-xs px-2 py-1 bg-gray-100 border border-gray-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </li>
-        ))}
+                {work.metadata.techStack && (
+                  <div className="flex flex-wrap gap-2">
+                    {work.metadata.techStack.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="text-xs px-2 py-1 bg-gray-100 border border-gray-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </li>
+          ))
+        ) : (
+          <div>
+            <p>No Work content is found</p>
+          </div>
+        )}
       </ul>
     </div>
   );

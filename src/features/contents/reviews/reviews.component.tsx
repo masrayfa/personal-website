@@ -1,22 +1,27 @@
-import React, { useEffect } from "react";
-import { Link } from "@tanstack/react-router";
-import ReviewsMDsCollections from "./md";
-import { useFilterStore } from "@/stores/filter-store";
-import { filterCollections } from "@/lib/utils/filter-collections";
+import React, { useEffect } from 'react';
+import { Link } from '@tanstack/react-router';
+import ReviewsMDsCollections from './md';
+import { useFilterStore } from '@/stores/filter-store';
+import { filterCollections } from '@/lib/utils/filter-collections';
 
 const ReviewsComponent = () => {
   const { getActiveFilters } = useFilterStore();
 
-  const activeFilters = getActiveFilters("reviews");
+  const activeFilters = getActiveFilters('reviews');
 
   // Get filtered collections if filters are active, otherwise use all collections
-  const filteredCollections = filterCollections(ReviewsMDsCollections, 'full', activeFilters);
+  const filteredCollections = filterCollections(
+    ReviewsMDsCollections,
+    'full',
+    activeFilters
+  );
 
   const reviews = filteredCollections.length > 0 ? filteredCollections : null;
 
-  const [hovered, setHovered] = React.useState(false);
-  const [mediaLoaded, setMediaLoaded] = React.useState(false);
-  const [mediaError, setMediaError] = React.useState(false);
+  useEffect(() => {
+    console.log('@ReviesComponent - activeFilters:', activeFilters);
+    console.log('@ReviesComponent - reviews:', reviews);
+  }, [activeFilters, reviews]);
 
   return (
     <div className="flex flex-col space-y-16">
@@ -36,8 +41,8 @@ const ReviewsComponent = () => {
           reviews?.map((review) => (
             <li>
               <Link
-                to={"/$widgetId/$contentId"}
-                params={{ widgetId: "reviews", contentId: String(review.id) }}
+                to={'/$widgetId/$contentId'}
+                params={{ widgetId: 'reviews', contentId: String(review.id) }}
               >
                 <div className="w-full">
                   <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group flex justify-center items-center">
