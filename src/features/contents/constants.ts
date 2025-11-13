@@ -68,13 +68,6 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
       allTimeFavName: 'Fantech WGP',
     },
   },
-  {
-    id: 7,
-    metadata: {
-      category: 'fragrance',
-      allTimeFavName: 'Metaverse',
-    },
-  },
 ];
 
 export const wallOfFavsCollections: ContentsCollectionsTypeSimplified[] = [
