@@ -40,7 +40,7 @@ type ContentCollectionsMetadata = {
 
 export type ContentsCollectionsType = {
   id: number;
-  component: (props: MDXProps) => JSX.Element;
+  component?: (props: MDXProps) => JSX.Element;
   metadata: ContentCollectionsMetadata;
 };
 

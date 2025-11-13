@@ -1,23 +1,24 @@
-import { useEffect } from "react";
-import { useFilterStore } from "@/stores/filter-store";
-import { FilterPill } from "../components/filter-pill";
-import { FilterSection } from "../components/filter-section";
-import { filterCollections } from "@/lib/utils/filter-collections";
-import ShortStoriesMDsCollections from "@/features/contents/short-stories/md";
+import { useEffect } from 'react';
+import { useFilterStore } from '@/stores/filter-store';
+import { FilterPill } from '../components/filter-pill';
+import { FilterSection } from '../components/filter-section';
+import { filterCollections } from '@/lib/utils/filter-collections';
+import ShortStoriesMDsCollections from '@/features/contents/short-stories/md';
+import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 const GENRE_OPTIONS = [
-  { label: "Drama", value: "drama" },
-  { label: "Comedy", value: "comedy" },
-  { label: "Sci-Fi", value: "sci-fi" },
-  { label: "Romance", value: "romance" },
-  { label: "Family", value: "family" },
+  { label: 'Drama', value: 'drama' },
+  { label: 'Comedy', value: 'comedy' },
+  { label: 'Sci-Fi', value: 'sci-fi' },
+  { label: 'Romance', value: 'romance' },
+  { label: 'Family', value: 'family' },
 ];
 
 const MOOD_OPTIONS = [
-  { label: "Warm", value: "warm" },
-  { label: "Cold", value: "cold" },
-  { label: "Depressed", value: "depressed" },
-  { label: "Hopeful", value: "hopeful" },
+  { label: 'Warm', value: 'warm' },
+  { label: 'Cold', value: 'cold' },
+  { label: 'Depressed', value: 'depressed' },
+  { label: 'Hopeful', value: 'hopeful' },
 ];
 
 const ShortStoriesFilter = () => {
@@ -29,31 +30,35 @@ const ShortStoriesFilter = () => {
     toggleMoodFilter,
   } = useFilterStore();
 
-  const activeFilters = getActiveFilters("short-stories");
+  const activeFilters = getActiveFilters('short-stories');
 
   // Apply filters whenever active filters change
   useEffect(() => {
     const filtered = filterCollections(
       ShortStoriesMDsCollections,
-      activeFilters,
+      'full',
+      activeFilters
     );
-    setFilteredCollections("short-stories", filtered);
+    setFilteredCollections(
+      'short-stories',
+      filtered as ContentsCollectionsType[]
+    );
   }, [activeFilters, setFilteredCollections]);
 
   const handleGenreClick = (genre: string) => {
-    toggleGenreFilter("short-stories", genre);
+    toggleGenreFilter('short-stories', genre);
   };
 
   const handleMoodClick = (mood: string) => {
-    toggleMoodFilter("short-stories", mood);
+    toggleMoodFilter('short-stories', mood);
   };
 
   const handleClearAll = () => {
-    clearAllFilters("short-stories");
+    clearAllFilters('short-stories');
   };
 
   const hasActiveFilters = Object.values(activeFilters).some(
-    (value) => value !== null && value !== undefined,
+    (value) => value !== null && value !== undefined
   );
 
   return (

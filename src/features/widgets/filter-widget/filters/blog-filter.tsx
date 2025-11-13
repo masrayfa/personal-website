@@ -1,13 +1,14 @@
-import { useEffect } from "react";
-import { useFilterStore } from "@/stores/filter-store";
-import { FilterPill } from "../components/filter-pill";
-import { FilterSection } from "../components/filter-section";
-import { filterCollections } from "@/lib/utils/filter-collections";
-import { BlogMDsCollections } from "@/features/contents/blog/md";
+import { useEffect } from 'react';
+import { useFilterStore } from '@/stores/filter-store';
+import { FilterPill } from '../components/filter-pill';
+import { FilterSection } from '../components/filter-section';
+import { filterCollections } from '@/lib/utils/filter-collections';
+import { BlogMDsCollections } from '@/features/contents/blog/md';
+import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 const GENRE_OPTIONS = [
-  { label: "Mundane", value: "mundane" },
-  { label: "Tech", value: "tech" },
+  { label: 'Mundane', value: 'mundane' },
+  { label: 'Tech', value: 'tech' },
 ];
 
 const BlogFilter = () => {
@@ -18,26 +19,30 @@ const BlogFilter = () => {
     clearAllFilters,
   } = useFilterStore();
 
-  const activeFilters = getActiveFilters("blog");
+  const activeFilters = getActiveFilters('blog');
 
   // Apply filters whenever active filters change
   useEffect(() => {
-    const filtered = filterCollections(BlogMDsCollections, activeFilters);
-    setFilteredCollections("blog", filtered);
+    const filtered = filterCollections(
+      BlogMDsCollections,
+      'full',
+      activeFilters
+    );
+    setFilteredCollections('blog', filtered as ContentsCollectionsType[]);
 
-    console.log("@Blog-Filter::activeFilters: ", activeFilters);
+    console.log('@Blog-Filter::activeFilters: ', activeFilters);
   }, [activeFilters, setFilteredCollections]);
 
   const handleGenreClick = (genre: string) => {
-    toggleGenreFilter("blog", genre);
+    toggleGenreFilter('blog', genre);
   };
 
   const handleClearAll = () => {
-    clearAllFilters("blog");
+    clearAllFilters('blog');
   };
 
   const hasActiveFilters = Object.values(activeFilters).some(
-    (value) => value !== null && value !== undefined,
+    (value) => value !== null && value !== undefined
   );
 
   return (

@@ -1,5 +1,8 @@
 import { create } from 'zustand';
-import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
+import {
+  ContentsCollectionsType,
+  ContentsCollectionsTypeSimplified,
+} from '@/lib/types/post-collections-type';
 
 /**
  * Filter configuration for each widget type
@@ -41,11 +44,11 @@ export type ActiveFilters = {
   year?: number[] | null;
 
   // All times fav
-  category?: string;
+  category?: string[] | null;
   allTimeFavName?: string;
 
   // Work Projects
-  techStack?: string[];
+  techStack?: string[] | null;
   mediaUrl?: string;
   url?: string;
   mediaType?: 'image' | 'video';
@@ -79,6 +82,10 @@ type FilterStore = {
     value: string | number | string[] | null
   ) => void;
 
+  toggleTechStackFilter: (widgetId: WidgetType, techStack: string) => void;
+
+  toggleCategoryFilter: (widgetId: WidgetType, category: string) => void;
+
   toggleReviewTypeFilter: (widgetId: WidgetType, reviewType: string) => void;
 
   toggleGenreFilter: (widgetId: WidgetType, genre: string) => void;
@@ -103,7 +110,7 @@ type FilterStore = {
 
   setFilteredCollections: (
     widgetId: WidgetType,
-    collections: ContentsCollectionsType[]
+    collections: ContentsCollectionsType[] | ContentsCollectionsTypeSimplified[]
   ) => void;
 
   getActiveFilters: (widgetId: WidgetType) => ActiveFilters;
@@ -127,6 +134,54 @@ export const useFilterStore = create<FilterStore>((set, get) => ({
         },
       },
     }));
+  },
+
+  toggleTechStackFilter: (widgetId, techStack) => {
+    set((state) => {
+      const currentTechStack =
+        state.widgetFilters[widgetId]?.activeFilters?.techStack || [];
+      const newTechStack = currentTechStack.includes(techStack)
+        ? currentTechStack.filter((t) => t !== techStack)
+        : [...currentTechStack, techStack];
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              techStack: newTechStack.length > 0 ? newTechStack : null,
+            },
+          },
+        },
+      };
+    });
+  },
+
+  toggleCategoryFilter: (widgetId, category) => {
+    set((state) => {
+      const currentCategory =
+        state.widgetFilters[widgetId]?.activeFilters?.category || [];
+      const newCategory = currentCategory.includes(category)
+        ? currentCategory.filter((c) => c !== category)
+        : [...currentCategory, category];
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              category:
+                newCategory !== null && newCategory !== undefined
+                  ? newCategory
+                  : null,
+            },
+          },
+        },
+      };
+    });
   },
 
   toggleReviewTypeFilter: (widgetId, reviewType) => {

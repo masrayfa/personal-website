@@ -22,11 +22,20 @@ function filterSimplifiedCollections(
       return true;
     }
 
-    // Apply category filter (exact match for single category)
-    if (activeFilters.category) {
+    // Apply category filter (OR logic - matches ANY selected category)
+    if (activeFilters.category && activeFilters.category.length > 0) {
       const itemCategory = item.metadata.category;
-      const hasCategory = itemCategory === activeFilters.category;
+      const hasCategory = activeFilters.category.includes(itemCategory || '');
       if (!hasCategory) return false;
+    }
+
+    // Apply techStack filter (OR logic - matches ANY selected tech)
+    if (activeFilters.techStack && activeFilters.techStack.length > 0) {
+      const itemTechStack = item.metadata.techStack || [];
+      const hasTechStack = activeFilters.techStack.some((selectedTech) =>
+        itemTechStack.includes(selectedTech)
+      );
+      if (!hasTechStack) return false;
     }
 
     return true;

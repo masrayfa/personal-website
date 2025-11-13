@@ -2,9 +2,17 @@ import { Link, Outlet, useMatches } from '@tanstack/react-router';
 import { workProjects } from '../constants';
 import { WorkProjectCard } from '@/components/WorkCanvasRealEffect';
 import { VscLinkExternal } from 'react-icons/vsc';
+import { useFilterStore } from '@/stores/filter-store';
 
 const WorkComponent = () => {
   const matches = useMatches();
+  const filteredCollections = useFilterStore((state) =>
+    state.getFilteredCollections('work')
+  );
+
+  // Use filtered collections if available, otherwise use all work projects
+  const displayProjects =
+    filteredCollections.length > 0 ? filteredCollections : workProjects;
 
   // Checking if child route (contentId) is activated
   const hasChildRoute = matches.some((match) =>
@@ -30,7 +38,7 @@ const WorkComponent = () => {
 
       {/* List of contents */}
       <ul className="flex flex-col gap-12">
-        {workProjects.map((project) => (
+        {displayProjects.map((project) => (
           <li key={project.id}>
             <Link
               id={String(project.id)}

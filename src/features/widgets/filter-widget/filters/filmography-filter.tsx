@@ -1,54 +1,55 @@
-import { useEffect, useMemo } from "react";
-import { useFilterStore } from "@/stores/filter-store";
-import { FilterPill } from "../components/filter-pill";
-import { FilterSection } from "../components/filter-section";
-import { filterCollections } from "@/lib/utils/filter-collections";
-import FilmographyCollections from "@/features/contents/filmography/md";
+import { useEffect, useMemo } from 'react';
+import { useFilterStore } from '@/stores/filter-store';
+import { FilterPill } from '../components/filter-pill';
+import { FilterSection } from '../components/filter-section';
+import { filterCollections } from '@/lib/utils/filter-collections';
+import FilmographyCollections from '@/features/contents/filmography/md';
+import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 const STATUS_OPTIONS = [
-  { label: "Dream Destination", value: "dream" },
-  { label: "Captured", value: "captured" },
+  { label: 'Dream Destination', value: 'dream' },
+  { label: 'Captured', value: 'captured' },
 ];
 
 const REGION_OPTIONS = [
-  { label: "Asia", value: "Asia" },
-  { label: "Southeast Asia", value: "Southeast Asia" },
-  { label: "Europe", value: "Europe" },
-  { label: "Western Europe", value: "Western Europe" },
-  { label: "Oceania", value: "Oceania" },
+  { label: 'Asia', value: 'Asia' },
+  { label: 'Southeast Asia', value: 'Southeast Asia' },
+  { label: 'Europe', value: 'Europe' },
+  { label: 'Western Europe', value: 'Western Europe' },
+  { label: 'Oceania', value: 'Oceania' },
 ];
 
 const SUBJECT_OPTIONS = [
-  { label: "Architecture", value: "architecture" },
-  { label: "Culture", value: "culture" },
-  { label: "Nature", value: "nature" },
-  { label: "Landscape", value: "landscape" },
-  { label: "Street", value: "street" },
-  { label: "People", value: "people" },
-  { label: "Products", value: "products" },
+  { label: 'Architecture', value: 'architecture' },
+  { label: 'Culture', value: 'culture' },
+  { label: 'Nature', value: 'nature' },
+  { label: 'Landscape', value: 'landscape' },
+  { label: 'Street', value: 'street' },
+  { label: 'People', value: 'people' },
+  { label: 'Products', value: 'products' },
 ];
 
 const VISUAL_STYLE_OPTIONS = [
-  { label: "Cinematic", value: "cinematic" },
-  { label: "Minimalist", value: "minimalist" },
-  { label: "Vintage", value: "vintage" },
-  { label: "Moody", value: "moody" },
-  { label: "Vibrant", value: "vibrant" },
-  { label: "B&W", value: "b&w" },
+  { label: 'Cinematic', value: 'cinematic' },
+  { label: 'Minimalist', value: 'minimalist' },
+  { label: 'Vintage', value: 'vintage' },
+  { label: 'Moody', value: 'moody' },
+  { label: 'Vibrant', value: 'vibrant' },
+  { label: 'B&W', value: 'b&w' },
 ];
 
 const TECHNICAL_OPTIONS = [
-  { label: "4K", value: "4K" },
-  { label: "8K", value: "8K" },
-  { label: "Drone", value: "drone" },
-  { label: "Digital", value: "digital" },
-  { label: "Film", value: "film" },
-  { label: "Mobile", value: "mobile" },
+  { label: '4K', value: '4K' },
+  { label: '8K', value: '8K' },
+  { label: 'Drone', value: 'drone' },
+  { label: 'Digital', value: 'digital' },
+  { label: 'Film', value: 'film' },
+  { label: 'Mobile', value: 'mobile' },
 ];
 
 const YEAR_OPTIONS = [
-  { label: "2024", value: 2024 },
-  { label: "2025", value: 2025 },
+  { label: '2024', value: 2024 },
+  { label: '2025', value: 2025 },
 ];
 
 const FilmographyFilter = () => {
@@ -64,30 +65,37 @@ const FilmographyFilter = () => {
     toggleYearFilter,
   } = useFilterStore();
 
-  const activeFilters = getActiveFilters("filmography");
+  const activeFilters = getActiveFilters('filmography');
 
   // Apply filters whenever active filters change
   useEffect(() => {
-    const filtered = filterCollections(FilmographyCollections, activeFilters);
-    setFilteredCollections("filmography", filtered);
+    const filtered = filterCollections(
+      FilmographyCollections,
+      'full',
+      activeFilters
+    );
+    setFilteredCollections(
+      'filmography',
+      filtered as ContentsCollectionsType[]
+    );
   }, [activeFilters, setFilteredCollections]);
 
   // Check which filter options are actually used in the collections
   const availableFilters = useMemo(() => {
     const hasStatus = FilmographyCollections.some(
-      (film) => film.metadata.status,
+      (film) => film.metadata.status
     );
     const hasRegion = FilmographyCollections.some(
-      (film) => film.metadata.region?.length,
+      (film) => film.metadata.region?.length
     );
     const hasSubject = FilmographyCollections.some(
-      (film) => film.metadata.subject?.length,
+      (film) => film.metadata.subject?.length
     );
     const hasVisualStyle = FilmographyCollections.some(
-      (film) => film.metadata.visualStyle?.length,
+      (film) => film.metadata.visualStyle?.length
     );
     const hasTechnical = FilmographyCollections.some(
-      (film) => film.metadata.technical?.length,
+      (film) => film.metadata.technical?.length
     );
     const hasYear = FilmographyCollections.some((film) => film.metadata.year);
 
@@ -122,35 +130,35 @@ const FilmographyFilter = () => {
   }, []);
 
   const handleStatusClick = (status: string) => {
-    toggleStatusFilter("filmography", status);
+    toggleStatusFilter('filmography', status);
   };
 
   const handleRegionClick = (region: string) => {
-    toggleRegionFilter("filmography", region);
+    toggleRegionFilter('filmography', region);
   };
 
   const handleSubjectClick = (subject: string) => {
-    toggleSubjectFilter("filmography", subject);
+    toggleSubjectFilter('filmography', subject);
   };
 
   const handleVisualStyleClick = (visualStyle: string) => {
-    toggleVisualStyleFilter("filmography", visualStyle);
+    toggleVisualStyleFilter('filmography', visualStyle);
   };
 
   const handleTechnicalClick = (technical: string) => {
-    toggleTechnicalFilter("filmography", technical);
+    toggleTechnicalFilter('filmography', technical);
   };
 
   const handleYearClick = (year: number) => {
-    toggleYearFilter("filmography", year);
+    toggleYearFilter('filmography', year);
   };
 
   const handleClearAll = () => {
-    clearAllFilters("filmography");
+    clearAllFilters('filmography');
   };
 
   const hasActiveFilters = Object.values(activeFilters).some(
-    (value) => value !== null && value !== undefined,
+    (value) => value !== null && value !== undefined
   );
 
   return (

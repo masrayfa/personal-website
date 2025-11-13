@@ -1,34 +1,35 @@
-import { useEffect } from "react";
-import { useFilterStore } from "@/stores/filter-store";
-import { FilterPill } from "../components/filter-pill";
-import { FilterSection } from "../components/filter-section";
-import ReviewsMDsCollections from "@/features/contents/reviews/md";
-import { filterCollections } from "@/lib/utils/filter-collections";
+import { useEffect } from 'react';
+import { useFilterStore } from '@/stores/filter-store';
+import { FilterPill } from '../components/filter-pill';
+import { FilterSection } from '../components/filter-section';
+import ReviewsMDsCollections from '@/features/contents/reviews/md';
+import { filterCollections } from '@/lib/utils/filter-collections';
+import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 const REVIEW_TYPE_OPTIONS = [
-  { label: "Movie", value: "movie" },
-  { label: "Book", value: "book" },
-  { label: "Music", value: "music" },
-  { label: "Game", value: "game" },
-  { label: "Tech", value: "tech" },
-  { label: "Product", value: "product" },
-]
+  { label: 'Movie', value: 'movie' },
+  { label: 'Book', value: 'book' },
+  { label: 'Music', value: 'music' },
+  { label: 'Game', value: 'game' },
+  { label: 'Tech', value: 'tech' },
+  { label: 'Product', value: 'product' },
+];
 
 const GENRE_OPTIONS = [
-  { label: "Action", value: "action" },
-  { label: "Drama", value: "drama" },
-  { label: "Comedy", value: "comedy" },
-  { label: "Thriller", value: "thriller" },
-  { label: "Horror", value: "horror" },
-  { label: "Sci-Fi", value: "sci-fi" },
-  { label: "Romance", value: "romance" },
+  { label: 'Action', value: 'action' },
+  { label: 'Drama', value: 'drama' },
+  { label: 'Comedy', value: 'comedy' },
+  { label: 'Thriller', value: 'thriller' },
+  { label: 'Horror', value: 'horror' },
+  { label: 'Sci-Fi', value: 'sci-fi' },
+  { label: 'Romance', value: 'romance' },
 ];
 
 const MOOD_OPTIONS = [
-  { label: "Warm", value: "warm" },
-  { label: "Cold", value: "cold" },
-  { label: "Depressed", value: "depressed" },
-  { label: "Hopeful", value: "hopeful" },
+  { label: 'Warm', value: 'warm' },
+  { label: 'Cold', value: 'cold' },
+  { label: 'Depressed', value: 'depressed' },
+  { label: 'Hopeful', value: 'hopeful' },
 ];
 
 const ReviewsFilter = () => {
@@ -41,32 +42,36 @@ const ReviewsFilter = () => {
     toggleReviewTypeFilter,
   } = useFilterStore();
 
-  const activeFilters = getActiveFilters("reviews");
+  const activeFilters = getActiveFilters('reviews');
 
   // Apply filters whenever active filters change
   useEffect(() => {
-    const filtered = filterCollections(ReviewsMDsCollections, activeFilters);
-    setFilteredCollections("reviews", filtered);
+    const filtered = filterCollections(
+      ReviewsMDsCollections,
+      'full',
+      activeFilters
+    );
+    setFilteredCollections('reviews', filtered as ContentsCollectionsType[]);
   }, [activeFilters, setFilteredCollections]);
 
   const handleReviewTypeClick = (reviewType: string) => {
-    toggleReviewTypeFilter("reviews", reviewType);
+    toggleReviewTypeFilter('reviews', reviewType);
   };
 
   const handleGenreClick = (genre: string) => {
-    toggleGenreFilter("reviews", genre);
+    toggleGenreFilter('reviews', genre);
   };
 
   const handleMoodClick = (mood: string) => {
-    toggleMoodFilter("reviews", mood);
+    toggleMoodFilter('reviews', mood);
   };
 
   const handleClearAll = () => {
-    clearAllFilters("reviews");
+    clearAllFilters('reviews');
   };
 
   const hasActiveFilters = Object.values(activeFilters).some(
-    (value) => value !== null && value !== undefined,
+    (value) => value !== null && value !== undefined
   );
 
   return (

@@ -4,10 +4,16 @@ import { FilterPill } from '../components/filter-pill';
 import { FilterSection } from '../components/filter-section';
 import { filterCollections } from '@/lib/utils/filter-collections';
 import { wallOfFavsCollections } from '@/features/contents/constants';
+import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-type';
 
 const AllTimeFavFilter = () => {
-  const { getActiveFilters, setFilter, setFilteredCollections, clearAllFilters } =
-    useFilterStore();
+  const {
+    getActiveFilters,
+    toggleCategoryFilter,
+    setFilteredCollections,
+    clearAllFilters,
+    clearFilter,
+  } = useFilterStore();
 
   const activeFilters = getActiveFilters('all-time-fav');
 
@@ -18,7 +24,10 @@ const AllTimeFavFilter = () => {
       'simplified',
       activeFilters
     );
-    setFilteredCollections('all-time-fav', filtered);
+    setFilteredCollections(
+      'all-time-fav',
+      filtered as ContentsCollectionsTypeSimplified[]
+    );
   }, [activeFilters, setFilteredCollections]);
 
   // Get unique categories from wall of favs data
@@ -38,14 +47,8 @@ const AllTimeFavFilter = () => {
   }, []);
 
   const handleCategoryClick = (category: string) => {
-    // Toggle: if already selected, clear it; otherwise set it
-    if (activeFilters.category === category) {
-      setFilter('all-time-fav', 'category', null);
-    } else {
-      setFilter('all-time-fav', 'category', category);
-    }
+    toggleCategoryFilter('all-time-fav', category);
   };
-
   const handleClearAll = () => {
     clearAllFilters('all-time-fav');
   };
@@ -71,13 +74,16 @@ const AllTimeFavFilter = () => {
       </div>
 
       {/* Category Filter */}
-      <FilterSection title="By Category" disabled={categoryOptions.length === 0}>
+      <FilterSection
+        title="By Category"
+        disabled={categoryOptions.length === 0}
+      >
         {categoryOptions.map((option) => (
           <FilterPill
             key={option.value}
             label={option.label}
             value={option.value}
-            isActive={activeFilters.category === option.value}
+            isActive={activeFilters.category?.includes(option.value) || false}
             onClick={() => handleCategoryClick(option.value)}
             disabled={false}
           />

@@ -4,17 +4,29 @@ import { FilterPill } from '../components/filter-pill';
 import { FilterSection } from '../components/filter-section';
 import { filterCollections } from '@/lib/utils/filter-collections';
 import { peripherals } from '@/features/contents/constants';
+import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-type';
 
 const PeripheralsFilter = () => {
-  const { getActiveFilters, setFilter, setFilteredCollections, clearAllFilters } =
-    useFilterStore();
+  const {
+    getActiveFilters,
+    toggleCategoryFilter,
+    setFilteredCollections,
+    clearAllFilters,
+  } = useFilterStore();
 
   const activeFilters = getActiveFilters('peripherals');
 
   // Apply filters whenever active filters change
   useEffect(() => {
-    const filtered = filterCollections(peripherals, 'simplified', activeFilters);
-    setFilteredCollections('peripherals', filtered);
+    const filtered = filterCollections(
+      peripherals,
+      'simplified',
+      activeFilters
+    );
+    setFilteredCollections(
+      'peripherals',
+      filtered as ContentsCollectionsTypeSimplified[]
+    );
   }, [activeFilters, setFilteredCollections]);
 
   // Get unique categories from peripherals data
@@ -34,19 +46,17 @@ const PeripheralsFilter = () => {
   }, []);
 
   const handleCategoryClick = (category: string) => {
-    // Toggle: if already selected, clear it; otherwise set it
-    if (activeFilters.category === category) {
-      setFilter('peripherals', 'category', null);
-    } else {
-      setFilter('peripherals', 'category', category);
-    }
+    toggleCategoryFilter('peripherals', category);
   };
 
   const handleClearAll = () => {
     clearAllFilters('peripherals');
   };
 
-  const hasActiveFilters = activeFilters.category !== null && activeFilters.category !== undefined;
+  const hasActiveFilters =
+    activeFilters.category !== null &&
+    activeFilters.category !== undefined &&
+    activeFilters.category.length > 0;
 
   return (
     <div className="space-y-6 w-full">
@@ -66,13 +76,16 @@ const PeripheralsFilter = () => {
       </div>
 
       {/* Category Filter */}
-      <FilterSection title="By Category" disabled={categoryOptions.length === 0}>
+      <FilterSection
+        title="By Category"
+        disabled={categoryOptions.length === 0}
+      >
         {categoryOptions.map((option) => (
           <FilterPill
             key={option.value}
             label={option.label}
             value={option.value}
-            isActive={activeFilters.category === option.value}
+            isActive={activeFilters.category?.includes(option.value) || false}
             onClick={() => handleCategoryClick(option.value)}
             disabled={false}
           />
