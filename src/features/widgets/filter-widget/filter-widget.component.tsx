@@ -7,6 +7,7 @@ import PeripheralsFilter from './filters/peripherals-filter';
 import ReviewsFilter from './filters/reviews-filter';
 import ShortStoriesFilter from './filters/short-stories-filter';
 import WorkFilter from './filters/work-filter';
+import { usePersonaStore } from '@/stores/persona-store';
 
 const FILTER_COMPONENTS: Record<string, React.ComponentType> = {
   'all-time-fav': AllTimeFavFilter,
@@ -30,6 +31,15 @@ const FilterWidget = () => {
   }
 
   const FilterComponent = widgetId ? FILTER_COMPONENTS[widgetId] : null;
+  const { selectedPersona } = usePersonaStore();
+
+  if (selectedPersona === 'mas-rayfa') {
+    return (
+      <div className="p-4">
+        No Filter Available. Please select another persona to access filters.
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 overflow-y-auto scrollbar-hidden p-5 min-h-0">

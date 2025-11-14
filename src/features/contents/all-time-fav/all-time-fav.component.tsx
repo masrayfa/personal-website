@@ -87,12 +87,8 @@ const AllTimeFavComponent = () => {
                             {fav.metadata.allTimeFavName}
                           </h2>
                           <img src={fav.metadata.image_url} />
-                          <span>
-                            <p className="text-xl font-bold">
-                              all time reason:{' '}
-                            </p>
-                            <p>{fav.metadata.allTimeReason}</p>
-                          </span>
+                          <span></span>
+                          <p>{fav.metadata.allTimeReason}</p>
                           {fav.metadata.reviewLink && (
                             <Link to={fav.metadata.reviewLink}>
                               <p className="text-sm underline">review link</p>

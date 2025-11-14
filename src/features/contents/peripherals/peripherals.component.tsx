@@ -31,18 +31,22 @@ const PeripheralsComponent = () => {
     activefilters
   ) as ContentsCollectionsTypeSimplified[];
 
-  // Group collections by category
-  const groupedByCategory = filteredCollections.reduce(
-    (acc, item) => {
-      const category = item.metadata.category || 'Uncategorized';
-      if (!acc[category]) {
-        acc[category] = [];
-      }
-      acc[category].push(item);
-      return acc;
-    },
-    {} as Record<string, ContentsCollectionsTypeSimplified[]>
-  );
+  /**
+   * Disabled grouping by category for now
+   * since the peripherals collections are still few
+   */
+  // // Group collections by category
+  // const groupedByCategory = filteredCollections.reduce(
+  //   (acc, item) => {
+  //     const category = item.metadata.category || 'Uncategorized';
+  //     if (!acc[category]) {
+  //       acc[category] = [];
+  //     }
+  //     acc[category].push(item);
+  //     return acc;
+  //   },
+  //   {} as Record<string, ContentsCollectionsTypeSimplified[]>
+  // );
 
   const hasResults = filteredCollections.length > 0;
 
@@ -60,40 +64,28 @@ const PeripheralsComponent = () => {
 
       {/* List of contents grouped by category */}
       {hasResults ? (
-        <div className="flex flex-col space-y-12">
-          {Object.entries(groupedByCategory).map(([category, items]) => (
-            <div key={category} className="flex flex-col space-y-5">
-              {/* Category Header */}
-              <h3 className="text-2xl font-bold capitalize">{category}</h3>
-
-              {/* Items in this category */}
-              <ul className="grid grid-cols-4 gap-5">
-                {items.map((item) => (
-                  <li key={item.id}>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Card className="rounded-none cursor-pointer border-black">
-                          <CardHeader>
-                            <CardTitle>
-                              {item.metadata.allTimeFavName}
-                            </CardTitle>
-                            <CardDescription>
-                              {item.metadata.category}
-                            </CardDescription>
-                          </CardHeader>
-                        </Card>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <div className="flex flex-col space-y-4 p-4">
-                          <h2 className="text-2xl font-bold">
-                            {item.metadata.allTimeFavName}
-                          </h2>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                  </li>
-                ))}
-              </ul>
+        <div className="space-y-4 grid grid-cols-4 gap-3 ">
+          {filteredCollections.map((item) => (
+            <div key={item.id}>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Card className="rounded-none cursor-pointer border-black">
+                    <CardHeader>
+                      <CardTitle>{item.metadata.peripheralName}</CardTitle>
+                      <CardDescription>
+                        {item.metadata.category}
+                      </CardDescription>
+                    </CardHeader>
+                  </Card>
+                </DialogTrigger>
+                <DialogContent>
+                  <div className="flex flex-col space-y-4 p-4">
+                    <h2 className="text-2xl font-bold">
+                      {item.metadata.allTimeFavName}
+                    </h2>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           ))}
         </div>

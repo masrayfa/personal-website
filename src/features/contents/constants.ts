@@ -30,42 +30,64 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
     id: 1,
     metadata: {
       category: 'camera',
-      allTimeFavName: 'zv-e10',
+      peripheralName: 'zv-e10',
+      brand: ['sony'],
     },
   },
   {
     id: 2,
     metadata: {
       category: 'audio',
-      allTimeFavName: 'Rexus Sedna',
+      peripheralName: 'Rexus Sedna Headset',
+      brand: ['rexus'],
     },
   },
   {
     id: 3,
     metadata: {
       category: 'gamepad',
-      allTimeFavName: 'Fantech WGP',
+      peripheralName: 'Fantech WGP',
+      brand: ['fantech'],
     },
   },
   {
     id: 4,
     metadata: {
       category: 'lamp',
-      allTimeFavName: 'IKEA BLÅSVERK',
+      peripheralName: 'IKEA BLÅSVERK',
+      brand: ['ikea'],
     },
   },
   {
     id: 5,
     metadata: {
-      category: 'gamepad',
-      allTimeFavName: 'Fantech WGP',
+      category: 'keyboard',
+      peripheralName: 'Keychron B1 Pro',
+      brand: ['keychron'],
     },
   },
   {
     id: 6,
     metadata: {
-      category: 'gamepad',
-      allTimeFavName: 'Fantech WGP',
+      category: 'audio',
+      peripheralName: "old logitech (i don't know the type)",
+      brand: ['logitech'],
+    },
+  },
+  {
+    id: 7,
+    metadata: {
+      category: 'PC',
+      peripheralName: 'my sheila',
+      brand: ['custom-built'],
+    },
+  },
+  {
+    id: 8,
+    metadata: {
+      category: 'Desk',
+      peripheralName: 'Fantech WS311',
+      brand: ['fantech'],
     },
   },
 ];
@@ -87,6 +109,9 @@ export const wallOfFavsCollections: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'director',
       allTimeFavName: 'Christopher Nolan',
+      allTimeReason:
+        'almost every movie i watch from him is a masterpiece. be it oppenheimer, interstellar, inception, dunkirk, and most importantly the dark knight trilogy.',
+      image_url: '/img/directors/nolan.jpg',
     },
   },
   {
@@ -105,13 +130,16 @@ export const wallOfFavsCollections: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'director',
       allTimeFavName: 'James Gunn',
+      image_url: '/img/directors/gunn.jpg',
+      allTimeReason:
+        'i love his style of storytelling for underdog characters. be it in guardians of the galaxy, the suicide squad, peacemaker. Lastly, he is a director (CEO) of all DC Studios movies.',
     },
   },
   {
     id: 5,
     metadata: {
       category: 'movies',
-      allTimeFavName: 'inglorious basterds',
+      allTimeFavName: 'Inglorious Basterds',
       image_url: '/img/movies/inglorious-basterds.png',
       allTimeReason:
         'the characters depth. the directing style. the script. the picture',
@@ -122,7 +150,7 @@ export const wallOfFavsCollections: ContentsCollectionsTypeSimplified[] = [
     id: 6,
     metadata: {
       category: 'movies',
-      allTimeFavName: 'moonrise kingdom',
+      allTimeFavName: 'Moonrise Kingdom',
       image_url: '/img/movies/moonrise-kingdom.png',
       allTimeReason:
         'a wes anderson movie that inspires me to make film in junior high. it influenced my aesthetic film making style till now.',
@@ -135,8 +163,38 @@ export const wallOfFavsCollections: ContentsCollectionsTypeSimplified[] = [
       allTimeFavName: 'SORE',
       image_url: '/img/movies/sore.png',
       allTimeReason:
-        'i resonated with the characters struggle that as much as we want to change our partner, we cannot.',
+        'i resonated with the characters struggle that as much as we want to change our significant other, we cannot.',
       reviewLink: '/reviews/1',
+    },
+  },
+  {
+    id: 8,
+    metadata: {
+      category: 'movies',
+      allTimeFavName: 'Whiplash',
+      image_url: '/img/movies/whiplash.png',
+      allTimeReason:
+        'feels like unorthodox tense music film. it was tiring a** movie to follow because the intensity on every scene but it left me marks to be better at my craft.',
+      reviewLink: '/reviews/1',
+    },
+  },
+  {
+    id: 9,
+    metadata: {
+      category: 'director',
+      allTimeFavName: 'Denis Villeneuve',
+      allTimeReason: 'made me fall in love with dune and bladerunner 2049',
+      image_url: '/img/directors/denis.jpg',
+    },
+  },
+  {
+    id: 10,
+    metadata: {
+      category: 'director',
+      allTimeFavName: 'Yandy Laurens',
+      allTimeReason:
+        'mas yandy membuat cerita yang sangat dekat dengan kehidupan menjadi lebih hangat',
+      image_url: '/img/directors/yandy.jpg',
     },
   },
 ];

@@ -1,6 +1,9 @@
 import { Button } from '@/components/ui/button';
+import { usePersonaStore } from '@/stores/persona-store';
 
 const ChooseYourPersona = () => {
+  const { selectedPersona, setPersona } = usePersonaStore();
+
   return (
     <div className="pt-24">
       <div className="border-y flex">
@@ -11,14 +14,20 @@ const ChooseYourPersona = () => {
         <div className="flex flex-col items-stretch ">
           <Button
             variant={'ghost'}
-            className="flex flex-1 pl-3 pr-16 cursor-pointer rounded-none border-b"
+            className={`flex flex-1 pl-3 pr-16 cursor-pointer rounded-none border-b ${
+              selectedPersona === 'mas-rayfa' ? 'bg-accent' : ''
+            }`}
+            onClick={() => setPersona('mas-rayfa')}
           >
             <h1 className="text-4xl self-end">mas rayfa</h1>
           </Button>
 
           <Button
             variant={'ghost'}
-            className="flex flex-1 pl-3 pr-16 cursor-pointer rounded-none "
+            className={`flex flex-1 pl-3 pr-16 cursor-pointer rounded-none ${
+              selectedPersona === 'sani-uong' ? 'bg-accent' : ''
+            }`}
+            onClick={() => setPersona('sani-uong')}
           >
             <h1 className="text-4xl self-end">sani uong</h1>
           </Button>

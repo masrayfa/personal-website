@@ -29,6 +29,10 @@ type ContentCollectionsMetadata = {
   allTimeReason?: string;
   reviewLink?: string;
 
+  // Peripherals
+  peripheralName?: string;
+  brand?: string[];
+
   // Work Projects
   techStack?: string[];
   mediaUrl?: string;
