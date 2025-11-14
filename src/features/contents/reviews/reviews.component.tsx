@@ -3,8 +3,12 @@ import { Link } from '@tanstack/react-router';
 import ReviewsMDsCollections from './md';
 import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
+import { cn } from '@/lib/utils';
+import { useTheme } from '@/lib/theme-provider';
 
 const ReviewsComponent = () => {
+  const { theme } = useTheme();
+
   const { getActiveFilters } = useFilterStore();
 
   const activeFilters = getActiveFilters('reviews');
@@ -17,11 +21,6 @@ const ReviewsComponent = () => {
   );
 
   const reviews = filteredCollections.length > 0 ? filteredCollections : null;
-
-  useEffect(() => {
-    console.log('@ReviesComponent - activeFilters:', activeFilters);
-    console.log('@ReviesComponent - reviews:', reviews);
-  }, [activeFilters, reviews]);
 
   return (
     <div className="flex flex-col space-y-16">
@@ -45,7 +44,12 @@ const ReviewsComponent = () => {
                 params={{ widgetId: 'reviews', contentId: String(review.id) }}
               >
                 <div className="w-full">
-                  <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group flex justify-center items-center">
+                  <div
+                    className={cn(
+                      'relative w-full max-h-56 aspect-video bg-gray-100 border-2 overflow-hidden group flex justify-center items-center',
+                      theme === 'dark' ? 'border-white' : 'border-black'
+                    )}
+                  >
                     {review.metadata.image_url && (
                       <img
                         src={review.metadata.image_url}
@@ -61,7 +65,7 @@ const ReviewsComponent = () => {
                   <h3 className="text-xl font-bold">{review.metadata.title}</h3>
 
                   {review.metadata.desc && (
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-neutral-400">
                       {review.metadata.reviewType} • {review.metadata.desc}
                     </p>
                   )}
@@ -71,7 +75,12 @@ const ReviewsComponent = () => {
                       {review.metadata.genre.map((g) => (
                         <span
                           key={g}
-                          className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                          className={cn(
+                            'text-xs border px-2 py-1',
+                            theme === 'dark'
+                              ? 'bg-neutral-900 border-neutral-600 '
+                              : 'bg-gray-100 border-gray-300 '
+                          )}
                         >
                           {g}
                         </span>

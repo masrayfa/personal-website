@@ -1,77 +1,91 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
-import ChooseYourPersona from "@/features/choose-your-persona/choose-your-persona.component";
-import WidgetsActionMenu from "@/features/widgets/widget-action-menu/widgets-action-menu.component";
-import GlobalWidget from "@/features/widgets/global-widget/global-widget.component";
-import CollabWidget from "@/features/widgets/collab-widget/collab-widget.component";
-import Socials from "@/features/socials/socials.component";
-import FilterWidget from "@/features/widgets/filter-widget/filter-widget.component";
+import { createFileRoute, Outlet } from '@tanstack/react-router';
+import ChooseYourPersona from '@/features/choose-your-persona/choose-your-persona.component';
+import WidgetsActionMenu from '@/features/widgets/widget-action-menu/widgets-action-menu.component';
+import GlobalWidget from '@/features/widgets/global-widget/global-widget.component';
+import CollabWidget from '@/features/widgets/collab-widget/collab-widget.component';
+import Socials from '@/features/socials/socials.component';
+import FilterWidget from '@/features/widgets/filter-widget/filter-widget.component';
+import { useTheme } from '@/lib/theme-provider';
+import { cn } from '@/lib/utils';
 
-export const Route = createFileRoute("/_layout")({
+export const Route = createFileRoute('/_layout')({
   component: RouteComponent,
 });
 
 const WidgetsAction = [
   {
     id: 1,
-    url: "blog",
-    label: "blog",
-    src: "",
+    url: 'blog',
+    label: 'blog',
+    src: '',
   },
   {
     id: 2,
-    url: "work",
-    label: "work",
-    src: "",
+    url: 'work',
+    label: 'work',
+    src: '',
   },
   {
     id: 3,
-    url: "peripherals",
-    label: "peripherals",
-    src: "",
+    url: 'peripherals',
+    label: 'peripherals',
+    src: '',
   },
   {
     id: 4,
-    url: "short-stories",
-    label: "short stories",
-    src: "",
+    url: 'short-stories',
+    label: 'short stories',
+    src: '',
   },
   {
     id: 5,
-    url: "filmography",
-    label: "filmography",
-    src: "",
+    url: 'filmography',
+    label: 'filmography',
+    src: '',
   },
   {
     id: 6,
-    url: "reviews",
-    label: "reviews",
-    src: "",
+    url: 'reviews',
+    label: 'reviews',
+    src: '',
   },
   {
     id: 7,
-    url: "all-time-fav",
-    label: "all time fav",
-    src: "",
+    url: 'all-time-fav',
+    label: 'all time fav',
+    src: '',
   },
   {
     id: 8,
-    url: "love",
-    label: "<3",
-    src: "",
+    url: 'love',
+    label: '<3',
+    src: '',
   },
 ];
 
 function RouteComponent() {
+  const { theme } = useTheme();
+
   return (
     <div className="flex h-screen">
       {/* Left Wing */}
-      <div className="border-r border-black">
+      <div
+        className={cn(
+          'border-r',
+          theme === 'dark' ? 'border-white' : 'border-black'
+        )}
+      >
         <ChooseYourPersona />
         <WidgetsActionMenu widgets={WidgetsAction} />
       </div>
 
       {/* Middle */}
-      <div className="p-10 flex-1 overflow-y-auto scrollbar-hidden border-r border-black ">
+      <div
+        className={cn(
+          'p-10 flex-1 overflow-y-auto scrollbar-hidden border-r',
+          theme === 'dark' ? 'border-white' : 'border-black'
+        )}
+      >
         <Outlet />
       </div>
 
@@ -83,10 +97,20 @@ function RouteComponent() {
         </div>
 
         {/* Empty space / Unknown Widget */}
-        <div className="border p-20"></div>
+        <div
+          className={cn(
+            'p-20',
+            theme === 'dark' ? 'border-y border-white/20' : 'border'
+          )}
+        ></div>
 
         {/* Filter Widget - most likes, favs, most claps */}
-        <div className="flex flex-col flex-1 justify-between border-b overflow-hidden">
+        <div
+          className={cn(
+            'flex flex-col flex-1 justify-between overflow-hidden',
+            theme === 'dark' ? 'border-b border-white/20' : 'border-b'
+          )}
+        >
           <FilterWidget />
           {/* Collab Widget - let's collab button */}
           <CollabWidget />

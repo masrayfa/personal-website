@@ -4,17 +4,21 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Link, Outlet, useMatches } from "@tanstack/react-router";
-import { BlogMDsCollections } from "./md";
-import { filterCollections } from "@/lib/utils/filter-collections";
-import { useFilterStore } from "@/stores/filter-store";
+} from '@/components/ui/card';
+import { Link, Outlet, useMatches } from '@tanstack/react-router';
+import { BlogMDsCollections } from './md';
+import { filterCollections } from '@/lib/utils/filter-collections';
+import { useFilterStore } from '@/stores/filter-store';
+import { useTheme } from '@/lib/theme-provider';
+import { cn } from '@/lib/utils';
 
 const BlogComponent = () => {
+  const { theme } = useTheme();
+
   const matches = useMatches();
 
   const hasChildRoute = matches.some((match) =>
-    match.id.includes("$contentId"),
+    match.id.includes('$contentId')
   );
 
   if (hasChildRoute) {
@@ -22,12 +26,12 @@ const BlogComponent = () => {
   }
 
   const { getActiveFilters } = useFilterStore();
-  const activefilters = getActiveFilters("blog");
+  const activefilters = getActiveFilters('blog');
 
   const filteredCollections = filterCollections(
     BlogMDsCollections,
     'full',
-    activefilters,
+    activefilters
   );
 
   const blogs = filteredCollections.length > 0 ? filteredCollections : null;
@@ -51,27 +55,34 @@ const BlogComponent = () => {
             <li className="">
               <Link
                 id={String(blog.id)}
-                to={"/$widgetId/$contentId"}
-                params={{ widgetId: "blog", contentId: String(blog.id) }}
+                to={'/$widgetId/$contentId'}
+                params={{ widgetId: 'blog', contentId: String(blog.id) }}
               >
-                <Card className="rounded-none cursor-pointer border-black">
+                <Card
+                  className={cn(
+                    'rounded-none cursor-pointer',
+                    theme === 'dark' ? 'border-white' : 'border-black'
+                  )}
+                >
                   <CardHeader>
                     <CardTitle>{blog.metadata.title}</CardTitle>
-                    <CardDescription>{blog.metadata.date} • {blog.metadata.desc}</CardDescription>
+                    <CardDescription>
+                      {blog.metadata.date} • {blog.metadata.desc}
+                    </CardDescription>
                   </CardHeader>
                   <CardFooter>
                     {/* Metadata Pills */}
                     <div className="flex flex-wrap gap-2">
-                      {blog.metadata.year && (
-                        <span className="text-xs bg-gray-100 border border-gray-300 px-2 py-1">
-                          {blog.metadata.year}
-                        </span>
-                      )}
                       {blog.metadata.genre &&
                         blog.metadata.genre.map((b: string) => (
                           <span
                             key={b}
-                            className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                            className={cn(
+                              'text-xs  border px-2 py-1',
+                              theme === 'dark'
+                                ? 'bg-neutral-900 border-neutral-600 '
+                                : 'bg-gray-100 border-gray-300 '
+                            )}
                           >
                             {b}
                           </span>

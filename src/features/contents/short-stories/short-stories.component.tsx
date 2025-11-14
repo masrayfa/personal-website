@@ -3,17 +3,21 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Link, Outlet, useMatches } from "@tanstack/react-router";
-import ShortStoriesMDsCollections from "./md";
-import { useFilterStore } from "@/stores/filter-store";
-import { filterCollections } from "@/lib/utils/filter-collections";
+} from '@/components/ui/card';
+import { Link, Outlet, useMatches } from '@tanstack/react-router';
+import ShortStoriesMDsCollections from './md';
+import { useFilterStore } from '@/stores/filter-store';
+import { filterCollections } from '@/lib/utils/filter-collections';
+import { cn } from '@/lib/utils';
+import { useTheme } from '@/lib/theme-provider';
 
 const ShortStoriesComponent = () => {
+  const { theme } = useTheme();
+
   const matches = useMatches();
 
   const hasChildRoute = matches.some((match) =>
-    match.id.includes("$contentId"),
+    match.id.includes('$contentId')
   );
 
   if (hasChildRoute) {
@@ -21,12 +25,12 @@ const ShortStoriesComponent = () => {
   }
 
   const { getActiveFilters } = useFilterStore();
-  const activefilters = getActiveFilters("short-stories");
+  const activefilters = getActiveFilters('short-stories');
 
   const filteredCollections = filterCollections(
     ShortStoriesMDsCollections,
     'full',
-    activefilters,
+    activefilters
   );
 
   const shortStories =
@@ -50,9 +54,9 @@ const ShortStoriesComponent = () => {
           shortStories.map((story) => (
             <li key={story.id}>
               <Link
-                to={"/$widgetId/$contentId"}
+                to={'/$widgetId/$contentId'}
                 params={{
-                  widgetId: "short-stories",
+                  widgetId: 'short-stories',
                   contentId: String(story.id),
                 }}
               >
@@ -71,27 +75,33 @@ const ShortStoriesComponent = () => {
 
                     {/* Film Info */}
                     <div className="mt-4 space-y-2">
-                      <h3 className="text-xl font-bold">{story.metadata.title}</h3>
+                      <h3 className="text-xl font-bold">
+                        {story.metadata.title}
+                      </h3>
 
                       {story.metadata.desc && (
                         <span>
-                          <p className="text-sm text-gray-600">{story.metadata.date}</p>
-                        <p className="text-sm text-gray-600">{story.metadata.desc}</p>
+                          <p className="text-sm text-gray-600">
+                            {story.metadata.date}
+                          </p>
+                          <p className="text-sm text-gray-600">
+                            {story.metadata.desc}
+                          </p>
                         </span>
                       )}
 
                       {/* Metadata Pills */}
                       <div className="flex flex-wrap gap-2">
-                        {story.metadata.year && (
-                          <span className="text-xs bg-gray-100 border border-gray-300 px-2 py-1">
-                            {story.metadata.year}
-                          </span>
-                        )}
                         {story.metadata.genre &&
                           story.metadata.genre.map((g: string) => (
                             <span
                               key={g}
-                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                              className={cn(
+                                'text-xs border px-2 py-1',
+                                theme === 'dark'
+                                  ? 'bg-neutral-900 border-neutral-600 '
+                                  : 'bg-gray-100 border-gray-300 '
+                              )}
                             >
                               {g}
                             </span>
@@ -101,10 +111,17 @@ const ShortStoriesComponent = () => {
                   </>
                 ) : (
                   // Film without image - Blog card style
-                  <Card className="rounded-none cursor-pointer border-black">
+                  <Card
+                    className={cn(
+                      'rounded-none cursor-pointer',
+                      theme === 'dark' ? 'border-white' : 'border-black'
+                    )}
+                  >
                     <CardHeader>
                       <CardTitle>{story.metadata.title}</CardTitle>
-                      <CardDescription>{story.metadata.date} • {story.metadata.desc}</CardDescription>
+                      <CardDescription>
+                        {story.metadata.date} • {story.metadata.desc}
+                      </CardDescription>
 
                       {/* Metadata Pills */}
                       <div className="flex flex-wrap gap-2 mt-3">
@@ -117,7 +134,12 @@ const ShortStoriesComponent = () => {
                           story.metadata.genre.map((g: string) => (
                             <span
                               key={g}
-                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                              className={cn(
+                                'text-xs border px-2 py-1',
+                                theme === 'dark'
+                                  ? 'bg-neutral-900 border-neutral-600 '
+                                  : 'bg-gray-100 border-gray-300 '
+                              )}
                             >
                               {g}
                             </span>

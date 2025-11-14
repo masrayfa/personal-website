@@ -10,8 +10,12 @@ import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
 import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-type';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { cn } from '@/lib/utils';
+import { useTheme } from '@/lib/theme-provider';
 
 const PeripheralsComponent = () => {
+  const { theme } = useTheme();
+
   const matches = useMatches();
 
   const hasChildRoute = matches.some((match) =>
@@ -69,7 +73,12 @@ const PeripheralsComponent = () => {
             <div key={item.id}>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Card className="rounded-none cursor-pointer border-black">
+                  <Card
+                    className={cn(
+                      'rounded-none cursor-pointer',
+                      theme === 'dark' ? 'border-white' : 'border-black'
+                    )}
+                  >
                     <CardHeader>
                       <CardTitle>{item.metadata.peripheralName}</CardTitle>
                       <CardDescription>

@@ -8,8 +8,11 @@ import { Link, Outlet, useMatches } from '@tanstack/react-router';
 import FilmographyCollections from './md';
 import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
+import { useTheme } from '@/lib/theme-provider';
+import { cn } from '@/lib/utils';
 
 const FilmographyComponent = () => {
+  const { theme } = useTheme();
   const matches = useMatches();
 
   const hasChildRoute = matches.some((match) =>
@@ -64,7 +67,12 @@ const FilmographyComponent = () => {
                   // Film with image - Reviews style
                   <>
                     <div className="w-full">
-                      <div className="relative w-full max-h-56 aspect-video bg-gray-100 border-2 border-black overflow-hidden group flex justify-center items-center">
+                      <div
+                        className={cn(
+                          'relative w-full max-h-56 aspect-video bg-gray-100 border-2 overflow-hidden group flex justify-center items-center',
+                          theme === 'dark' ? 'border-white' : 'border-black'
+                        )}
+                      >
                         <img
                           src={film.metadata.image_url}
                           alt={film.metadata.title}
@@ -80,23 +88,30 @@ const FilmographyComponent = () => {
                       </h3>
 
                       {film.metadata.desc && (
-                        <p className="text-sm text-gray-600">
+                        <p
+                          className={cn(
+                            'text-sm',
+                            theme === 'dark'
+                              ? 'text-neutral-400'
+                              : 'text-gray-600'
+                          )}
+                        >
                           {film.metadata.desc}
                         </p>
                       )}
 
                       {/* Metadata Pills */}
                       <div className="flex flex-wrap gap-2">
-                        {film.metadata.year && (
-                          <span className="text-xs bg-gray-100 border border-gray-300 px-2 py-1">
-                            {film.metadata.year}
-                          </span>
-                        )}
                         {film.metadata.region &&
                           film.metadata.region.map((r) => (
                             <span
                               key={r}
-                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                              className={cn(
+                                'text-xs border px-2 py-1',
+                                theme === 'dark'
+                                  ? 'bg-neutral-900 border-neutral-600 '
+                                  : 'bg-gray-100 border-gray-300 '
+                              )}
                             >
                               {r}
                             </span>
@@ -105,7 +120,12 @@ const FilmographyComponent = () => {
                           film.metadata.subject.map((s) => (
                             <span
                               key={s}
-                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                              className={cn(
+                                'text-xs border px-2 py-1',
+                                theme === 'dark'
+                                  ? 'bg-neutral-900 border-neutral-600 '
+                                  : 'bg-gray-100 border-gray-300 '
+                              )}
                             >
                               {s}
                             </span>
@@ -115,23 +135,28 @@ const FilmographyComponent = () => {
                   </>
                 ) : (
                   // Film without image - Blog card style
-                  <Card className="rounded-none cursor-pointer border-black">
+                  <Card
+                    className={cn(
+                      'rounded-none cursor-pointer ',
+                      theme === 'dark' ? 'border-white' : 'border-black'
+                    )}
+                  >
                     <CardHeader>
                       <CardTitle>{film.metadata.title}</CardTitle>
                       <CardDescription>{film.metadata.desc}</CardDescription>
 
                       {/* Metadata Pills */}
                       <div className="flex flex-wrap gap-2 mt-3">
-                        {film.metadata.year && (
-                          <span className="text-xs bg-gray-100 border border-gray-300 px-2 py-1">
-                            {film.metadata.year}
-                          </span>
-                        )}
                         {film.metadata.region &&
                           film.metadata.region.map((r) => (
                             <span
                               key={r}
-                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                              className={cn(
+                                'text-xs border px-2 py-1',
+                                theme === 'dark'
+                                  ? 'bg-neutral-900 border-neutral-600 '
+                                  : 'bg-gray-100 border-gray-300 '
+                              )}
                             >
                               {r}
                             </span>
@@ -140,7 +165,12 @@ const FilmographyComponent = () => {
                           film.metadata.subject.map((s) => (
                             <span
                               key={s}
-                              className="text-xs bg-gray-100 border border-gray-300 px-2 py-1"
+                              className={cn(
+                                'text-xs border px-2 py-1',
+                                theme === 'dark'
+                                  ? 'bg-neutral-900 border-neutral-600 '
+                                  : 'bg-gray-100 border-gray-300 '
+                              )}
                             >
                               {s}
                             </span>

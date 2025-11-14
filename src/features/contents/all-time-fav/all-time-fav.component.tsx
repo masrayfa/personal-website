@@ -10,8 +10,11 @@ import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
 import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-type';
 import { Dialog, DialogTrigger, DialogContent } from '@/components/ui/dialog';
+import { useTheme } from '@/lib/theme-provider';
+import { cn } from '@/lib/utils';
 
 const AllTimeFavComponent = () => {
+  const { theme } = useTheme();
   const matches = useMatches();
 
   const hasChildRoute = matches.some((match) =>
@@ -72,7 +75,12 @@ const AllTimeFavComponent = () => {
                   <li key={fav.id}>
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Card className="rounded-none cursor-pointer border-black">
+                        <Card
+                          className={cn(
+                            'rounded-none cursor-pointer',
+                            theme === 'dark' ? 'border-white' : 'border-black'
+                          )}
+                        >
                           <CardHeader>
                             <CardTitle>{fav.metadata.allTimeFavName}</CardTitle>
                             <CardDescription>
