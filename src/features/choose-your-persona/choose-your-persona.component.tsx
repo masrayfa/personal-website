@@ -6,30 +6,30 @@ const ChooseYourPersona = () => {
 
   return (
     <div className="pt-24">
-      <div className="border-y flex">
-        <div className="p-10 max-w-sm border-r ">
-          <p className="text-4xl">choose your persona</p>
+      <div className="border-y">
+        <div className="p-5 border-b">
+          <p className="text-xl font-bold">choose your persona</p>
         </div>
 
-        <div className="flex flex-col items-stretch ">
+        <div className="flex flex-col">
           <Button
             variant={'ghost'}
-            className={`flex flex-1 pl-3 pr-16 cursor-pointer rounded-none border-b ${
+            className={`p-4 cursor-pointer rounded-none border-b ${
               selectedPersona === 'mas-rayfa' ? 'bg-accent' : ''
             }`}
             onClick={() => setPersona('mas-rayfa')}
           >
-            <h1 className="text-4xl self-end">mas rayfa</h1>
+            <span className="text-lg">mas rayfa</span>
           </Button>
 
           <Button
             variant={'ghost'}
-            className={`flex flex-1 pl-3 pr-16 cursor-pointer rounded-none ${
+            className={`p-4 cursor-pointer rounded-none ${
               selectedPersona === 'sani-uong' ? 'bg-accent' : ''
             }`}
             onClick={() => setPersona('sani-uong')}
           >
-            <h1 className="text-4xl self-end">sani uong</h1>
+            <span className="text-lg">sani uong</span>
           </Button>
         </div>
       </div>

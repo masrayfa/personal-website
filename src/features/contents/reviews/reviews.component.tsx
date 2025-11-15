@@ -25,20 +25,22 @@ const ReviewsComponent = () => {
   return (
     <div className="flex flex-col space-y-16">
       {/* Intro */}
-      <div>
-        <h2 className="text-4xl">Reviews</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
-        </p>
+      <div className="flex justify-between items-start">
+        <div>
+          <h2 className="text-4xl">Reviews</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam.
+          </p>
+        </div>
       </div>
 
       {/* List of Contents */}
-      <ul className="flex flex-col space-y-20">
-        {activeFilters && reviews?.length! > 0 ? (
-          reviews?.map((review) => (
-            <li>
+      {activeFilters && reviews?.length! > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {reviews?.map((review) => (
+            <div key={review.id}>
               <Link
                 to={'/$widgetId/$contentId'}
                 params={{ widgetId: 'reviews', contentId: String(review.id) }}
@@ -89,14 +91,14 @@ const ReviewsComponent = () => {
                   )}
                 </div>
               </Link>
-            </li>
-          ))
-        ) : (
-          <div>
-            <p>No Review content is found</p>
-          </div>
-        )}
-      </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <p>No Review content is found</p>
+        </div>
+      )}
     </div>
   );
 };

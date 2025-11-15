@@ -4,26 +4,22 @@ import { IWidgetsActionMenu } from './widgets-action-menu.interface';
 
 const WidgetsActionMenu = ({ widgets }: IWidgetsActionMenu) => {
   return (
-    <div className="p-10">
-      <p className="mb-5">here's your widget</p>
+    <div className="p-5">
+      <p className="mb-3 text-sm">here's your widget</p>
 
-      <ul className="grid grid-cols-3 gap-10">
+      <div className="flex flex-col gap-2">
         {widgets.map((widget) => (
-          <li
-            key={widget.id}
-            className="flex flex-col items-center justify-center"
-          >
-            <Link to={'/$widgetId'} params={{ widgetId: widget.url }}>
-              <Button
-                type="button"
-                variant={'outline'}
-                className="p-16 cursor-pointer rounded-none border border-black"
-              ></Button>
-              <p className="text-center">{widget.label}</p>
-            </Link>
-          </li>
+          <Link key={widget.id} to={'/$widgetId'} params={{ widgetId: widget.url }}>
+            <Button
+              type="button"
+              variant={'outline'}
+              className="w-full cursor-pointer rounded-none border border-black justify-start"
+            >
+              {widget.label}
+            </Button>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

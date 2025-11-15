@@ -40,20 +40,22 @@ const WorkComponent = () => {
   return (
     <div className="flex flex-col space-y-16">
       {/* Intro */}
-      <div>
-        <h2 className="text-4xl">Work</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
-        </p>
+      <div className="flex justify-between items-start">
+        <div>
+          <h2 className="text-4xl">Work</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam.
+          </p>
+        </div>
       </div>
 
       {/* List of contents */}
-      <ul className="flex flex-col gap-12">
-        {activeFilters && worksCollections?.length! > 0 ? (
-          (worksCollections ?? []).map((work) => (
-            <li key={work.id}>
+      {activeFilters && worksCollections?.length! > 0 ? (
+        <div className="grid grid-cols-1 gap-3">
+          {(worksCollections ?? []).map((work) => (
+            <div key={work.id}>
               <Link
                 id={String(work.id)}
                 to={work.metadata.url || '#'}
@@ -72,7 +74,7 @@ const WorkComponent = () => {
                 />
               </Link>
               {/* Project Info */}
-              <div className="mt-4 space-y-2">
+              <div className="mt-4 mb-10 space-y-2">
                 <Link
                   to={work.metadata.url || '#'}
                   className="flex items-start justify-between cursor-pointer"
@@ -101,14 +103,14 @@ const WorkComponent = () => {
                   </div>
                 )}
               </div>
-            </li>
-          ))
-        ) : (
-          <div>
-            <p>No Work content is found</p>
-          </div>
-        )}
-      </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <p>No Work content is found</p>
+        </div>
+      )}
     </div>
   );
 };

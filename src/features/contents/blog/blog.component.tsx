@@ -14,7 +14,6 @@ import { cn } from '@/lib/utils';
 
 const BlogComponent = () => {
   const { theme } = useTheme();
-
   const matches = useMatches();
 
   const hasChildRoute = matches.some((match) =>
@@ -49,10 +48,10 @@ const BlogComponent = () => {
       </div>
 
       {/* List of contents */}
-      <ul className="flex flex-col gap-5">
-        {(blogs ?? []).length > 0 ? (
-          blogs?.map((blog) => (
-            <li className="">
+      {(blogs ?? []).length > 0 ? (
+        <div className="flex flex-col space-y-3">
+          {blogs?.map((blog) => (
+            <div key={blog.id}>
               <Link
                 id={String(blog.id)}
                 to={'/$widgetId/$contentId'}
@@ -91,14 +90,14 @@ const BlogComponent = () => {
                   </CardFooter>
                 </Card>
               </Link>
-            </li>
-          ))
-        ) : (
-          <div>
-            <p>No content found</p>
-          </div>
-        )}
-      </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <p>No content found</p>
+        </div>
+      )}
     </div>
   );
 };

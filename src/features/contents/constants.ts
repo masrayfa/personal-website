@@ -163,7 +163,7 @@ export const wallOfFavsCollections: ContentsCollectionsTypeSimplified[] = [
       allTimeFavName: 'SORE',
       image_url: '/img/movies/sore.png',
       allTimeReason:
-        'i resonated with the characters struggle that as much as we want to change our significant other, we cannot.',
+        "i resonated with the characters struggle that no matter how much we want the best for our significant other, sometimes we simply can't.",
       reviewLink: '/reviews/1',
     },
   },

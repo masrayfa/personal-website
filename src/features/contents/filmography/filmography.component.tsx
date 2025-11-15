@@ -42,20 +42,22 @@ const FilmographyComponent = () => {
   return (
     <div className="flex flex-col space-y-16">
       {/* Intro */}
-      <div>
-        <h2 className="text-4xl">Filmography</h2>
-        <p>
-          A visual journey through places I've captured and dreams yet to be
-          realized. Each frame tells a story - some already lived, others
-          waiting to unfold through my lens.
-        </p>
+      <div className="flex justify-between items-start">
+        <div>
+          <h2 className="text-4xl">Filmography</h2>
+          <p>
+            A visual journey through places I've captured and dreams yet to be
+            realized. Each frame tells a story - some already lived, others
+            waiting to unfold through my lens.
+          </p>
+        </div>
       </div>
 
       {/* List of Contents */}
-      <ul className="flex flex-col space-y-20">
-        {activeFilters && filmography?.length! > 0 ? (
-          filmography?.map((film) => (
-            <li key={film.id}>
+      {activeFilters && filmography?.length! > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {filmography?.map((film) => (
+            <div key={film.id}>
               <Link
                 to={'/$widgetId/$contentId'}
                 params={{
@@ -82,7 +84,7 @@ const FilmographyComponent = () => {
                     </div>
 
                     {/* Film Info */}
-                    <div className="mt-4 space-y-2">
+                    <div className="mt-4 mb-10 space-y-2">
                       <h3 className="text-xl font-bold">
                         {film.metadata.title}
                       </h3>
@@ -180,14 +182,14 @@ const FilmographyComponent = () => {
                   </Card>
                 )}
               </Link>
-            </li>
-          ))
-        ) : (
-          <div>
-            <p>No Content found</p>
-          </div>
-        )}
-      </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <p>No Content found</p>
+        </div>
+      )}
     </div>
   );
 };

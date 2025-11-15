@@ -57,18 +57,20 @@ const PeripheralsComponent = () => {
   return (
     <div className="flex flex-col space-y-16">
       {/* Intro */}
-      <div>
-        <h2 className="text-4xl">Peripherals</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
-        </p>
+      <div className="flex justify-between items-start">
+        <div>
+          <h2 className="text-4xl">Peripherals</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam.
+          </p>
+        </div>
       </div>
 
       {/* List of contents grouped by category */}
       {hasResults ? (
-        <div className="space-y-4 grid grid-cols-4 gap-3 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {filteredCollections.map((item) => (
             <div key={item.id}>
               <Dialog>
@@ -89,8 +91,9 @@ const PeripheralsComponent = () => {
                 </DialogTrigger>
                 <DialogContent>
                   <div className="flex flex-col space-y-4 p-4">
+                    <img src={item.metadata.image_url} />
                     <h2 className="text-2xl font-bold">
-                      {item.metadata.allTimeFavName}
+                      {item.metadata.peripheralName}
                     </h2>
                   </div>
                 </DialogContent>

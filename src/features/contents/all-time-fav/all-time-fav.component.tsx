@@ -70,9 +70,9 @@ const AllTimeFavComponent = () => {
               <h3 className="text-2xl font-bold capitalize">{category}</h3>
 
               {/* Items in this category */}
-              <ul className="grid grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                 {items.map((fav) => (
-                  <li key={fav.id}>
+                  <div key={fav.id}>
                     <Dialog>
                       <DialogTrigger asChild>
                         <Card
@@ -105,9 +105,9 @@ const AllTimeFavComponent = () => {
                         </div>
                       </DialogContent>
                     </Dialog>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
         </div>

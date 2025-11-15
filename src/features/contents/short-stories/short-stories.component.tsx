@@ -39,20 +39,22 @@ const ShortStoriesComponent = () => {
   return (
     <div className="flex flex-col space-y-16">
       {/* Intro */}
-      <div>
-        <h2 className="text-4xl">Short Stories</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
-        </p>
+      <div className="flex justify-between items-start">
+        <div>
+          <h2 className="text-4xl">Short Stories</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam.
+          </p>
+        </div>
       </div>
 
       {/* List of contents */}
-      <ul className="flex flex-col space-y-20">
-        {shortStories && shortStories.length > 0 ? (
-          shortStories.map((story) => (
-            <li key={story.id}>
+      {shortStories && shortStories.length > 0 ? (
+        <div className="grid grid-cols-1 gap-3">
+          {shortStories.map((story) => (
+            <div key={story.id}>
               <Link
                 to={'/$widgetId/$contentId'}
                 params={{
@@ -149,14 +151,14 @@ const ShortStoriesComponent = () => {
                   </Card>
                 )}
               </Link>
-            </li>
-          ))
-        ) : (
-          <div>
-            <p>No Content found</p>
-          </div>
-        )}
-      </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <p>No Content found</p>
+        </div>
+      )}
     </div>
   );
 };
