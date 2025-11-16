@@ -12,9 +12,12 @@ import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/lib/theme-provider';
+import { useTranslation } from 'react-i18next';
 
 const PeripheralsComponent = () => {
   const { theme } = useTheme();
+
+  const { t } = useTranslation();
 
   const matches = useMatches();
 
@@ -60,11 +63,7 @@ const PeripheralsComponent = () => {
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-4xl">Peripherals</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam.
-          </p>
+          <p>{t('peripherals.desc')}</p>
         </div>
       </div>
 

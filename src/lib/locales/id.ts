@@ -1,8 +1,8 @@
 const id = {
   nav: {
     home: 'Beranda',
-    serverFunctions: 'Start - Fungsi Server',
-    apiRequest: 'Start - Permintaan API',
+    serverFunctions: 'Start – Fungsi Server',
+    apiRequest: 'Start – Permintaan API',
     neon: 'Neon',
     tanstackQuery: 'TanStack Query',
     store: 'Toko',
@@ -18,34 +18,53 @@ const id = {
   },
   blog: {
     title: 'Blog',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+    description:
+      'Kumpulan tulisan berisi pemikiran dan ekspresi aku tentang hidup dan hal-hal di antaranya.',
   },
   shortStories: {
     title: 'Cerita Pendek',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+    description:
+      'Kumpulan cerita pendek amatir. Bisa berisi simbolisasi hidup aku… atau hanya fiksi acak.',
   },
   allTimeFav: {
     title: 'Dinding Favorit',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed dojj eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+    description:
+      'aku mudah lupa. Ini cara aku mencatat hal-hal favorit sepanjang masa di berbagai kategori.',
   },
   filmography: {
     title: 'Filmografi',
-    description: 'Perjalanan visual melalui tempat-tempat yang telah saya abadikan dan impian yang belum terwujud. Setiap frame menceritakan sebuah kisah - beberapa sudah hidup, yang lain menunggu untuk terungkap melalui lensa saya.',
+    description:
+      'Perjalanan visual melalui tempat-tempat yang pernah aku abadikan dan mimpi-mimpi yang masih menunggu terwujud.',
   },
   reviews: {
     title: 'Ulasan',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-    noReviewFound: 'Tidak ada konten ulasan ditemukan',
+    description: 'Kumpulan ulasan aku terhadap hal-hal yang pernah aku alami.',
+    noReviewFound: 'Tidak ada ulasan ditemukan',
   },
   masRayfaPrivate: {
     title: '???',
     subtitle: 'ranah ini tetap terselubung',
-    quote: '"beberapa misteri dimaksudkan untuk tetap tersembunyi, terkunci dalam bayang-bayang dan keheningan."',
-    message: 'persona mas rayfa belum siap untuk diungkap. mungkin tidak akan pernah.',
+    quote:
+      '"beberapa misteri ditakdirkan tetap tersembunyi, terkunci dalam bayangan dan keheningan."',
+    message:
+      'persona mas rayfa belum siap untuk diungkap. mungkin memang tidak akan pernah.',
     accessDenied: '[AKSES DITOLAK]',
   },
   filterWidget: {
-    noFilterAvailable: 'Tidak Ada Filter Tersedia. Silakan pilih persona lain untuk mengakses filter.',
+    noFilterAvailable:
+      'Tidak ada filter tersedia. Silakan pilih persona lain untuk mengakses filter.',
+    noFilterSelected: 'Tidak ada filter dipilih',
+  },
+  peripherals: {
+    desc: 'Kumpulan periferal pribadi yang aku gunakan setiap hari.',
+    noFilterAvailable:
+      'Tidak ada filter tersedia. Silakan pilih persona lain untuk mengakses filter.',
+    noFilterSelected: 'Tidak ada filter dipilih',
+  },
+  work: {
+    desc: 'Kumpulan projek sampingan yang pernah aku kerjakan.',
+    noFilterAvailable:
+      'Tidak ada filter tersedia. Silakan pilih persona lain untuk mengakses filter.',
     noFilterSelected: 'Tidak ada filter dipilih',
   },
 } as const;

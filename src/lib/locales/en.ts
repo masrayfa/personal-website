@@ -18,34 +18,53 @@ const en = {
   },
   blog: {
     title: 'Blog',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+    description:
+      'This is a written collection of my thoughts and expressions on life and everything in between.',
   },
   shortStories: {
     title: 'Short Stories',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+    description:
+      'An amateur writing collection of my short stories. You should expect a symbolization of (my) life or maybe just random fiction stories (just pick a guess).',
   },
   allTimeFav: {
     title: 'Wall of Fav',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed dojj eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+    description:
+      'I tend to forget things easily. So this is my effort to keep track of my all-time favorite things across various categories.',
   },
   filmography: {
     title: 'Filmography',
-    description: 'A visual journey through places I\'ve captured and dreams yet to be realized. Each frame tells a story - some already lived, others waiting to unfold through my lens.',
+    description:
+      "A visual journey through places I've captured and dreams yet to be realized. Hopefully from films I've made will ease your chaotic mind.",
   },
   reviews: {
     title: 'Reviews',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+    description: 'A collection of my reviews on things i have experienced.',
     noReviewFound: 'No Review content is found',
   },
   masRayfaPrivate: {
     title: '???',
     subtitle: 'this realm remains veiled',
-    quote: '"some mysteries are meant to stay hidden, locked away in shadows and silence."',
-    message: 'mas rayfa\'s persona is not ready to be unveiled. perhaps it never will be.',
+    quote:
+      '"some mysteries are meant to stay hidden, locked away in shadows and silence."',
+    message:
+      "mas rayfa's persona is not ready to be unveiled. perhaps it never will be.",
     accessDenied: '[ACCESS DENIED]',
   },
   filterWidget: {
-    noFilterAvailable: 'No Filter Available. Please select another persona to access filters.',
+    noFilterAvailable:
+      'No Filter Available. Please select another persona to access filters.',
+    noFilterSelected: 'No filter selected',
+  },
+  peripherals: {
+    desc: 'A collection of my personal peripherals that I use daily.',
+    noFilterAvailable:
+      'No Filter Available. Please select another persona to access filters.',
+    noFilterSelected: 'No filter selected',
+  },
+  work: {
+    desc: 'A collection of my side projects that I have done.',
+    noFilterAvailable:
+      'No Filter Available. Please select another persona to access filters.',
     noFilterSelected: 'No filter selected',
   },
 } as const;

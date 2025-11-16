@@ -7,9 +7,12 @@ import { filterCollections } from '@/lib/utils/filter-collections';
 import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/lib/theme-provider';
+import { useTranslation } from 'react-i18next';
 
 const WorkComponent = () => {
   const { theme } = useTheme();
+
+  const { t } = useTranslation();
 
   const matches = useMatches();
 
@@ -47,11 +50,7 @@ const WorkComponent = () => {
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-4xl">Work</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam.
-          </p>
+          <p>{t('work.desc')}</p>
         </div>
       </div>
 
