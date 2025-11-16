@@ -9,11 +9,15 @@ const WidgetsActionMenu = ({ widgets }: IWidgetsActionMenu) => {
 
       <div className="flex flex-col gap-2">
         {widgets.map((widget) => (
-          <Link key={widget.id} to={'/$widgetId'} params={{ widgetId: widget.url }}>
+          <Link
+            key={widget.id}
+            to={'/$widgetId'}
+            params={{ widgetId: widget.url }}
+          >
             <Button
               type="button"
               variant={'outline'}
-              className="w-full cursor-pointer rounded-none border border-black justify-start"
+              className="w-full cursor-pointer rounded-none border border-black justify-start p-8"
             >
               {widget.label}
             </Button>
