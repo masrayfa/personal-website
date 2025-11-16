@@ -11,8 +11,10 @@ import { filterCollections } from '@/lib/utils/filter-collections';
 import { useFilterStore } from '@/stores/filter-store';
 import { useTheme } from '@/lib/theme-provider';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const BlogComponent = () => {
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const matches = useMatches();
 
@@ -39,12 +41,8 @@ const BlogComponent = () => {
     <div className="flex flex-col space-y-16">
       {/* Intro */}
       <div>
-        <h2 className="text-4xl">Blog</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
-        </p>
+        <h2 className="text-4xl">{t('blog.title')}</h2>
+        <p>{t('blog.description')}</p>
       </div>
 
       {/* List of contents */}
@@ -95,7 +93,7 @@ const BlogComponent = () => {
         </div>
       ) : (
         <div>
-          <p>No content found</p>
+          <p>{t('common.noContentFound')}</p>
         </div>
       )}
     </div>

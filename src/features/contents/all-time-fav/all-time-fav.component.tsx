@@ -12,8 +12,10 @@ import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-
 import { Dialog, DialogTrigger, DialogContent } from '@/components/ui/dialog';
 import { useTheme } from '@/lib/theme-provider';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const AllTimeFavComponent = () => {
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const matches = useMatches();
 
@@ -53,12 +55,8 @@ const AllTimeFavComponent = () => {
     <div className="flex flex-col space-y-16">
       {/* Intro */}
       <div>
-        <h2 className="text-4xl">Wall of Fav</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed dojj
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam.
-        </p>
+        <h2 className="text-4xl">{t('allTimeFav.title')}</h2>
+        <p>{t('allTimeFav.description')}</p>
       </div>
 
       {/* List of contents grouped by category */}
@@ -99,7 +97,7 @@ const AllTimeFavComponent = () => {
                           <p>{fav.metadata.allTimeReason}</p>
                           {fav.metadata.reviewLink && (
                             <Link to={fav.metadata.reviewLink}>
-                              <p className="text-sm underline">review link</p>
+                              <p className="text-sm underline">{t('common.reviewLink')}</p>
                             </Link>
                           )}
                         </div>
@@ -113,7 +111,7 @@ const AllTimeFavComponent = () => {
         </div>
       ) : (
         <div>
-          <p>No Content found</p>
+          <p>{t('common.noContentFound')}</p>
         </div>
       )}
     </div>

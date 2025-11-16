@@ -10,8 +10,10 @@ import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/lib/theme-provider';
+import { useTranslation } from 'react-i18next';
 
 const ShortStoriesComponent = () => {
+  const { t } = useTranslation();
   const { theme } = useTheme();
 
   const matches = useMatches();
@@ -41,12 +43,8 @@ const ShortStoriesComponent = () => {
       {/* Intro */}
       <div className="flex justify-between items-start">
         <div>
-          <h2 className="text-4xl">Short Stories</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam.
-          </p>
+          <h2 className="text-4xl">{t('shortStories.title')}</h2>
+          <p>{t('shortStories.description')}</p>
         </div>
       </div>
 
@@ -156,7 +154,7 @@ const ShortStoriesComponent = () => {
         </div>
       ) : (
         <div>
-          <p>No Content found</p>
+          <p>{t('common.noContentFound')}</p>
         </div>
       )}
     </div>

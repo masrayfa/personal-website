@@ -7,8 +7,11 @@ import {
   FaInstagram,
 } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { useTranslation } from 'react-i18next';
 
 const Socials = () => {
+  const { t } = useTranslation();
+
   const socials = [
     { icon: FaEnvelope, url: 'mailto:your@email.com' },
     { icon: FaLinkedin, url: 'https://linkedin.com' },
@@ -35,7 +38,7 @@ const Socials = () => {
           </Button>
         ))}
       </div>
-      <p className="text-center text-xl ">socials</p>
+      <p className="text-center text-xl ">{t('socials.title')}</p>
     </div>
   );
 };

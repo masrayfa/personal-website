@@ -10,8 +10,10 @@ import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
 import { useTheme } from '@/lib/theme-provider';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const FilmographyComponent = () => {
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const matches = useMatches();
 
@@ -44,12 +46,8 @@ const FilmographyComponent = () => {
       {/* Intro */}
       <div className="flex justify-between items-start">
         <div>
-          <h2 className="text-4xl">Filmography</h2>
-          <p>
-            A visual journey through places I've captured and dreams yet to be
-            realized. Each frame tells a story - some already lived, others
-            waiting to unfold through my lens.
-          </p>
+          <h2 className="text-4xl">{t('filmography.title')}</h2>
+          <p>{t('filmography.description')}</p>
         </div>
       </div>
 
@@ -187,7 +185,7 @@ const FilmographyComponent = () => {
         </div>
       ) : (
         <div>
-          <p>No Content found</p>
+          <p>{t('common.noContentFound')}</p>
         </div>
       )}
     </div>

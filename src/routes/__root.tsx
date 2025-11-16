@@ -12,6 +12,9 @@ import StoreDevtools from '../lib/demo-store-devtools';
 
 import appCss from '../styles.css?url';
 
+// Initialize i18n
+import '../lib/i18n';
+
 import type { QueryClient } from '@tanstack/react-query';
 
 interface MyRouterContext {

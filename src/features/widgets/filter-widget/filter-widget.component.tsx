@@ -8,6 +8,7 @@ import ReviewsFilter from './filters/reviews-filter';
 import ShortStoriesFilter from './filters/short-stories-filter';
 import WorkFilter from './filters/work-filter';
 import { usePersonaStore } from '@/stores/persona-store';
+import { useTranslation } from 'react-i18next';
 
 const FILTER_COMPONENTS: Record<string, React.ComponentType> = {
   'all-time-fav': AllTimeFavFilter,
@@ -21,6 +22,7 @@ const FILTER_COMPONENTS: Record<string, React.ComponentType> = {
 };
 
 const FilterWidget = () => {
+  const { t } = useTranslation();
   let widgetId: string | undefined;
 
   try {
@@ -36,7 +38,7 @@ const FilterWidget = () => {
   if (selectedPersona === 'mas-rayfa') {
     return (
       <div className="p-4">
-        No Filter Available. Please select another persona to access filters.
+        {t('filterWidget.noFilterAvailable')}
       </div>
     );
   }
@@ -46,7 +48,7 @@ const FilterWidget = () => {
       <div className="flex flex-wrap gap-2">
         {FilterComponent && <FilterComponent />}
         {!FilterComponent && (
-          <p className="text-gray-500">No filter selected</p>
+          <p className="text-gray-500">{t('filterWidget.noFilterSelected')}</p>
         )}
       </div>
     </div>

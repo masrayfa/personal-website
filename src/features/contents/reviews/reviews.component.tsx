@@ -5,8 +5,10 @@ import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/lib/theme-provider';
+import { useTranslation } from 'react-i18next';
 
 const ReviewsComponent = () => {
+  const { t } = useTranslation();
   const { theme } = useTheme();
 
   const { getActiveFilters } = useFilterStore();
@@ -27,12 +29,8 @@ const ReviewsComponent = () => {
       {/* Intro */}
       <div className="flex justify-between items-start">
         <div>
-          <h2 className="text-4xl">Reviews</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam.
-          </p>
+          <h2 className="text-4xl">{t('reviews.title')}</h2>
+          <p>{t('reviews.description')}</p>
         </div>
       </div>
 
@@ -96,7 +94,7 @@ const ReviewsComponent = () => {
         </div>
       ) : (
         <div>
-          <p>No Review content is found</p>
+          <p>{t('reviews.noReviewFound')}</p>
         </div>
       )}
     </div>
