@@ -5,8 +5,12 @@ import { VscLinkExternal } from 'react-icons/vsc';
 import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
 import { useEffect } from 'react';
+import { cn } from '@/lib/utils';
+import { useTheme } from '@/lib/theme-provider';
 
 const WorkComponent = () => {
+  const { theme } = useTheme();
+
   const matches = useMatches();
 
   // Checking if child route (contentId) is activated
@@ -95,7 +99,12 @@ const WorkComponent = () => {
                     {work.metadata.techStack.map((tech, index) => (
                       <span
                         key={index}
-                        className="text-xs px-2 py-1 bg-gray-100 border border-gray-300"
+                        className={cn(
+                          'text-xs border px-2 py-1',
+                          theme === 'dark'
+                            ? 'bg-neutral-900 border-neutral-600 '
+                            : 'bg-gray-100 border-gray-300 '
+                        )}
                       >
                         {tech}
                       </span>
