@@ -23,6 +23,8 @@ const GENRE_OPTIONS = [
   { label: 'Horror', value: 'horror' },
   { label: 'Sci-Fi', value: 'sci-fi' },
   { label: 'Romance', value: 'romance' },
+  { label: 'Fantasy', value: 'fantasy' },
+  { label: 'Animated', value: 'animated' },
 ];
 
 const MOOD_OPTIONS = [

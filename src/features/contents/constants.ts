@@ -6,9 +6,9 @@ export const workProjects: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       title: 'Rayzen',
       desc: 'Modern design system',
-      mediaUrl: './w-edna.jpg',
+      mediaUrl: './img/work/rayzen.png',
       techStack: ['typeScript', 'tauri', 'solidjs', 'rust'],
-      url: 'https://www.youtube.com/watch?v=fmHP7pSNhk0',
+      url: 'https://smntcs.vercel.app/',
       category: 'desktop',
     },
   },
@@ -17,9 +17,9 @@ export const workProjects: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       title: 'Netflix Clone',
       desc: 'Watch movies trailers',
-      mediaUrl: './w-harry.jpg',
+      mediaUrl: './img/work/netflix-clone.png',
       techStack: ['typeScript', 'nextjs', 'tailwindcss'],
-      url: 'https://www.youtube.com/watch?v=fmHP7pSNhk0',
+      url: 'https://netflix-clone-next-typescript-tailwind.vercel.app/login',
       category: 'web',
     },
   },

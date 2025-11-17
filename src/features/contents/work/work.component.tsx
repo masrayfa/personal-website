@@ -39,11 +39,6 @@ const WorkComponent = () => {
   const worksCollections =
     filteredCollections.length > 0 ? filteredCollections : null;
 
-  useEffect(() => {
-    console.log('@ReviesComponent - activeFilters:', activeFilters);
-    console.log('@ReviesComponent - reviews:', worksCollections);
-  }, [activeFilters, worksCollections]);
-
   return (
     <div className="flex flex-col space-y-16">
       {/* Intro */}

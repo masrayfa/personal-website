@@ -17,7 +17,7 @@ const WidgetsActionMenu = ({ widgets }: IWidgetsActionMenu) => {
             <Button
               type="button"
               variant={'outline'}
-              className="w-full cursor-pointer rounded-none border border-black justify-start p-8"
+              className="w-full cursor-pointer rounded-none border justify-start p-8"
             >
               {widget.label}
             </Button>
