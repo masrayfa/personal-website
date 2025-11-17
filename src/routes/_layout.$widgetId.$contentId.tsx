@@ -23,5 +23,9 @@ async function RouteComponent() {
     return <div>Post not found</div>;
   }
 
-  return <SelectedContent />;
+  return (
+    <div className="prose prose-neutral dark:prose-invert max-w-none">
+      <SelectedContent />
+    </div>
+  );
 }
