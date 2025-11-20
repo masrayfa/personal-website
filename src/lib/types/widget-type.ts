@@ -1,4 +1,4 @@
-type WidgetType =
+export type WidgetType =
   | "blog"
   | "work"
   | "peripherals"

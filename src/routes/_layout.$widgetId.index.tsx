@@ -9,6 +9,7 @@ import WorkComponent from "@/features/contents/work/work.component";
 import MasRayfaPrivate from "@/features/mas-rayfa-private/mas-rayfa-private.component";
 import { usePersonaStore } from "@/stores/persona-store";
 import { createFileRoute } from "@tanstack/react-router";
+import { WidgetType } from "@/lib/types/widget-type";
 
 export const Route = createFileRoute("/_layout/$widgetId/")({
   component: MainWidget,

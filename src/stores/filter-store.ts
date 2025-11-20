@@ -3,6 +3,7 @@ import {
   ContentsCollectionsType,
   ContentsCollectionsTypeSimplified,
 } from '@/lib/types/post-collections-type';
+import { WidgetType } from '@/lib/types/widget-type';
 
 /**
  * Filter configuration for each widget type
@@ -55,6 +56,9 @@ export type ActiveFilters = {
   // // Canvas colors for videos
   canvasColors?: [number, number, number][];
 
+  // Content version filter (for blog, short-stories, reviews)
+  contentVersion?: 'short' | 'long' | null;
+
   // Future filters:
   // likes?: number | null;
   // claps?: number | null;
@@ -103,6 +107,8 @@ type FilterStore = {
   toggleTechnicalFilter: (widgetId: WidgetType, technical: string) => void;
 
   toggleYearFilter: (widgetId: WidgetType, year: number) => void;
+
+  setContentVersion: (widgetId: WidgetType, version: 'short' | 'long') => void;
 
   clearFilter: (widgetId: WidgetType, filterKey: keyof ActiveFilters) => void;
 
@@ -389,6 +395,21 @@ export const useFilterStore = create<FilterStore>((set, get) => ({
         },
       };
     });
+  },
+
+  setContentVersion: (widgetId, version) => {
+    set((state) => ({
+      widgetFilters: {
+        ...state.widgetFilters,
+        [widgetId]: {
+          ...state.widgetFilters[widgetId],
+          activeFilters: {
+            ...state.widgetFilters[widgetId]?.activeFilters,
+            contentVersion: version,
+          },
+        },
+      },
+    }));
   },
 
   clearFilter: (widgetId, filterKey) => {

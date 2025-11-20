@@ -6,6 +6,7 @@ import PeripheralsMDsCollections from "@/features/contents/peripherals/md";
 import ReviewsMDsCollections from "@/features/contents/reviews/md";
 import ShortStoriesMDsCollections from "@/features/contents/short-stories/md";
 import WorkContentsCollections from "@/features/contents/work/md";
+import { WidgetType } from "@/lib/types/widget-type";
 
 export function ContentsCollections(collectionKey: string) {
   const widgetId = collectionKey.split("_")[0] as WidgetType;
