@@ -3,6 +3,8 @@ import { useParams } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { WidgetType } from '@/lib/types/widget-type';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+import { Label } from '../ui/label';
 
 const VERSION_OPTIONS = [
   { label: 'Long Version', value: 'long' },
@@ -35,33 +37,31 @@ export const VersionFilter = () => {
       <h3 className="text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">
         Reading Version
       </h3>
-      <div className="flex gap-4">
+      <RadioGroup
+        className="flex gap-4"
+        value={selectedVersion}
+        onValueChange={handleVersionChange}
+      >
         {VERSION_OPTIONS.map((option) => (
-          <label
+          <div
             key={option.value}
             className="flex items-center gap-2 cursor-pointer group"
           >
-            <input
-              type="radio"
-              name="content-version"
-              value={option.value}
-              checked={selectedVersion === option.value}
-              onChange={() => handleVersionChange(option.value)}
-              className="w-4 h-4 cursor-pointer accent-blue-600"
-            />
-            <span
+            <RadioGroupItem id={option.value} value={option.value} />
+            <Label
+              htmlFor={option.value}
               className={cn(
-                'text-sm transition-colors',
+                'text-sm transition-colors cursor-pointer',
                 selectedVersion === option.value
-                  ? 'font-semibold text-blue-600 dark:text-blue-400'
+                  ? 'font-semibold'
                   : 'text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200'
               )}
             >
               {option.label}
-            </span>
-          </label>
+            </Label>
+          </div>
         ))}
-      </div>
+      </RadioGroup>
     </div>
   );
 };
