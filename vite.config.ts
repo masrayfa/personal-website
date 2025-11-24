@@ -8,6 +8,7 @@ import neon from "./vite-plugins/neon.ts";
 import mdx from "@mdx-js/rollup";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import { fileURLToPath } from "url";
 
 const config = defineConfig({
   plugins: [
@@ -18,13 +19,18 @@ const config = defineConfig({
       projects: ["./tsconfig.json"],
     }),
     tailwindcss(),
-    tanstackStart(),
-    viteReact(),
     mdx({
       remarkPlugins: [remarkGfm],
       rehypePlugins: [rehypeHighlight],
     }),
+    tanstackStart(),
+    viteReact(),
   ],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
   server: {
     port: 3000,
   },
