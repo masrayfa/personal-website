@@ -8,7 +8,7 @@ export const Route = createFileRoute('/_layout/$widgetId/$contentId')({
   component: RouteComponent,
 });
 
-async function RouteComponent() {
+function RouteComponent() {
   const { widgetId, contentId } = Route.useParams();
   const { selectedPersona } = usePersonaStore();
 
