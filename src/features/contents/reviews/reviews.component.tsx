@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
 import ReviewsMDsCollections from './md';
 import { useFilterStore } from '@/stores/filter-store';
