@@ -67,7 +67,7 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'keyboard',
       peripheralName: 'Keychron B1 Pro',
-      image_url: '/img/perihperals/keyboard-keychron-b1-pro.JPG',
+      image_url: '/img/peripherals/keyboard-keychron-b1-pro.JPG',
       brand: 'keychron',
     },
   },
