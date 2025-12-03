@@ -48,6 +48,9 @@ export type ActiveFilters = {
   category?: string[] | null;
   allTimeFavName?: string;
 
+  // Peripherals
+  brand?: string[] | null;
+
   // Work Projects
   techStack?: string[] | null;
   mediaUrl?: string;
@@ -89,6 +92,8 @@ type FilterStore = {
   toggleTechStackFilter: (widgetId: WidgetType, techStack: string) => void;
 
   toggleCategoryFilter: (widgetId: WidgetType, category: string) => void;
+
+  toggleBrandFilter: (widgetId: WidgetType, brand: string) => void;
 
   toggleReviewTypeFilter: (widgetId: WidgetType, reviewType: string) => void;
 
@@ -183,6 +188,29 @@ export const useFilterStore = create<FilterStore>((set, get) => ({
                 newCategory !== null && newCategory !== undefined
                   ? newCategory
                   : null,
+            },
+          },
+        },
+      };
+    });
+  },
+
+  toggleBrandFilter: (widgetId, brand) => {
+    set((state) => {
+      const currentBrand =
+        state.widgetFilters[widgetId]?.activeFilters?.brand || [];
+      const newBrand = currentBrand.includes(brand)
+        ? currentBrand.filter((b) => b !== brand)
+        : [...currentBrand, brand];
+
+      return {
+        widgetFilters: {
+          ...state.widgetFilters,
+          [widgetId]: {
+            ...state.widgetFilters[widgetId],
+            activeFilters: {
+              ...state.widgetFilters[widgetId]?.activeFilters,
+              brand: newBrand.length > 0 ? newBrand : null,
             },
           },
         },

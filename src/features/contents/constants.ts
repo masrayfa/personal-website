@@ -31,7 +31,8 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'camera',
       peripheralName: 'zv-e10',
-      brand: ['sony'],
+      // image_url: '/img/peripherals/camera-zv-e10.png',
+      brand: 'sony',
     },
   },
   {
@@ -39,7 +40,8 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'audio',
       peripheralName: 'Rexus Sedna Headset',
-      brand: ['rexus'],
+      image_url: '/img/peripherals/headset-rexus-sedna.JPG',
+      brand: 'rexus',
     },
   },
   {
@@ -47,7 +49,8 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'gamepad',
       peripheralName: 'Fantech WGP',
-      brand: ['fantech'],
+      image_url: '/img/peripherals/gamepad-fantech-wgp.JPG',
+      brand: 'fantech',
     },
   },
   {
@@ -55,7 +58,8 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'lamp',
       peripheralName: 'IKEA BLÅSVERK',
-      brand: ['ikea'],
+      image_url: '/img/peripherals/lamp-IKEA-BLÅSVERK.JPG',
+      brand: 'ikea',
     },
   },
   {
@@ -63,7 +67,8 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'keyboard',
       peripheralName: 'Keychron B1 Pro',
-      brand: ['keychron'],
+      image_url: '/img/perihperals/keyboard-keychron-b1-pro.JPG',
+      brand: 'keychron',
     },
   },
   {
@@ -71,7 +76,8 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'audio',
       peripheralName: "old logitech (i don't know the type)",
-      brand: ['logitech'],
+      image_url: '/img/peripherals/audio-logitech.JPG',
+      brand: 'logitech',
     },
   },
   {
@@ -79,7 +85,8 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'PC',
       peripheralName: 'my sheila',
-      brand: ['custom-built'],
+      image_url: '/img/peripherals/pc-my-sheila.JPG',
+      brand: 'custom-built',
     },
   },
   {
@@ -87,7 +94,26 @@ export const peripherals: ContentsCollectionsTypeSimplified[] = [
     metadata: {
       category: 'Desk',
       peripheralName: 'Fantech WS311',
-      brand: ['fantech'],
+      image_url: '/img/peripherals/desk-fantech-WS311.JPG',
+      brand: 'fantech',
+    },
+  },
+  {
+    id: 9,
+    metadata: {
+      category: 'audio',
+      peripheralName: 'Focusrite Scarlett Solo',
+      image_url: '/img/peripherals/audio-focusrite-scarlett-solo.JPG',
+      brand: 'focusrite',
+    },
+  },
+  {
+    id: 10,
+    metadata: {
+      category: 'cleaner',
+      peripheralName: 'cleaner i dont know',
+      image_url: '/img/peripherals/cleaner.JPG',
+      brand: 'unknown',
     },
   },
 ];

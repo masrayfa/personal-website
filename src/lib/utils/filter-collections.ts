@@ -29,6 +29,13 @@ function filterSimplifiedCollections(
       if (!hasCategory) return false;
     }
 
+    // Apply brand filter (OR logic - matches ANY selected brand)
+    if (activeFilters.brand && activeFilters.brand.length > 0) {
+      const itemBrand = item.metadata.brand;
+      const hasBrand = activeFilters.brand.includes(itemBrand || '');
+      if (!hasBrand) return false;
+    }
+
     // Apply techStack filter (OR logic - matches ANY selected tech)
     if (activeFilters.techStack && activeFilters.techStack.length > 0) {
       const itemTechStack = item.metadata.techStack || [];

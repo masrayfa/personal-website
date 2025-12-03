@@ -10,6 +10,7 @@ const PeripheralsFilter = () => {
   const {
     getActiveFilters,
     toggleCategoryFilter,
+    toggleBrandFilter,
     setFilteredCollections,
     clearAllFilters,
   } = useFilterStore();
@@ -45,8 +46,27 @@ const PeripheralsFilter = () => {
       }));
   }, []);
 
+  const brandOptions = useMemo(() => {
+    const brands = new Set<string>();
+    peripherals.forEach((item) => {
+      if (item.metadata.brand) {
+        brands.add(item.metadata.brand);
+      }
+    });
+    return Array.from(brands)
+      .sort()
+      .map((brand) => ({
+        label: brand.charAt(0).toUpperCase() + brand.slice(1),
+        value: brand,
+      }));
+  }, []);
+
   const handleCategoryClick = (category: string) => {
     toggleCategoryFilter('peripherals', category);
+  };
+
+  const handleBrandClick = (brand: string) => {
+    toggleBrandFilter('peripherals', brand);
   };
 
   const handleClearAll = () => {
@@ -54,9 +74,12 @@ const PeripheralsFilter = () => {
   };
 
   const hasActiveFilters =
-    activeFilters.category !== null &&
-    activeFilters.category !== undefined &&
-    activeFilters.category.length > 0;
+    (activeFilters.category !== null &&
+      activeFilters.category !== undefined &&
+      activeFilters.category.length > 0) ||
+    (activeFilters.brand !== null &&
+      activeFilters.brand !== undefined &&
+      activeFilters.brand.length > 0);
 
   return (
     <div className="space-y-6 w-full">
@@ -87,6 +110,20 @@ const PeripheralsFilter = () => {
             value={option.value}
             isActive={activeFilters.category?.includes(option.value) || false}
             onClick={() => handleCategoryClick(option.value)}
+            disabled={false}
+          />
+        ))}
+      </FilterSection>
+
+      {/* Brand Filter */}
+      <FilterSection title="By Brand" disabled={brandOptions.length === 0}>
+        {brandOptions.map((option) => (
+          <FilterPill
+            key={option.value}
+            label={option.label}
+            value={option.value}
+            isActive={activeFilters.brand?.includes(option.value) || false}
+            onClick={() => handleBrandClick(option.value)}
             disabled={false}
           />
         ))}

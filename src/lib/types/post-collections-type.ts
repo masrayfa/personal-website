@@ -31,7 +31,7 @@ type ContentCollectionsMetadata = {
 
   // Peripherals
   peripheralName?: string;
-  brand?: string[];
+  brand?: string;
 
   // Work Projects
   techStack?: string[];
