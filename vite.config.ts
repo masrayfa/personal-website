@@ -20,6 +20,7 @@ const config = defineConfig({
     }),
     tailwindcss(),
     mdx({
+      development: process.env.NODE_ENV !== 'production',
       remarkPlugins: [remarkGfm],
       rehypePlugins: [rehypeHighlight],
     }),
