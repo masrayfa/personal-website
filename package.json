@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
+    "prestart": "node scripts/write-dev-vars.mjs",
     "start": "vite --port 3000",
     "build": "vite build",
     "serve": "vite preview",
