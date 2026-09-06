@@ -1,10 +1,6 @@
-import { useEffect } from 'react';
 import { useFilterStore } from '@/stores/filter-store';
 import { FilterPill } from '../components/filter-pill';
 import { FilterSection } from '../components/filter-section';
-import { filterCollections } from '@/lib/utils/filter-collections';
-import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-type';
-import { workProjects } from '@/features/contents/constants';
 
 const TECH_STACK_OPTIONS = [
   { label: 'TypeScript', value: 'typeScript' },
@@ -24,27 +20,9 @@ const CATEGORY_OPTIONS = [
 ];
 
 const WorkFilter = () => {
-  const {
-    getActiveFilters,
-    setFilteredCollections,
-    clearAllFilters,
-    toggleTechStackFilter,
-    toggleCategoryFilter,
-  } = useFilterStore();
+  const { getActiveFilters, clearAllFilters, toggleFilter } = useFilterStore();
 
   const activeFilters = getActiveFilters('work');
-
-  useEffect(() => {
-    const filtered = filterCollections(
-      workProjects,
-      'simplified',
-      activeFilters
-    );
-    setFilteredCollections(
-      'work',
-      filtered as ContentsCollectionsTypeSimplified[]
-    );
-  }, [activeFilters, setFilteredCollections]);
 
   const handleClearAll = () => {
     clearAllFilters('work');
@@ -78,7 +56,7 @@ const WorkFilter = () => {
             label={option.label}
             value={option.value}
             isActive={activeFilters.category?.includes(option.value) || false}
-            onClick={() => toggleCategoryFilter('work', option.value)}
+            onClick={() => toggleFilter('work', 'category', option.value)}
           />
         ))}
       </FilterSection>
@@ -90,7 +68,7 @@ const WorkFilter = () => {
             label={option.label}
             value={option.value}
             isActive={activeFilters.techStack?.includes(option.value) || false}
-            onClick={() => toggleTechStackFilter('work', option.value)}
+            onClick={() => toggleFilter('work', 'techStack', option.value)}
           />
         ))}
       </FilterSection>

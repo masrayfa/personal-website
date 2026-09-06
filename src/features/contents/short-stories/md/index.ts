@@ -1,5 +1,3 @@
-import Unfinished from './unfinished-finished-puzzle.mdx';
-
 import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 const ShortStoriesMDsCollections: ContentsCollectionsType[] = [

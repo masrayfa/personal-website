@@ -1,10 +1,6 @@
-import { useEffect } from 'react';
 import { useFilterStore } from '@/stores/filter-store';
 import { FilterPill } from '../components/filter-pill';
 import { FilterSection } from '../components/filter-section';
-import ReviewsMDsCollections from '@/features/contents/reviews/md';
-import { filterCollections } from '@/lib/utils/filter-collections';
-import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 const REVIEW_TYPE_OPTIONS = [
   { label: 'Movie', value: 'movie' },
@@ -37,35 +33,22 @@ const MOOD_OPTIONS = [
 const ReviewsFilter = () => {
   const {
     getActiveFilters,
-    setFilteredCollections,
     clearAllFilters,
-    toggleGenreFilter,
-    toggleMoodFilter,
-    toggleReviewTypeFilter,
+    toggleFilter,
   } = useFilterStore();
 
   const activeFilters = getActiveFilters('reviews');
 
-  // Apply filters whenever active filters change
-  useEffect(() => {
-    const filtered = filterCollections(
-      ReviewsMDsCollections,
-      'full',
-      activeFilters
-    );
-    setFilteredCollections('reviews', filtered as ContentsCollectionsType[]);
-  }, [activeFilters, setFilteredCollections]);
-
   const handleReviewTypeClick = (reviewType: string) => {
-    toggleReviewTypeFilter('reviews', reviewType);
+    toggleFilter('reviews', 'reviewType', reviewType);
   };
 
   const handleGenreClick = (genre: string) => {
-    toggleGenreFilter('reviews', genre);
+    toggleFilter('reviews', 'genre', genre);
   };
 
   const handleMoodClick = (mood: string) => {
-    toggleMoodFilter('reviews', mood);
+    toggleFilter('reviews', 'mood', mood);
   };
 
   const handleClearAll = () => {

@@ -171,29 +171,3 @@ export function filterCollections(
       );
   }
 }
-
-/**
- * Extracts unique values for a specific filter from collections
- *
- * @param collections - The collection array to extract from
- * @param filterKey - The metadata key to extract (e.g., 'genre')
- * @returns Array of unique values
- *
- * @example
- * const genres = extractUniqueFilterValues(ReviewsMDsCollections, 'genre');
- * // Returns: ['action', 'drama', ...]
- */
-export function extractUniqueFilterValues(
-  collections: ContentsCollectionsType[],
-  filterKey: keyof ContentsCollectionsType['metadata']
-): string[] {
-  const values = collections.flatMap((item) => {
-    const value = item.metadata[filterKey];
-    if (Array.isArray(value)) {
-      return value;
-    }
-    return value ? [String(value)] : [];
-  });
-
-  return Array.from(new Set(values));
-}

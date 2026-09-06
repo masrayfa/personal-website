@@ -1,5 +1,4 @@
 import React from 'react';
-import { AnimatePresence, motion } from 'motion/react';
 import { CanvasRevealEffect } from '@/components/ui/canvas-reveal-effect';
 
 interface WorkProjectCardProps {
@@ -18,16 +17,12 @@ export function WorkProjectCard({
   mediaType = 'image',
   logoUrl,
 }: WorkProjectCardProps) {
-  const [hovered, setHovered] = React.useState(false);
-  const [mediaLoaded, setMediaLoaded] = React.useState(false);
   const [mediaError, setMediaError] = React.useState(false);
 
   return (
     <div className="w-full">
       {/* Media Container */}
       <div
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
         className="relative w-full aspect-video bg-gray-100 border overflow-hidden group"
       >
         {/* Corner Icons */}
@@ -48,7 +43,6 @@ export function WorkProjectCard({
                   loop
                   muted
                   playsInline
-                  onLoadedData={() => setMediaLoaded(true)}
                   onError={() => setMediaError(true)}
                 />
               ) : (
@@ -56,7 +50,6 @@ export function WorkProjectCard({
                   src={mediaUrl}
                   alt={title}
                   className="w-full h-full object-cover opacity-30 group-hover:opacity-100 transition-opacity duration-500"
-                  onLoad={() => setMediaLoaded(true)}
                   onError={() => setMediaError(true)}
                 />
               )}
@@ -88,25 +81,16 @@ export function WorkProjectCard({
         ) : (
           <>
             {/* Static Canvas for placeholder */}
-            <AnimatePresence>
-              {hovered && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="h-full w-full absolute inset-0"
-                >
-                  <CanvasRevealEffect
-                    animationSpeed={3}
-                    containerClassName="bg-black"
-                    colors={[
-                      [20, 20, 20],
-                    ]}
-                    dotSize={2}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div className="h-full w-full absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <CanvasRevealEffect
+                animationSpeed={3}
+                containerClassName="bg-black"
+                colors={[
+                  [20, 20, 20],
+                ]}
+                dotSize={2}
+              />
+            </div>
 
             {/* Placeholder Icon */}
             <div className="relative z-20">

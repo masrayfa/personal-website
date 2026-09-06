@@ -1,10 +1,6 @@
-import { useEffect } from 'react';
 import { useFilterStore } from '@/stores/filter-store';
 import { FilterPill } from '../components/filter-pill';
 import { FilterSection } from '../components/filter-section';
-import { filterCollections } from '@/lib/utils/filter-collections';
-import ShortStoriesMDsCollections from '@/features/contents/short-stories/md';
-import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 const GENRE_OPTIONS = [
   { label: 'Drama', value: 'drama' },
@@ -24,33 +20,18 @@ const MOOD_OPTIONS = [
 const ShortStoriesFilter = () => {
   const {
     getActiveFilters,
-    setFilteredCollections,
     clearAllFilters,
-    toggleGenreFilter,
-    toggleMoodFilter,
+    toggleFilter,
   } = useFilterStore();
 
   const activeFilters = getActiveFilters('short-stories');
 
-  // Apply filters whenever active filters change
-  useEffect(() => {
-    const filtered = filterCollections(
-      ShortStoriesMDsCollections,
-      'full',
-      activeFilters
-    );
-    setFilteredCollections(
-      'short-stories',
-      filtered as ContentsCollectionsType[]
-    );
-  }, [activeFilters, setFilteredCollections]);
-
   const handleGenreClick = (genre: string) => {
-    toggleGenreFilter('short-stories', genre);
+    toggleFilter('short-stories', 'genre', genre);
   };
 
   const handleMoodClick = (mood: string) => {
-    toggleMoodFilter('short-stories', mood);
+    toggleFilter('short-stories', 'mood', mood);
   };
 
   const handleClearAll = () => {

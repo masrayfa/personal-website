@@ -1,34 +1,13 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useFilterStore } from '@/stores/filter-store';
 import { FilterPill } from '../components/filter-pill';
 import { FilterSection } from '../components/filter-section';
-import { filterCollections } from '@/lib/utils/filter-collections';
 import { wallOfFavsCollections } from '@/features/contents/constants';
-import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-type';
 
 const AllTimeFavFilter = () => {
-  const {
-    getActiveFilters,
-    toggleCategoryFilter,
-    setFilteredCollections,
-    clearAllFilters,
-    clearFilter,
-  } = useFilterStore();
+  const { getActiveFilters, toggleFilter, clearAllFilters } = useFilterStore();
 
   const activeFilters = getActiveFilters('all-time-fav');
-
-  // Apply filters whenever active filters change
-  useEffect(() => {
-    const filtered = filterCollections(
-      wallOfFavsCollections,
-      'simplified',
-      activeFilters
-    );
-    setFilteredCollections(
-      'all-time-fav',
-      filtered as ContentsCollectionsTypeSimplified[]
-    );
-  }, [activeFilters, setFilteredCollections]);
 
   // Get unique categories from wall of favs data
   const categoryOptions = useMemo(() => {
@@ -47,7 +26,7 @@ const AllTimeFavFilter = () => {
   }, []);
 
   const handleCategoryClick = (category: string) => {
-    toggleCategoryFilter('all-time-fav', category);
+    toggleFilter('all-time-fav', 'category', category);
   };
   const handleClearAll = () => {
     clearAllFilters('all-time-fav');

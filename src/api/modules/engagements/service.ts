@@ -1,5 +1,3 @@
-import { status } from "elysia";
-
 import type { EngagementsModel } from "./model";
 import { db } from "@/db/index";
 import { engagementsTable } from "@/db/schema/engagements";

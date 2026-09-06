@@ -1,3 +1,0 @@
-interface IContent {
-  widgetId: string;
-}

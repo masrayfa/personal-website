@@ -4,7 +4,6 @@ import { WorkProjectCard } from '@/components/WorkCanvasRealEffect';
 import { VscLinkExternal } from 'react-icons/vsc';
 import { useFilterStore } from '@/stores/filter-store';
 import { filterCollections } from '@/lib/utils/filter-collections';
-import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/lib/theme-provider';
 import { useTranslation } from 'react-i18next';

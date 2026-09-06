@@ -1,3 +1,0 @@
-interface IFilterWidget {
-  tags: string[];
-}

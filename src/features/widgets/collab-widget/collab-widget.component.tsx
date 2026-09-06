@@ -1,11 +1,10 @@
 import { Button } from '@/components/ui/button';
-import { Link } from '@tanstack/react-router';
 import { PiCallBell } from 'react-icons/pi';
 
 const CollabWidget = () => {
   return (
     <div className="p-5">
-      <Link to="https://cal.com/sani.d.uong/30min" target="_blank">
+      <a href="https://cal.com/sani.d.uong/30min" target="_blank" rel="noreferrer">
         <Button
           type="button"
           variant="outline"
@@ -16,7 +15,7 @@ const CollabWidget = () => {
           </span>
           let's collab
         </Button>
-      </Link>
+      </a>
     </div>
   );
 };

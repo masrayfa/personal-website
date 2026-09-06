@@ -1,11 +1,8 @@
 import { Elysia } from "elysia";
-import { treaty } from "@elysiajs/eden";
 import { fromTypes, openapi } from "@elysiajs/openapi";
 
 import { createFileRoute } from "@tanstack/react-router";
-import { createIsomorphicFn } from "@tanstack/react-start";
 import { engagements } from "@/api/modules";
-import { responseHelpersPlugin } from "@/api/plugins/response";
 
 const app = new Elysia({
   name: "personal-website-api",
@@ -17,7 +14,6 @@ const app = new Elysia({
       references: fromTypes(),
     }),
   )
-  .use(responseHelpersPlugin)
   .use(engagements);
 
 const handle = async ({ request }: { request: Request }) => {
@@ -57,7 +53,3 @@ export const Route = createFileRoute("/api/$")({
     },
   },
 });
-
-export const api = createIsomorphicFn()
-  .server(() => treaty(handle as unknown as any))
-  .client(() => treaty<typeof app>("http://localhost:3000"));

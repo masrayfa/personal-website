@@ -1,10 +1,8 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useFilterStore } from '@/stores/filter-store';
 import { FilterPill } from '../components/filter-pill';
 import { FilterSection } from '../components/filter-section';
-import { filterCollections } from '@/lib/utils/filter-collections';
 import FilmographyCollections from '@/features/contents/filmography/md';
-import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 const STATUS_OPTIONS = [
   { label: 'Dream Destination', value: 'dream' },
@@ -53,32 +51,9 @@ const YEAR_OPTIONS = [
 ];
 
 const FilmographyFilter = () => {
-  const {
-    getActiveFilters,
-    setFilteredCollections,
-    clearAllFilters,
-    toggleStatusFilter,
-    toggleRegionFilter,
-    toggleSubjectFilter,
-    toggleVisualStyleFilter,
-    toggleTechnicalFilter,
-    toggleYearFilter,
-  } = useFilterStore();
+  const { getActiveFilters, clearAllFilters, toggleFilter } = useFilterStore();
 
   const activeFilters = getActiveFilters('filmography');
-
-  // Apply filters whenever active filters change
-  useEffect(() => {
-    const filtered = filterCollections(
-      FilmographyCollections,
-      'full',
-      activeFilters
-    );
-    setFilteredCollections(
-      'filmography',
-      filtered as ContentsCollectionsType[]
-    );
-  }, [activeFilters, setFilteredCollections]);
 
   // Check which filter options are actually used in the collections
   const availableFilters = useMemo(() => {
@@ -130,27 +105,27 @@ const FilmographyFilter = () => {
   }, []);
 
   const handleStatusClick = (status: string) => {
-    toggleStatusFilter('filmography', status);
+    toggleFilter('filmography', 'status', status);
   };
 
   const handleRegionClick = (region: string) => {
-    toggleRegionFilter('filmography', region);
+    toggleFilter('filmography', 'region', region);
   };
 
   const handleSubjectClick = (subject: string) => {
-    toggleSubjectFilter('filmography', subject);
+    toggleFilter('filmography', 'subject', subject);
   };
 
   const handleVisualStyleClick = (visualStyle: string) => {
-    toggleVisualStyleFilter('filmography', visualStyle);
+    toggleFilter('filmography', 'visualStyle', visualStyle);
   };
 
   const handleTechnicalClick = (technical: string) => {
-    toggleTechnicalFilter('filmography', technical);
+    toggleFilter('filmography', 'technical', technical);
   };
 
   const handleYearClick = (year: number) => {
-    toggleYearFilter('filmography', year);
+    toggleFilter('filmography', 'year', year);
   };
 
   const handleClearAll = () => {

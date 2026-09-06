@@ -11,7 +11,6 @@ type FilterPillProps = {
 
 export const FilterPill = ({
   label,
-  value,
   isActive,
   onClick,
   disabled = false,

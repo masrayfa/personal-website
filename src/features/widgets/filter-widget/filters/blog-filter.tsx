@@ -1,10 +1,6 @@
-import { useEffect } from 'react';
 import { useFilterStore } from '@/stores/filter-store';
 import { FilterPill } from '../components/filter-pill';
 import { FilterSection } from '../components/filter-section';
-import { filterCollections } from '@/lib/utils/filter-collections';
-import { BlogMDsCollections } from '@/features/contents/blog/md';
-import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 const GENRE_OPTIONS = [
   { label: 'Mundane', value: 'mundane' },
@@ -12,29 +8,12 @@ const GENRE_OPTIONS = [
 ];
 
 const BlogFilter = () => {
-  const {
-    toggleGenreFilter,
-    getActiveFilters,
-    setFilteredCollections,
-    clearAllFilters,
-  } = useFilterStore();
+  const { toggleFilter, getActiveFilters, clearAllFilters } = useFilterStore();
 
   const activeFilters = getActiveFilters('blog');
 
-  // Apply filters whenever active filters change
-  useEffect(() => {
-    const filtered = filterCollections(
-      BlogMDsCollections,
-      'full',
-      activeFilters
-    );
-    setFilteredCollections('blog', filtered as ContentsCollectionsType[]);
-
-    console.log('@Blog-Filter::activeFilters: ', activeFilters);
-  }, [activeFilters, setFilteredCollections]);
-
   const handleGenreClick = (genre: string) => {
-    toggleGenreFilter('blog', genre);
+    toggleFilter('blog', 'genre', genre);
   };
 
   const handleClearAll = () => {

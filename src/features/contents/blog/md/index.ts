@@ -1,6 +1,4 @@
 import Why from './why-people-misunderstood-us.mdx';
-import Luck from './luck-came-when-im-ready.mdx';
-import PiedPiper from './pied-piper-change-my-life.mdx';
 import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
 
 export const BlogMDsCollections: ContentsCollectionsType[] = [

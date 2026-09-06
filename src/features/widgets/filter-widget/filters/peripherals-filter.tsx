@@ -1,34 +1,13 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useFilterStore } from '@/stores/filter-store';
 import { FilterPill } from '../components/filter-pill';
 import { FilterSection } from '../components/filter-section';
-import { filterCollections } from '@/lib/utils/filter-collections';
 import { peripherals } from '@/features/contents/constants';
-import { ContentsCollectionsTypeSimplified } from '@/lib/types/post-collections-type';
 
 const PeripheralsFilter = () => {
-  const {
-    getActiveFilters,
-    toggleCategoryFilter,
-    toggleBrandFilter,
-    setFilteredCollections,
-    clearAllFilters,
-  } = useFilterStore();
+  const { getActiveFilters, toggleFilter, clearAllFilters } = useFilterStore();
 
   const activeFilters = getActiveFilters('peripherals');
-
-  // Apply filters whenever active filters change
-  useEffect(() => {
-    const filtered = filterCollections(
-      peripherals,
-      'simplified',
-      activeFilters
-    );
-    setFilteredCollections(
-      'peripherals',
-      filtered as ContentsCollectionsTypeSimplified[]
-    );
-  }, [activeFilters, setFilteredCollections]);
 
   // Get unique categories from peripherals data
   const categoryOptions = useMemo(() => {
@@ -62,11 +41,11 @@ const PeripheralsFilter = () => {
   }, []);
 
   const handleCategoryClick = (category: string) => {
-    toggleCategoryFilter('peripherals', category);
+    toggleFilter('peripherals', 'category', category);
   };
 
   const handleBrandClick = (brand: string) => {
-    toggleBrandFilter('peripherals', brand);
+    toggleFilter('peripherals', 'brand', brand);
   };
 
   const handleClearAll = () => {

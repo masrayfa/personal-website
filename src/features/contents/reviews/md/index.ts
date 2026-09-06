@@ -1,7 +1,5 @@
 import { ContentsCollectionsType } from '@/lib/types/post-collections-type';
-import F1Movie from './movies/f1-movie.mdx';
 import TheLegoBatmanMovie from './movies/the-lego-batman-movie.mdx';
-import NoCountryForOldMen from './movies/no-country-for-old-men.mdx';
 
 const ReviewsMDsCollections: ContentsCollectionsType[] = [
   {
