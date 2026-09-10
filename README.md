@@ -9,10 +9,12 @@ npm install
 npm run dev      # dev server on :3000
 npm run build    # production build
 npm run serve    # preview build
-npm run deploy   # wrangler deploy
+npm start        # run the production build (Node, honours $PORT)
 ```
 
-Env vars live in `.env` / `.env.example` (`VITE_DATABASE_URL` etc.). `prestart` writes dev vars via `scripts/write-dev-vars.mjs`.
+Env vars live in `.env` / `.env.example` (`VITE_DATABASE_URL` etc.) and are read straight from `process.env`.
+
+Deployed to Railway as a plain Node server: `npm run build` then `npm start`. `server.js` wraps the fetch handler that Vite emits at `dist/server/server.js` in an HTTP listener and serves `dist/client` as static assets.
 
 ## Structure
 
